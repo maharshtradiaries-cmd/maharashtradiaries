@@ -387,3 +387,74 @@
         flex-direction: column;
     }
 }
+
+/* Seasonal Guide & Premium Components */
+.seasonal-section {
+    background: rgba(255, 107, 0, 0.05);
+    padding: var(--space-12);
+    border-radius: 40px;
+    border: 1px solid rgba(255, 107, 0, 0.1);
+    margin-bottom: var(--space-16);
+}
+
+.seasonal-header {
+    text-align: center;
+    margin-bottom: var(--space-10);
+}
+
+.seasonal-header h2 {
+    font-size: 2.5rem;
+    margin-bottom: var(--space-2);
+}
+
+.seasonal-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--space-8);
+}
+
+.season-card {
+    padding: var(--space-8);
+    border-radius: var(--radius-2xl);
+    transition: var(--transition-base);
+}
+
+.season-card:hover {
+    transform: translateY(-5px);
+}
+
+.season-card.monsoon {
+    background: rgba(59, 130, 246, 0.1);
+    border: 1px solid rgba(59, 130, 246, 0.2);
+}
+
+.season-card.winter {
+    background: rgba(16, 185, 129, 0.1);
+    border: 1px solid rgba(16, 185, 129, 0.2);
+}
+
+.season-card h3 {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    margin-bottom: var(--space-4);
+    font-size: 1.25rem;
+}
+
+.monsoon-color { color: #3b82f6; }
+.winter-color { color: #10b981; }
+
+.season-card p {
+    color: var(--gray-300);
+    font-size: 1rem;
+    line-height: 1.7;
+}
+
+.footer-link {
+    color: var(--gray-400);
+    transition: var(--transition-fast);
+}
+
+.footer-link:hover {
+    color: var(--primary-400);
+}

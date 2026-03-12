@@ -5,6 +5,7 @@ import { destinations as staticDestinations, type Destination } from '../data/de
 import { useAuth } from '../context/AuthContext'
 import toast from 'react-hot-toast'
 import axios from 'axios'
+import { DESTINATION_API_URL } from '../config'
 import './Explore.css'
 
 interface Review {
@@ -53,7 +54,7 @@ export default function Explore() {
 
     const fetchDestinations = async () => {
         try {
-            const res = await axios.get('http://localhost:5000/api/destinations')
+            const res = await axios.get(DESTINATION_API_URL)
             setAllDestinations(res.data)
         } catch {
             console.error('Failed to fetch destinations, using static data')
@@ -77,7 +78,7 @@ export default function Explore() {
     const openDetails = async (dest: Destination) => {
         setCalculatedDistance(null)
         try {
-            const res = await axios.get(`http://localhost:5000/api/destinations/${dest.id}`)
+            const res = await axios.get(`${DESTINATION_API_URL}/${dest.id}`)
             setSelectedDestination(res.data)
         } catch {
             setSelectedDestination({ ...dest, reviews: [], rating: 4.5 })
@@ -99,7 +100,7 @@ export default function Explore() {
         }
         try {
             const token = localStorage.getItem('md_token')
-            const res = await axios.post(`http://localhost:5000/api/destinations/${selectedDestination.id}/reviews`,
+            const res = await axios.post(`${DESTINATION_API_URL}/${selectedDestination.id}/reviews`,
                 { rating: selectedRating, comment: reviewText },
                 { headers: { Authorization: `Bearer ${token}` } }
             )

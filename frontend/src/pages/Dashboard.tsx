@@ -5,6 +5,7 @@ import Navbar from '../components/Navbar'
 import { useAuth } from '../context/AuthContext'
 import { FaMapMarkerAlt, FaStar, FaRoute, FaHeart, FaArrowRight, FaCalendarAlt, FaSun, FaLeaf, FaCloudRain, FaCoins } from 'react-icons/fa'
 import { destinations } from '../data/destinations'
+import { TRIP_API_URL } from '../config'
 import './Dashboard.css'
 
 export default function Dashboard() {
@@ -24,7 +25,7 @@ export default function Dashboard() {
         const fetchStats = async () => {
             try {
                 const token = localStorage.getItem('md_token')
-                const res = await axios.get('http://localhost:5000/api/trips', {
+                const res = await axios.get(TRIP_API_URL, {
                     headers: { Authorization: `Bearer ${token}` }
                 })
                 setTripsCount(res.data.length)
@@ -145,37 +146,37 @@ export default function Dashboard() {
                     </section>
                 )}
 
-                {/* Seasonal Travel Guide Section replacing Split Costs */}
-                <section className="seasonal-guide-section glass-card animate-slideInUp" style={{ padding: '30px', marginTop: '40px' }}>
-                    <div className="section-header">
-                        <h2><FaCalendarAlt style={{ color: '#10b981' }} /> Seasonal Travel Guide</h2>
-                        <p>Best times to visit different regions of Maharashtra</p>
+                {/* Seasonal Travel Guide */}
+                <section className="seasonal-section animate-slideInUp">
+                    <div className="seasonal-header">
+                        <h2><FaCalendarAlt className="winter-color" /> Seasonal Travel Guide</h2>
+                        <p>Plan your journey according to Maharashtra's diverse seasons</p>
                     </div>
 
-                    <div className="seasonal-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '20px', marginTop: '20px' }}>
-                        <div className="season-card" style={{ background: 'rgba(255, 140, 0, 0.1)', padding: '20px', borderRadius: '15px', border: '1px solid rgba(255, 140, 0, 0.2)' }}>
-                            <h3 style={{ display: 'flex', alignItems: 'center', gap: '10px', color: '#FF8C00', margin: '0 0 10px 0' }}>
+                    <div className="seasonal-grid">
+                        <div className="season-card" style={{ background: 'rgba(255, 140, 0, 0.1)', border: '1px solid rgba(255, 140, 0, 0.2)' }}>
+                            <h3 style={{ color: '#FF8C00' }}>
                                 <FaSun /> Summer (Mar - May)
                             </h3>
-                            <p style={{ color: '#cbd5e1', fontSize: '0.9rem', lineHeight: '1.5', margin: 0 }}>
-                                Escape the heat by visiting hill stations like Mahabaleshwar, Panchgani, and Matheran. Perfect for enjoying strawberries and cool evening breezes.
+                            <p>
+                                Escape the heat in the misty hill stations of Mahabaleshwar, Panchgani, and Matheran. Perfect for strawberry picking and cool evening walks.
                             </p>
                         </div>
-                        
-                        <div className="season-card" style={{ background: 'rgba(56, 189, 248, 0.1)', padding: '20px', borderRadius: '15px', border: '1px solid rgba(56, 189, 248, 0.2)' }}>
-                            <h3 style={{ display: 'flex', alignItems: 'center', gap: '10px', color: '#38bdf8', margin: '0 0 10px 0' }}>
-                                <FaCloudRain /> Monsoon (Jun - Sep)
+
+                        <div className="season-card monsoon">
+                            <h3 className="monsoon-color">
+                                <FaCloudRain /> Monsoon (June - Sept)
                             </h3>
-                            <p style={{ color: '#cbd5e1', fontSize: '0.9rem', lineHeight: '1.5', margin: 0 }}>
+                            <p>
                                 The Sahyadris come alive! Trek to majestic waterfalls, lush green forts like Rajmachi, and experience the magical fog in Lonavala and Igatpuri.
                             </p>
                         </div>
 
-                        <div className="season-card" style={{ background: 'rgba(16, 185, 129, 0.1)', padding: '20px', borderRadius: '15px', border: '1px solid rgba(16, 185, 129, 0.2)' }}>
-                            <h3 style={{ display: 'flex', alignItems: 'center', gap: '10px', color: '#10b981', margin: '0 0 10px 0' }}>
+                        <div className="season-card winter">
+                            <h3 className="winter-color">
                                 <FaLeaf /> Winter (Oct - Feb)
                             </h3>
-                            <p style={{ color: '#cbd5e1', fontSize: '0.9rem', lineHeight: '1.5', margin: 0 }}>
+                            <p>
                                 The perfect weather for coastal drives along the Konkan belt, exploring the beaches of Ratnagiri, Tarkarli, and water sports in Malvan.
                             </p>
                         </div>
@@ -197,11 +198,11 @@ export default function Dashboard() {
 
             <footer className="dashboard-footer">
                 <p>&copy; 2026 Maharashtra Diaries New. All rights reserved.</p>
-                <div className="footer-links" style={{ display: 'flex', gap: '15px' }}>
-                    <Link to="/privacy-policy" style={{ color: 'var(--gray-300)', textDecoration: 'none' }}>Privacy Policy</Link>
-                    <Link to="/terms" style={{ color: 'var(--gray-300)', textDecoration: 'none' }}>Terms of Service</Link>
-                    <Link to="/about" style={{ color: 'var(--gray-300)', textDecoration: 'none' }}>About Us</Link>
-                    <Link to="/contact" style={{ color: 'var(--gray-300)', textDecoration: 'none' }}>Contact Us</Link>
+                <div className="footer-links">
+                    <Link to="/privacy-policy" className="footer-link">Privacy Policy</Link>
+                    <Link to="/terms" className="footer-link">Terms of Service</Link>
+                    <Link to="/about" className="footer-link">About Us</Link>
+                    <Link to="/contact" className="footer-link">Contact Us</Link>
                 </div>
             </footer>
         </div>

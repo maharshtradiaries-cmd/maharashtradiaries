@@ -1,5 +1,5 @@
 import { useState, type FormEvent } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
 import toast from 'react-hot-toast'
 import { FaMapMarkedAlt, FaEnvelope, FaLock, FaEye, FaEyeSlash } from 'react-icons/fa'
@@ -8,6 +8,7 @@ import './Auth.css'
 
 export default function Login() {
     const { login } = useAuth()
+    const navigate = useNavigate()
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [showPassword, setShowPassword] = useState(false)
@@ -24,6 +25,7 @@ export default function Login() {
         try {
             await login(email, password)
             toast.success('Welcome back! 🎉')
+            navigate('/dashboard')
         } catch (err) {
             if (axios.isAxiosError(err) && err.response) {
                 toast.error(err.response.data.message)
@@ -57,18 +59,22 @@ export default function Login() {
                             Discover the soul of Maharashtra — from ancient forts to pristine beaches,
                             vibrant cities to serene hill stations.
                         </p>
-                        <div className="branding-stats">
-                            <div className="stat-item">
-                                <span className="stat-number">200+</span>
-                                <span className="stat-label">Destinations</span>
+                        <div className="branding-features">
+                            <div className="feature-item">
+                                <span className="feature-dot" />
+                                <span>Plan personalized trips</span>
                             </div>
-                            <div className="stat-item">
-                                <span className="stat-number">50+</span>
-                                <span className="stat-label">Forts</span>
+                            <div className="feature-item">
+                                <span className="feature-dot" />
+                                <span>Explore hidden gems</span>
                             </div>
-                            <div className="stat-item">
-                                <span className="stat-number">100+</span>
-                                <span className="stat-label">Temples</span>
+                            <div className="feature-item">
+                                <span className="feature-dot" />
+                                <span>Save favorite places</span>
+                            </div>
+                            <div className="feature-item">
+                                <span className="feature-dot" />
+                                <span>Community recommendations</span>
                             </div>
                         </div>
                     </div>
@@ -85,7 +91,6 @@ export default function Login() {
                         <div className="input-group" id="login-email-group">
                             <label className="input-label">Email</label>
                             <div className="input-wrapper">
-                                <FaEnvelope className="input-icon" />
                                 <input
                                     type="email"
                                     id="login-email"
@@ -95,13 +100,13 @@ export default function Login() {
                                     required
                                     autoComplete="email"
                                 />
+                                <FaEnvelope className="input-icon" />
                             </div>
                         </div>
 
                         <div className="input-group" id="login-password-group">
                             <label className="input-label">Password</label>
                             <div className="input-wrapper">
-                                <FaLock className="input-icon" />
                                 <input
                                     type={showPassword ? 'text' : 'password'}
                                     id="login-password"
@@ -111,6 +116,7 @@ export default function Login() {
                                     required
                                     autoComplete="current-password"
                                 />
+                                <FaLock className="input-icon" />
                                 <button
                                     type="button"
                                     className="password-toggle"

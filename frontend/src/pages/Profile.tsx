@@ -7,6 +7,7 @@ import { FaUser, FaHeart, FaPlane, FaTrash, FaCalendarAlt, FaDownload, FaWallet,
 import jsPDF from 'jspdf'
 import 'jspdf-autotable'
 import toast from 'react-hot-toast'
+import { TRIP_API_URL } from '../config'
 import './Profile.css'
 
 interface SavedTrip {
@@ -47,7 +48,7 @@ export default function Profile() {
     const fetchTrips = async () => {
         try {
             const token = localStorage.getItem('md_token')
-            const res = await axios.get('http://localhost:5000/api/trips', {
+            const res = await axios.get(TRIP_API_URL, {
                 headers: { Authorization: `Bearer ${token}` }
             })
             setTrips(res.data)
@@ -61,7 +62,7 @@ export default function Profile() {
     const deleteTrip = async (id: string) => {
         try {
             const token = localStorage.getItem('md_token')
-            await axios.delete(`http://localhost:5000/api/trips/${id}`, {
+            await axios.delete(`${TRIP_API_URL}/${id}`, {
                 headers: { Authorization: `Bearer ${token}` }
             })
             setTrips(trips.filter(t => t._id !== id))
@@ -81,7 +82,7 @@ export default function Profile() {
         if (!reviewModalTrip) return
         try {
             const token = localStorage.getItem('md_token')
-            const res = await axios.put(`http://localhost:5000/api/trips/${reviewModalTrip._id}`, {
+            const res = await axios.put(`${TRIP_API_URL}/${reviewModalTrip._id}`, {
                 isCompleted: true,
                 rating: reviewRating,
                 review: reviewText

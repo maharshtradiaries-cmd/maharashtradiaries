@@ -9,10 +9,13 @@ dotenv.config();
 const app = express();
 
 // Middleware
-app.use(cors({
-  origin: ['http://localhost:5173', 'http://127.0.0.1:5173'],
+const corsOptions = {
+  origin: process.env.NODE_ENV === 'production' 
+    ? ['https://maharashtra-diaries.vercel.app'] // Replace with actual production URL
+    : true, // Allow all in development
   credentials: true
-}));
+};
+app.use(cors(corsOptions));
 app.use(express.json());
 
 // Routes
@@ -42,7 +45,11 @@ mongoose.connect(MONGODB_URI)
 
 const PORT = process.env.PORT || 5000;
 
-app.listen(PORT, () => {
-  console.log(`🚀 Server running on http://localhost:${PORT}`);
-  console.log(`📡 API Health: http://localhost:${PORT}/api/health`);
-});
+if (process.env.NODE_ENV !== 'production' || !process.env.VERCEL) {
+  app.listen(PORT, () => {
+    console.log(`🚀 Server running on http://localhost:${PORT}`);
+    console.log(`📡 API Health: http://localhost:${PORT}/api/health`);
+  });
+}
+
+module.exports = app;

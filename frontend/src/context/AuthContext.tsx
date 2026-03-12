@@ -2,7 +2,9 @@ import { createContext, useContext, useState, useEffect, type ReactNode } from '
 import axios from 'axios'
 import toast from 'react-hot-toast'
 
-const API_URL = 'http://localhost:5000/api/auth'
+import { AUTH_API_URL } from '../config'
+
+const API_URL = AUTH_API_URL
 
 interface User {
     id: string

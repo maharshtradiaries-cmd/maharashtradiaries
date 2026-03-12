@@ -1,11 +1,12 @@
 import { useState, useMemo } from 'react'
 import axios from 'axios'
 import Navbar from '../components/Navbar'
-import { FaMapMarkerAlt, FaPlus, FaTrash, FaInfoCircle, FaWallet, FaSearch, FaCalendarAlt, FaUsers, FaCompass, FaChevronRight, FaTimes, FaMapSigns } from 'react-icons/fa'
+import { FaMapMarkerAlt, FaPlus, FaTrash, FaInfoCircle, FaWallet, FaSearch, FaCalendarAlt, FaUsers, FaCompass, FaChevronRight, FaTimes, FaMapSigns, FaEdit } from 'react-icons/fa'
 import { destinations } from '../data/destinations'
 import toast from 'react-hot-toast'
 import { jsPDF } from 'jspdf'
 import autoTable from 'jspdf-autotable'
+import { TRIP_API_URL } from '../config'
 import './PlanTrip.css'
 
 interface TripStep {
@@ -148,7 +149,7 @@ export default function PlanTrip() {
                  toast.error('Please login to save your trip.')
                  return;
             }
-            await axios.post('http://localhost:5000/api/trips',
+            await axios.post(TRIP_API_URL,
                 { 
                     title: tripName, 
                     steps,
@@ -226,15 +227,22 @@ export default function PlanTrip() {
                 {/* LEFT SIDEBAR: ITINERARY BUILDER */}
                 <div className={`planner-sidebar ${isSidebarOpen ? 'open' : 'closed'}`}>
                     <div className="sidebar-header">
-                        <input
-                            type="text"
-                            className="trip-name-input"
-                            value={tripName}
-                            onChange={(e) => setTripName(e.target.value)}
-                            placeholder="Trip Name"
-                        />
+                        <div className="trip-name-section">
+                            <label className="sidebar-label">Trip Title</label>
+                            <div className="trip-name-input-wrapper">
+                                <input
+                                    type="text"
+                                    className="trip-name-input"
+                                    value={tripName}
+                                    onChange={(e) => setTripName(e.target.value)}
+                                    placeholder="e.g., Konkan Summer Trip"
+                                />
+                                <FaEdit className="edit-icon" />
+                            </div>
+                        </div>
                         <div className="trip-config">
                             <div className="config-item">
+                                <span className="config-label">Group Size</span>
                                 <FaUsers className="config-icon" />
                                 <input 
                                     type="number" 

@@ -1,13 +1,15 @@
 import { useState, type FormEvent } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
 import toast from 'react-hot-toast'
 import { FaMapMarkedAlt, FaUser, FaEnvelope, FaLock, FaEye, FaEyeSlash, FaCalendar } from 'react-icons/fa'
 import axios from 'axios'
+import { OTP_API_URL } from '../config'
 import './Auth.css'
 
 export default function Signup() {
     const { signup } = useAuth()
+    const navigate = useNavigate()
     const [username, setUsername] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
@@ -58,8 +60,8 @@ export default function Signup() {
             return
         }
 
-        if (/\d/.test(username)) {
-            toast.error('Name cannot contain numbers')
+        if (/^\d+$/.test(username)) {
+            toast.error('Name cannot contain only numbers')
             return
         }
 
@@ -72,7 +74,7 @@ export default function Signup() {
         setLoading(true)
         try {
             // Step 1: Send OTP
-            await axios.post('http://localhost:5000/api/otp/send', { email })
+            await axios.post(`${OTP_API_URL}/send`, { email })
             toast.success('OTP sent to your email! 📧')
             setShowOtpModal(true)
         } catch (err: any) {
@@ -95,24 +97,47 @@ export default function Signup() {
         }
     }
 
+    const handleResendOtp = async () => {
+        try {
+            setLoading(true)
+            await axios.post(`${OTP_API_URL}/send`, { email })
+            toast.success('New OTP sent! 📧')
+        } catch (err: any) {
+            toast.error(err.response?.data?.message || 'Failed to resend OTP')
+        } finally {
+            setLoading(false)
+        }
+    }
+
     const handleVerifyOtp = async () => {
         const otpString = otp.join('')
+        console.log('Button clicked. OTP String:', otpString)
+        
         if (otpString.length < 6) {
-            toast.error('Please enter 6-digit OTP')
+            toast.error('Please enter the full 6-digit code')
             return
         }
 
         setVerifying(true)
         try {
-            // Step 2: Verify OTP
-            await axios.post('http://localhost:5000/api/otp/verify', { email, otp: otpString })
+            console.log('Verifying OTP for:', email)
+            const verifyRes = await axios.post(`${OTP_API_URL}/verify`, { email, otp: otpString })
+            console.log('Verification Success:', verifyRes.data)
             
+            console.log('Proceeding to complete signup for:', username)
             // Step 3: Complete Signup
-            await signup(username, email, password, parseInt(age))
+            await signup(username, email, password, Number(age))
+            
             toast.success('Account verified & created! 🚀')
             localStorage.setItem('md_is_new_user', 'true')
+            setShowOtpModal(false)
+            navigate('/dashboard')
         } catch (err: any) {
-            toast.error(err.response?.data?.message || 'Verification failed')
+            console.error('Final Signup/Verify Flow Error:', err)
+            const errMsg = err.response?.data?.message || err.message || 'Something went wrong'
+            toast.error(errMsg)
+            // If it's a verification error, don't close modal. 
+            // If it's a signup error (e.g. username taken), maybe help them go back.
         } finally {
             setVerifying(false)
         }
@@ -172,7 +197,6 @@ export default function Signup() {
                         <div className="input-group" id="signup-username-group">
                             <label className="input-label">Username</label>
                             <div className="input-wrapper">
-                                <FaUser className="input-icon" />
                                 <input
                                     type="text"
                                     id="signup-username"
@@ -184,16 +208,16 @@ export default function Signup() {
                                     minLength={3}
                                     maxLength={30}
                                 />
+                                <FaUser className="input-icon" />
                             </div>
-                            {username && /\d/.test(username) && (
-                                <span className="error-text">Name cannot contain numbers</span>
+                            {username && /^\d+$/.test(username) && (
+                                <span className="error-text">Name cannot contain only numbers</span>
                             )}
                         </div>
 
                         <div className="input-group" id="signup-email-group">
                             <label className="input-label">Email</label>
                             <div className="input-wrapper">
-                                <FaEnvelope className="input-icon" />
                                 <input
                                     type="email"
                                     id="signup-email"
@@ -203,13 +227,13 @@ export default function Signup() {
                                     required
                                     autoComplete="email"
                                 />
+                                <FaEnvelope className="input-icon" />
                             </div>
                         </div>
 
                         <div className="input-group" id="signup-age-group">
                             <label className="input-label">Age</label>
                             <div className="input-wrapper">
-                                <FaCalendar className="input-icon" />
                                 <input
                                     type="number"
                                     id="signup-age"
@@ -220,13 +244,13 @@ export default function Signup() {
                                     min={13}
                                     max={120}
                                 />
+                                <FaCalendar className="input-icon" />
                             </div>
                         </div>
 
                         <div className="input-group" id="signup-password-group">
                             <label className="input-label">Password</label>
                             <div className="input-wrapper">
-                                <FaLock className="input-icon" />
                                 <input
                                     type={showPassword ? 'text' : 'password'}
                                     id="signup-password"
@@ -236,6 +260,7 @@ export default function Signup() {
                                     required
                                     autoComplete="new-password"
                                 />
+                                <FaLock className="input-icon" />
                                 <button
                                     type="button"
                                     className="password-toggle"
@@ -307,25 +332,42 @@ export default function Signup() {
                                         if (e.key === 'Backspace' && !digit && idx > 0) {
                                             document.getElementById(`otp-${idx - 1}`)?.focus()
                                         }
+                                        if (e.key === 'Enter') {
+                                            handleVerifyOtp()
+                                        }
                                     }}
                                 />
                             ))}
                         </div>
 
                         <button 
+                            type="button"
                             className="auth-btn" 
                             onClick={handleVerifyOtp}
                             disabled={verifying}
                         >
                             {verifying ? 'Verifying...' : 'Verify & Sign Up'}
                         </button>
-                        
-                        <button 
-                            className="modal-close-btn"
-                            onClick={() => setShowOtpModal(false)}
-                        >
-                            Back to Signup
-                        </button>
+
+                        <div style={{ marginTop: '15px' }}>
+                            <button 
+                                type="button" 
+                                className="modal-close-btn" 
+                                onClick={handleResendOtp}
+                                disabled={loading}
+                                style={{ color: 'var(--primary-400)', marginRight: '15px' }}
+                            >
+                                {loading ? 'Sending...' : 'Resend OTP'}
+                            </button>
+                            
+                            <button 
+                                type="button"
+                                className="modal-close-btn"
+                                onClick={() => setShowOtpModal(false)}
+                            >
+                                Back to Signup
+                            </button>
+                        </div>
                     </div>
                 </div>
             )}
