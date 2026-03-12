@@ -1,0 +1,2098 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Explore Maharashtra</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/explore.css">
+  <script src="js/animations.js"></script>
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <nav class="navbar navbar-expand-lg navbar-dark" style="background: rgba(13,13,13,0.95); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(255,107,0,0.2); box-shadow: 0 4px 20px rgba(0,0,0,0.3);">
+    <div class="container">
+      <a class="navbar-brand" href="dashboard.html" style="font-weight: 800; font-size: 1.3rem; background: linear-gradient(135deg,#FF6B00,#FF8C00,#FFB347); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
+        <i class="fas fa-map-marked-alt" style="margin-right: 8px; color: #FF6B00; -webkit-text-fill-color: #FF6B00;"></i>MaharashtraDiaries
+      </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="dashboard.html" style="color: rgba(255,255,255,0.7);">Dashboard</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="explore.html" style="color: #FF8C00;">Explore</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="plantrip.html" style="color: rgba(255,255,255,0.7);">Plan Trip</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="index.html" style="color: #ff4444;">Logout</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="explore-hero">
+    <h1><i class="fas fa-map-location-dot"></i> Explore Maharashtra</h1>
+    <p>Discover amazing destinations tailored to your interests</p>
+  </section>
+
+  <main class="container mt-5">
+
+    <!-- Search by Name -->
+    <section class="mb-4 text-center">
+      <h2 class="h5 mb-3"><i class="fas fa-search"></i> Search Places</h2>
+      <div class="search-box">
+        <input type="text" id="searchInput" placeholder="Type a place or category...">
+        <button id="searchButton"><i class="fas fa-arrow-right"></i> Search</button>
+      </div>
+    </section>
+
+    <!-- Filter by Category -->
+    <section class="mb-4 text-center">
+      <h2 class="h5 mb-3"><i class="fas fa-filter"></i> Filter by Category</h2>
+      <div class="btn-group flex-wrap" role="group" aria-label="Category Filter">
+        <button class="filter-chip active" data-filter="all">All</button>
+        <button class="filter-chip" data-filter="hillstation"><i class="fas fa-mountain"></i> Hill Stations</button>
+        <button class="filter-chip" data-filter="beach"><i class="fas fa-water"></i> Beaches</button>
+        <button class="filter-chip" data-filter="temple"><i class="fas fa-gopuram"></i> Temples</button>
+        <button class="filter-chip" data-filter="fort"><i class="fas fa-chess-rook"></i> Forts</button>
+        <button class="filter-chip" data-filter="lake"><i class="fas fa-water"></i> Lakes</button>
+        <button class="filter-chip" data-filter="themepark"><i class="fas fa-ticket"></i> Theme Parks</button>
+        <button class="filter-chip" data-filter="shopping"><i class="fas fa-shopping-bag"></i> Shopping</button>
+        <button class="filter-chip" data-filter="zoo"><i class="fas fa-paw"></i> Zoos</button>
+        <button class="filter-chip" data-filter="heritage"><i class="fas fa-landmark"></i> Heritage</button>
+      </div>
+    </section>
+
+    <!-- Search by Region -->
+    <section class="mb-5 text-center">
+      <h2 class="h5 mb-3"><i class="fas fa-compass"></i> Explore by Region</h2>
+      <div class="region-bar">
+        <button class="region-chip" data-region="aurangabad">Aurangabad</button>
+        <button class="region-chip" data-region="ahmednagar">Ahmednagar</button>
+        <button class="region-chip" data-region="kolhapur">Kolhapur</button>
+        <button class="region-chip" data-region="ratnagiri">Ratnagiri</button>
+        <button class="region-chip" data-region="konkan">Konkan</button>
+        <button class="region-chip" data-region="satara">Satara</button>
+        <button class="region-chip" data-region="raigad">Raigad</button>
+        <button class="region-chip" data-region="vidarbha">Vidarbha</button>
+        <button class="region-chip" data-region="nashik">Nashik</button>
+        <button class="region-chip" data-region="nagpur">Nagpur</button>
+        <button class="region-chip" data-region="marathwada">Marathwada</button>
+        <button class="region-chip" data-region="mumbai">Mumbai</button>
+        <button class="region-chip" data-region="pune">Pune</button>
+        <button class="region-chip" data-region="solapur">Solapur</button>
+      </div>
+    </section>
+
+    <!-- Places Section -->
+    <section>
+      <div class="page row" id="places-list">
+
+        <!--hillstation cards-->
+        <!-- Card 1 -->
+        <article class="col-md-4 place-card featured" data-category="hillstation" data-region="aurangabad" 
+          data-title="Mhaismal Hillstation" 
+          data-image="images/mhaismal.jpg"
+          data-how-to-reach="Located near Aurangabad, accessible by road from Mumbai (around 6 hours). Well-maintained roads connect to major highways. Best visited during monsoon and post-monsoon seasons."
+          data-travel-time="6 hours from Mumbai"
+          data-activities="Nature trekking, Photography, Bird watching, Sunset viewing"
+          data-cost="800"
+          data-duration="2-3 days"
+          data-map-link="https://www.google.com/maps/search/Mhaismal+Hillstation+Aurangabad">
+          <div class="card mb-4 shadow-sm">
+            <img src="images/mhaismal.jpg" class="card-img-top" alt="Mhaismal">
+            <div class="card-body">
+              <h5 class="card-title">Mhaismal hillstation</h5>
+              <p class="card-text">A good destination for a quiet weekend or day trip — ideal for nature lovers, photographers, and travelers looking for an offbeat getaway</p>
+              <button class="btn btn-sm btn-primary view-btn cta">View Info</button>
+            </div>
+          </div>
+        </article>
+       <!-- Card 2 -->
+       <article class="col-md-4 place-card featured"    data-category="hillstation"     data-region="pune"
+          data-title="Lonavala"
+          data-image="images/lonavala.jpg"
+          data-how-to-reach="Located on the Mumbai-Bangalore highway, 65 km from Mumbai. Well-connected by road with frequent buses and trains. Highway toll gates available."
+          data-travel-time="2-2.5 hours from Mumbai"
+          data-activities="Trekking, Rock climbing, Cave exploration, Monsoon waterfalls, Forts"
+          data-cost="1200"
+          data-duration="2-3 days"
+          data-map-link="https://www.google.com/maps/search/Lonavala+Maharashtra">
+           <div class="card mb-4 shadow-sm">
+            <img src="images/lonavala.jpg" class="card-img-top" alt="Lonavala Hill Station">
+            <div class="card-body">
+              <h5 class="card-title">Lonavala</h5>
+              <p class="card-text">Scenic hill station near Pune, known for lush greenery, forts, and monsoon vibes.</p>
+              <button class="btn btn-sm btn-primary view-btn">View Info</button>
+            </div>
+         </div>
+       </article>
+       
+       <!-- Card 4 -->
+      <article class="col-md-4 place-card featured" data-category="hillstation" data-region="pune"
+        data-title="Khandala"
+        data-image="images/khandala.jpg"
+        data-how-to-reach="Located 15 km from Lonavala on the Mumbai-Bangalore highway. Easy access via road from Mumbai. Well-maintained roads with scenic mountain views."
+        data-travel-time="2.5 hours from Mumbai"
+        data-activities="Hiking, Viewpoints (Duke's Nose, Sunset Point), Caves, Picnicking"
+        data-cost="1000"
+        data-duration="1-2 days"
+        data-map-link="https://www.google.com/maps/search/Khandala+Maharashtra">
+        <div class="card mb-4 shadow-sm">
+          <img src="images/khandala.jpg" class="card-img-top" alt="Khandala Hill Station">
+          <div class="card-body">
+           <h5 class="card-title">Khandala</h5>
+           <p class="card-text">Popular weekend getaway near Lonavala, offers stunning ghat roads and viewpoints.</p>
+           <button class="btn btn-sm btn-primary view-btn">View Info</button>
+          </div>
+        </div>
+      </article>
+       <!-- Card 5 -->
+      <article class="col-md-4 place-card featured" data-category="hillstation" data-region="raigad"
+        data-title="Matheran"
+        data-image="images/matheran.jpg"
+        data-how-to-reach="Accessible from Neral railway station (3 hours from Mumbai). No vehicles allowed - horse/walking access only. Toy train from Neral makes it unique."
+        data-travel-time="3-4 hours from Mumbai"
+        data-activities="Trekking, Sunrise/sunset viewing, Horse riding, Forest walks, Adventure activities"
+        data-cost="1500"
+        data-duration="2-3 days"
+        data-map-link="https://www.google.com/maps/search/Matheran+Maharashtra">
+       <div class="card mb-4 shadow-sm">
+          <img src="images/matheran.jpg" class="card-img-top" alt="Matheran Hill Station">
+          <div class="card-body">
+            <h5 class="card-title">Matheran</h5>
+            <p class="card-text">Eco-friendly hill station with no vehicles, red-soil roads and breathtaking views.</p>
+           <button class="btn btn-sm btn-primary view-btn">View Info</button>
+          </div>
+       </div>
+     </article>
+        <!-- Card 6 -->
+      <article class="col-md-4 place-card featured" data-category="hillstation" data-region="satara"
+        data-title="Mahabaleshwar"
+        data-image="images/mahabaleshwar.jpeg"
+        data-how-to-reach="210 km from Mumbai via Pune. Take NH-48 towards Belgaum. Well-developed road network with regular buses and taxis available."
+        data-travel-time="5-6 hours from Mumbai"
+        data-activities="Strawberry farms, Temple visits, Trekking, Valley Point, Venna Lake, Photography"
+        data-cost="1300"
+        data-duration="2-3 days"
+        data-map-link="https://www.google.com/maps/search/Mahabaleshwar+Satara">
+        <div class="card mb-4 shadow-sm">
+          <img src="images/mahabaleshwar.jpeg" class="card-img-top" alt="Mahabaleshwar Hill Station">
+          <div class="card-body">
+            <h5 class="card-title">Mahabaleshwar</h5>
+            <p class="card-text">Queen of hill stations in Maharashtra, known for  strawberries, lakes, and temples.</p>
+            <button class="btn btn-sm btn-primary view-btn">View Info</button>
+         </div>
+        </div>
+     </article>
+         <!-- Card 7 -->
+       <article class="col-md-4 place-card featured" data-category="hillstation" data-region="satara"
+        data-title="Panchgani"
+        data-image="images/panchgani.jpg"
+        data-how-to-reach="Located 17 km from Mahabaleshwar. Same route via Pune. Well-connected by road with multiple transportation options available."
+        data-travel-time="5-6 hours from Mumbai"
+        data-activities="Table Land plateau walks, Camping, Adventure sports, Temples, Photography"
+        data-cost="1200"
+        data-duration="2-3 days"
+        data-map-link="https://www.google.com/maps/search/Panchgani+Satara">
+           <div class="card mb-4 shadow-sm">
+           <img src="images/panchgani.jpg" class="card-img-top" alt="Panchgani Hill Station">
+            <div class="card-body">
+             <h5 class="card-title">Panchgani</h5>
+             <p class="card-text">Calm and beautiful hill town near Mahabaleshwar, famous for Table Land and schools.</p>
+             <button class="btn btn-sm btn-primary view-btn">View Info</button>
+           </div>
+         </div>
+       </article>
+
+        <!--end of hillstation cards-->
+
+         <!--beach cards-->
+         <!-- Card 8 -->
+<article class="col-md-4 place-card featured" data-category="beach" data-region="konkan"
+  data-title="Alibaug Beach"
+  data-image="images/alibaug.jpg"
+  data-how-to-reach="58 km south of Mumbai. Take NH-48 towards Pune, then divert towards Alibaug. Regular ferries from Gateway of India. Best road route: NH-48 then SH-44."
+  data-travel-time="2-2.5 hours from Mumbai"
+  data-activities="Swimming, Water sports, Kolaba Fort visit, Sunset viewing, Beach walks, Photography"
+  data-cost="1500"
+  data-duration="1-2 days"
+  data-map-link="https://www.google.com/maps/search/Alibaug+Beach+Maharashtra">
+  <div class="card mb-4 shadow-sm">
+    <img src="images/alibaug.jpg" class="card-img-top" alt="Alibaug Beach">
+    <div class="card-body">
+      <h5 class="card-title">Alibaug Beach</h5>
+      <p class="card-text">Popular beach near Mumbai with black sand and scenic views of Kolaba Fort.</p>
+      <button class="btn btn-sm btn-primary view-btn">View Info</button>
+    </div>
+  </div>
+</article>
+
+<!-- Card 9 -->
+<article class="col-md-4 place-card featured" data-category="beach" data-region="konkan"
+  data-title="Kashid Beach"
+data-image="images/kashid.jpg"
+  data-how-to-reach="95 km from Mumbai via Alibaug. White sand paradise between Alibaug and Murud. Drive via NH-48 then scenic coastal route. Well-maintained roads."
+  data-travel-time="3-3.5 hours from Mumbai"
+  data-activities="Swimming, Surfing, Beach camping, Dolphin spotting, Rock formations, Picnicking"
+  data-cost="1200"
+  data-duration="2-3 days"
+  data-map-link="https://www.google.com/maps/search/Kashid+Beach+Maharashtra">
+  <div class="card mb-4 shadow-sm">
+    <img src="images/kashid.jpg" class="card-img-top" alt="Kashid Beach">
+    <div class="card-body">
+      <h5 class="card-title">Kashid Beach</h5>
+      <p class="card-text">A white sand beach between Alibaug and Murud, perfect for peaceful getaways.</p>
+      <button class="btn btn-sm btn-primary view-btn">View Info</button>
+    </div>
+  </div>
+</article>
+
+<!-- Card 10 -->
+<article class="col-md-4 place-card" data-category="beach" data-region="konkan" data-travel-time="7-8 hours from Mumbai" data-title="Murud Beach" data-image="images/murud.jpg" data-how-to-reach="Located 57 km south of Mumbai via NH-48 and SH-44. Well-connected coastal road with regular bus services. Accessible by ferry from Gateway of India." data-activities="Swimming, Boating, Fort exploration, Dolphin spotting, Beach photography" data-cost="1000" data-duration="1-2 days" data-map-link="https://www.google.com/maps/search/Murud+Beach">
+  <div class="card mb-4 shadow-sm">
+    <img src="images/murud.jpg" class="card-img-top" alt="Murud Beach">
+    <div class="card-body">
+      <h5 class="card-title">Murud Beach</h5>
+      <p class="card-text">Located near the iconic Murud-Janjira Fort with calm waters and a long shoreline.</p>
+      <button class="btn btn-sm btn-primary view-btn">View Info</button>
+    </div>
+  </div>
+</article>
+
+<!-- Card 11-->
+<article class="col-md-4 place-card" data-category="beach" data-region="konkan" data-travel-time="7-8 hours from Mumbai" data-title="Diveagar Beach" data-image="images/diveagar.jpg" data-how-to-reach="Located 370 km from Mumbai in Ratnagiri. Take NH-48 towards Belgaum, then coastal highway. Around 8-9 hours drive through Konkan landscape." data-activities="Temple visits, Beach walks, Photography, Swimming, Boat rides" data-cost="1100" data-duration="2-3 days" data-map-link="https://www.google.com/maps/search/Ganpatipule+Beach">
+  <div class="card mb-4 shadow-sm">
+    <img src="images/diveagar.jpg" class="card-img-top" alt="Diveagar Beach">
+    <div class="card-body">
+      <h5 class="card-title">Diveagar Beach</h5>
+      <p class="card-text">A clean and less-crowded beach in Raigad, famous for its natural charm.</p>
+      <button class="btn btn-sm btn-primary view-btn">View Info</button>
+    </div>
+  </div>
+</article>
+
+<!-- Card 12 -->
+<article class="col-md-4 place-card" data-category="beach" data-region="konkan" data-travel-time="7-8 hours from Mumbai" data-title="Ganpatipule Beach" data-image="images/ganpati.png" data-how-to-reach="Located near Ganpatipule, 375 km from Mumbai. Same route via NH-48 and coastal highway. Twin beaches off main road." data-activities="Peaceful beach walks, Photography, Swimming, Picnicking, Shell collection" data-cost="900" data-duration="1-2 days" data-map-link="https://www.google.com/maps/search/Aare-Ware+Beach">
+  <div class="card mb-4 shadow-sm">
+    <img src="images/ganpati.png" class="card-img-top" alt="Ganpatipule Beach">
+    <div class="card-body">
+      <h5 class="card-title">Ganpatipule Beach</h5>
+      <p class="card-text">Famous for its red sand, clean waters, and the beachside Ganesh temple.</p>
+      <button class="btn btn-sm btn-primary view-btn">View Info</button>
+    </div>
+  </div>
+</article>
+
+<!-- Card 13 -->
+<article class="col-md-4 place-card" data-category="beach" data-region="konkan" data-travel-time="7-8 hours from Mumbai" data-title="Aare-Ware Beach" data-image="images/aare waare.jpg" data-how-to-reach="Located 420 km from Mumbai in Sindhudurg. Follow NH-48 towards Belgaum, then take coastal route. Remote and scenic location." data-activities="Nature walks, Photography, Boating, Fishing, River-sea confluence viewing" data-cost="1000" data-duration="2-3 days" data-map-link="https://www.google.com/maps/search/Devbagh+Beach">
+  <div class="card mb-4 shadow-sm">
+    <img src="images/aare waare.jpg" class="card-img-top" alt="Aare Ware Beach">
+    <div class="card-body">
+      <h5 class="card-title">Aare-Ware Beach</h5>
+      <p class="card-text">Twin untouched beaches near Ganpatipule, known for peaceful vibes and scenic drives.</p>
+      <button class="btn btn-sm btn-primary view-btn">View Info</button>
+    </div>
+  </div>
+</article>
+
+<!-- Card 14-->
+<article class="col-md-4 place-card" data-category="beach" data-region="konkan" data-travel-time="7-8 hours from Mumbai" data-title="Tarkarli Beach" data-image="images/tarkarli.png" data-how-to-reach="Located 425 km from Mumbai in Sindhudurg. Follow NH-48 towards Belgaum, then take coastal route. Scenic drive through Konkan." data-activities="Scuba diving, Coral reef viewing, Swimming, Beach camping, Dolphin spotting" data-cost="1100" data-duration="2-3 days" data-map-link="https://www.google.com/maps/search/Tarkarli+Beach+Maharashtra">
+  <div class="card mb-4 shadow-sm">
+    <img src="images/tarkarli.png" class="card-img-top" alt="Tarkarli Beach">
+    <div class="card-body">
+      <h5 class="card-title">Tarkarli Beach</h5>
+      <p class="card-text">Known for scuba diving, coral reefs, and crystal-clear waters in Sindhudurg.</p>
+      <button class="btn btn-sm btn-primary view-btn">View Info</button>
+    </div>
+  </div>
+</article>
+
+<!-- Card 15 -->
+<article class="col-md-4 place-card" data-category="beach" data-region="konkan" data-travel-time="7-8 hours from Mumbai" data-title="Devbagh Beach" data-image="images/devbagh.jpg" data-how-to-reach="Located 410 km from Mumbai in Sindhudurg. Follow NH-48 towards Belgaum, then coastal route. Remote and scenic location." data-activities="Nature walks, Photography, Boating, Fishing, River-sea confluence viewing" data-cost="1000" data-duration="2-3 days" data-map-link="https://www.google.com/maps/search/Devbagh+Beach+Maharashtra">
+  <div class="card mb-4 shadow-sm">
+    <img src="images/devbagh.jpg" class="card-img-top" alt="Devbagh Beach">
+    <div class="card-body">
+      <h5 class="card-title">Devbagh Beach</h5>
+      <p class="card-text">A stunning beach where the Karli river meets the Arabian Sea, perfect for backwater views.</p>
+      <button class="btn btn-sm btn-primary view-btn">View Info</button>
+    </div>
+  </div>
+</article>
+
+<!-- Card 17 -->
+<article class="col-md-4 place-card" data-category="beach" data-region="mumbai" data-travel-time="1-2 hours from Mumbai" data-title="Juhu Beach" data-image="images/juhu.jpg" data-how-to-reach="Located 20 km northwest of central Mumbai. Easily accessible by local train, auto, or car. Well-developed beach with parking facilities." data-activities="Swimming, Sunset viewing, Street food, Beach walks, Photography, Water sports" data-cost="400" data-duration="2-3 hours" data-map-link="https://www.google.com/maps/search/Juhu+Beach+Mumbai">
+  <div class="card mb-4 shadow-sm">
+    <img src="images/juhu.jpg" class="card-img-top" alt="Juhu Beach">
+    <div class="card-body">
+      <h5 class="card-title">Juhu Beach</h5>
+      <p class="card-text">Mumbai’s most iconic beach, perfect for street food, walks, and watching the sunset.</p>
+      <button class="btn btn-sm btn-primary view-btn">View Info</button>
+    </div>
+  </div>
+</article>
+
+<!-- Card 18 -->
+<article class="col-md-4 place-card" data-category="beach" data-region="mumbai" data-travel-time="1-2 hours from Mumbai" data-title="Girgaon Chowpatty" data-image="images/girgaon.jpg" data-how-to-reach="Located in South Mumbai near Fort area. Easily accessible by local train, auto, or metro. Central beach location near landmarks." data-activities="Ganesh visarjan, Bhel puri tasting, Sunset viewing, Photography, Beach walks" data-cost="300" data-duration="2-3 hours" data-map-link="https://www.google.com/maps/search/Girgaon+Chowpatty+Mumbai">
+  <div class="card mb-4 shadow-sm">
+    <img src="images/girgaon.jpg" class="card-img-top" alt="Girgaon Chowpatty">
+    <div class="card-body">
+      <h5 class="card-title">Girgaon Chowpatty</h5>
+      <p class="card-text">Popular for Ganesh visarjan and bhel puri, this beach is in the heart of South Mumbai.</p>
+      <button class="btn btn-sm btn-primary view-btn">View Info</button>
+    </div>
+  </div>
+</article>
+
+<!-- Card 19 -->
+<article class="col-md-4 place-card" data-category="beach" data-region="mumbai" data-travel-time="1-2 hours from Mumbai" data-title="Versova Beach" data-image="images/versova.jpg" data-how-to-reach="Located in Andheri, Mumbai. Accessible by auto or local train. Recently revived and well-maintained beach with cleanup drives." data-activities="Beach cleanup participation, Photography, Evening walks, Yoga, Picnicking" data-cost="400" data-duration="2-3 hours" data-map-link="https://www.google.com/maps/search/Versova+Beach+Mumbai">
+  <div class="card mb-4 shadow-sm">
+    <img src="images/versova.jpg" class="card-img-top" alt="Versova Beach">
+    <div class="card-body">
+      <h5 class="card-title">Versova Beach</h5>
+      <p class="card-text">Recently revived by volunteers, this beach is cleaner and calmer than ever.</p>
+      <button class="btn btn-sm btn-primary view-btn">View Info</button>
+    </div>
+  </div>
+</article>
+
+<!-- Card 20 -->
+<article class="col-md-4 place-card" data-category="beach" data-region="mumbai" data-travel-time="1-2 hours from Mumbai" data-title="Dadar Chowpatty" data-image="images/dadar.jpg" data-how-to-reach="Located in Dadar East, Mumbai. Easily accessible by local train or auto. Near Bandra-Worli Sea Link." data-activities="Sunset viewing, Beach walks, Sea link views, Photography, Evening strolls" data-cost="300" data-duration="2-3 hours" data-map-link="https://www.google.com/maps/search/Dadar+Chowpatty+Mumbai">
+  <div class="card mb-4 shadow-sm">
+    <img src="images/dadar.jpg" class="card-img-top" alt="Dadar Chowpatty">
+    <div class="card-body">
+      <h5 class="card-title">Dadar Chowpatty</h5>
+      <p class="card-text">Famous for views of Bandra-Worli Sea Link and peaceful early mornings.</p>
+      <button class="btn btn-sm btn-primary view-btn">View Info</button>
+    </div>
+  </div>
+</article>
+<!--end of beach cards-->
+
+<!--temple cards-->
+<!-- Card 3 -->
+<article class="col-md-4 place-card" data-category="temple" data-region="aurangabad" data-travel-time="6-7 hours from Mumbai" data-title="Grishneshwar Temple" data-image="images/grishneshwar.jpg" data-how-to-reach="Located 60 km from Aurangabad near Ellora Caves. Accessible by well-maintained road. Regular taxi and bus services." data-activities="Temple darshan, Cave exploration, Photography, Spiritual meditation, Pilgrimage" data-cost="600" data-duration="1-2 days" data-map-link="https://www.google.com/maps/search/Grishneshwar+Temple+Aurangabad">
+  <div class="card mb-4 shadow-sm">
+    <img src="images/grishneshwar.jpg" class="card-img-top" alt="Grishneshwar Temple">
+    <div class="card-body">
+      <h5 class="card-title">Grishneshwar Temple</h5>
+      <p class="card-text">One of the 12 Jyotirlingas located in Aurangabad, a sacred site for Hindus.</p>
+      <button class="btn btn-sm btn-primary view-btn">View Info</button>
+    </div>
+  </div>
+</article>
+        
+<!-- Card: Bhadra Maruti Temple -->
+<article class="col-md-4 place-card" data-category="temple" data-region="aurangabad" data-travel-time="6-7 hours from Mumbai" data-title="Bhadra Maruti Temple" data-image="images/bhadra murti.jpg" data-how-to-reach="Located in Khuldabad near Aurangabad, 340 km from Mumbai. Take NH-48 towards Aurangabad. Accessible by road." data-activities="Temple prayers, Historical exploration, Photography, Meditation, Spiritual retreat" data-cost="600" data-duration="1-2 days" data-map-link="https://www.google.com/maps/search/Bhadra+Maruti+Temple+Khuldabad">
+  <div class="card mb-4 shadow-sm">
+    <img src="images/bhadra murti.jpg" class="card-img-top" alt="Bhadra Maruti Temple">
+    <div class="card-body">
+     <h5 class="card-title">Bhadra Maruti Temple</h5>
+     <p class="card-text">Famous temple of Lord Hanuman in a rare sleeping posture, located in Khuldabad.</p>
+     <button class="btn btn-sm btn-primary view-btn">View Info</button>
+   </div>
+   </div>
+</article>
+
+<!-- Card: Kailasa Temple -->
+<article class="col-md-4 place-card" data-category="temple" data-region="aurangabad" data-travel-time="6-7 hours from Mumbai" data-title="Kailasa Temple" data-image="images/kailasa.jpg" data-how-to-reach="Located at Ellora Caves, 60 km from Aurangabad. Well-maintained road access. Regular bus and taxi services." data-activities="Temple exploration, Rock-cut architecture viewing, Photography, Spiritual meditation" data-cost="700" data-duration="1-2 days" data-map-link="https://www.google.com/maps/search/Kailasa+Temple+Ellora">
+  <div class="card mb-4 shadow-sm">
+    <img src="images/kailasa.jpg" class="card-img-top" alt="Kailasa Temple, Ellora">
+    <div class="card-body">
+      <h5 class="card-title">Kailasa Temple</h5>
+      <p class="card-text">Rock-cut temple at Ellora Caves, an architectural marvel dedicated to Lord Shiva.</p>
+      <button class="btn btn-sm btn-primary view-btn">View Info</button>
+    </div>
+  </div>
+</article>
+
+<!-- Shirdi Sai Baba Temple -->
+<article class="col-md-4 place-card" data-category="temple" data-region="ahmednagar" data-travel-time="4-5 hours from Mumbai" data-title="Shirdi Sai Baba Temple" data-image="images/shirdi.jpg" data-how-to-reach="Located in Shirdi, 210 km from Mumbai. Take NH-48 towards Belgaum, then SH-42 to Shirdi. Well-developed pilgrimage route." data-activities="Temple darshan, Prayer, Meditation, Ashram visit, Spiritual learning" data-cost="800" data-duration="1-2 days" data-map-link="https://www.google.com/maps/search/Shirdi+Sai+Baba+Temple">
+  <div class="card mb-4 shadow-sm">
+    <img src="images/shirdi.jpg" class="card-img-top" alt="Shirdi Sai Baba Temple">
+    <div class="card-body">
+      <h5 class="card-title">Shirdi Sai Baba Temple</h5>
+      <p class="card-text">One of the most visited pilgrimage sites in India, dedicated to the saint Sai Baba of Shirdi.</p>
+      <button class="btn btn-sm btn-primary view-btn">View Info</button>
+    </div>
+  </div>
+</article>
+
+<!-- Shani Shingnapur Temple -->
+<article class="col-md-4 place-card" data-category="temple" data-region="ahmednagar" data-travel-time="4-5 hours from Mumbai" data-title="Shani Shingnapur" data-image="images/shani shingnapur.jpg" data-how-to-reach="Located 70 km from Nashik, 200 km from Mumbai. Take NH-48 to Nashik, then SH to Trimbak. Well-connected pilgrimage route." data-activities="Temple darshan, Godavari source visit, Photography, Pilgrimage, Spiritual retreat" data-cost="800" data-duration="1-2 days" data-map-link="https://www.google.com/maps/search/Trimbakeshwar+Jyotirlinga">
+  <div class="card mb-4 shadow-sm">
+    <img src="images/shani shingnapur.jpg" class="card-img-top" alt="Shani Shingnapur Temple">
+    <div class="card-body">
+      <h5 class="card-title">Shani Shingnapur</h5>
+      <p class="card-text">Famous for its open-roof shrine of Lord Shani and houses without doors around the village.</p>
+      <button class="btn btn-sm btn-primary view-btn">View Info</button>
+    </div>
+  </div>
+</article>
+
+<!-- Siddhatek Ganpati (Ashtavinayak) -->
+<article class="col-md-4 place-card" data-category="temple" data-region="ahmednagar" data-travel-time="4-5 hours from Mumbai" data-title="Siddhatek Ganpati" data-image="images/siddhatek.jpg" data-how-to-reach="Located 180 km from Mumbai in Ahmednagar. Accessible via NH-48 then SH-52. Hilltop temple with scenic surroundings." data-activities="Temple darshan, Hill views, Photography, Spiritual meditation, Pilgrimage" data-cost="700" data-duration="1-2 days" data-map-link="https://www.google.com/maps/search/Siddhatek+Ganpati">
+  <div class="card mb-4 shadow-sm">
+    <img src="images/siddhatek.jpg" class="card-img-top" alt="Siddhatek Ganpati Temple">
+    <div class="card-body">
+      <h5 class="card-title">Siddhatek Ganpati</h5>
+      <p class="card-text">One of the eight Ashtavinayak temples located on a hillock beside the Bhima River.</p>
+      <button class="btn btn-sm btn-primary view-btn">View Info</button>
+    </div>
+  </div>
+</article>
+<!-- Mahalaxmi Temple -->
+<article class="col-md-4 place-card" data-category="temple" data-region="kolhapur" data-travel-time="8-9 hours from Mumbai" data-title="Mahalaxmi Temple" data-image="images/mahalaxmi-kolhapur.png" data-how-to-reach="Located in Tuljapur, 380 km from Mumbai. Take NH-48 towards Belgaum. Well-connected town with good road infrastructure." data-activities="Shakti Peetha pilgrimage, Temple worship, Photography, Meditation, Local exploration" data-cost="800" data-duration="1-2 days" data-map-link="https://www.google.com/maps/search/Tulja+Bhavani+Temple">
+  <div class="card mb-4 shadow-sm">
+    <img src="images/mahalaxmi-kolhapur.png" class="card-img-top" alt="Mahalaxmi Temple Kolhapur">
+    <div class="card-body">
+      <h5 class="card-title">Mahalaxmi Temple</h5>
+      <p class="card-text">A revered Shakti Peetha dedicated to Goddess Mahalakshmi, attracting lakhs of devotees yearly.</p>
+      <button class="btn btn-sm btn-primary view-btn">View Info</button>
+    </div>
+  </div>
+</article>
+<!-- Ganpatipule Temple -->
+<article class="col-md-4 place-card" data-category="temple" data-region="ratnagiri" data-travel-time="8-9 hours from Mumbai" data-title="Ganpatipule Temple" data-image="images/ganpati.png" data-how-to-reach="Located in Kolhapur city, 390 km from Mumbai. Take NH-48 towards Belgaum. Well-developed city infrastructure." data-activities="Temple worship, Shakti Peetha pilgrimage, Photography, Local market exploration" data-cost="900" data-duration="1-2 days" data-map-link="https://www.google.com/maps/search/Mahalaxmi+Temple">
+  <div class="card mb-4 shadow-sm">
+    <img src="images/ganpati.png" class="card-img-top" alt="Ganpatipule Temple">
+    <div class="card-body">
+      <h5 class="card-title">Ganpatipule Temple</h5>
+      <p class="card-text">Located on a scenic beach, this 400-year-old temple is dedicated to Lord Ganesha and attracts thousands of devotees and tourists.</p>
+      <button class="btn btn-sm btn-primary view-btn">View Info</button>
+    </div>
+  </div>
+</article>
+
+<!-- Velneshwar Shiva Temple -->
+<article class="col-md-4 place-card" data-category="temple" data-region="ratnagiri" data-travel-time="8-9 hours from Mumbai" data-title="Velneshwar Shiva Temple" data-image="images/velneshwar.jpg" data-how-to-reach="Located on coast in Ratnagiri, 350 km from Mumbai. Access via NH-48 and coastal road. Beachside setting." data-activities="Temple prayers, Beach walks, Photography, Meditation, Spiritual retreat" data-cost="900" data-duration="1-2 days" data-map-link="https://www.google.com/maps/search/Velneshwar+Shiva+Temple">
+  <div class="card mb-4 shadow-sm">
+    <img src="images/velneshwar.jpg" class="card-img-top" alt="Velneshwar Temple">
+    <div class="card-body">
+      <h5 class="card-title">Velneshwar Shiva Temple</h5>
+      <p class="card-text">A peaceful beachside temple dedicated to Lord Shiva, known for its serene atmosphere and annual festival.</p>
+      <button class="btn btn-sm btn-primary view-btn">View Info</button>
+    </div>
+  </div>
+</article>
+
+<!-- Parshuram Temple, Chiplun -->
+<article class="col-md-4 place-card" data-category="temple" data-region="ratnagiri" data-travel-time="8-9 hours from Mumbai" data-title="Parshuram Temple, Chiplun" data-image="images/parshuram.jpg" data-how-to-reach="Located near Chiplun in Ratnagiri district. Accessible by road via NH-66 and Konkan Railway. Situated on a hill."
+  data-activities="Temple worship, Scenic views, Photography, Nature walks, Spiritual experience"
+  data-cost="300" data-duration="2-3 hours"
+  data-map-link="https://www.google.com/maps/search/Parshuram+Temple+Chiplun">
+  <div class="card mb-4 shadow-sm">
+    <img src="images/parshuram.jpg" class="card-img-top" alt="Parshuram Temple Chiplun">
+    <div class="card-body">
+      <h5 class="card-title">Parshuram Temple, Chiplun</h5>
+      <p class="card-text">This temple is dedicated to Lord Parshuram and is located atop a hill offering scenic views of the Konkan landscape.</p>
+      <button class="btn btn-sm btn-primary view-btn">View Info</button>
+    </div>
+  </div>
+</article>
+<!-- Markandeya Temple, Gadchiroli -->
+<article class="col-md-4 place-card" data-category="temple" data-region="vidarbha" data-travel-time="12-13 hours from Mumbai" data-title="Markandeya Temple, Gadchiroli" data-image="images/markandeya.jpg"
+  data-how-to-reach="Located in Gadchiroli district, Vidarbha region. Accessible by road. Situated on the banks of the Wainganga River."
+  data-activities="Temple worship, Historical exploration, Photography, River views, Spiritual retreat"
+  data-cost="400" data-duration="2-3 hours"
+  data-map-link="https://www.google.com/maps/search/Markandeya+Temple+Gadchiroli">
+  <div class="card mb-4 shadow-sm">
+    <img src="images/markandeya.jpg" class="card-img-top" alt="Markandeya Temple">
+    <div class="card-body">
+      <h5 class="card-title">Markandeya Temple, Gadchiroli</h5>
+      <p class="card-text">A historic temple on the banks of the Wainganga River, believed to be older than 1200 years, dedicated to Lord Shiva.</p>
+      <button class="btn btn-sm btn-primary view-btn">View Info</button>
+    </div>
+  </div>
+</article>
+
+<!-- Adasa Ganpati Temple, Nagpur -->
+<article class="col-md-4 place-card" data-category="temple" data-region="vidarbha" data-travel-time="12-13 hours from Mumbai" data-title="Adasa Ganpati Temple" data-image="images/adasa-ganpati.jpg"
+  data-how-to-reach="Located in Adasa village near Nagpur. Accessible by road from Nagpur. Situated on a hilltop."
+  data-activities="Temple worship, Hill views, Photography, Spiritual pilgrimage, Nature appreciation"
+  data-cost="300" data-duration="2-3 hours"
+  data-map-link="https://www.google.com/maps/search/Adasa+Ganpati+Temple+Nagpur">
+  <div class="card mb-4 shadow-sm">
+    <img src="images/adasa-ganpati.jpg" class="card-img-top" alt="Adasa Ganpati Temple">
+    <div class="card-body">
+      <h5 class="card-title">Adasa Ganpati Temple</h5>
+      <p class="card-text">Famous for its massive monolithic idol of Lord Ganesha, located on a hilltop near Nagpur with beautiful surroundings.</p>
+      <button class="btn btn-sm btn-primary view-btn">View Info</button>
+    </div>
+  </div>
+</article>
+
+  <!-- Trimbakeshwar Jyotirlinga -->
+<article class="col-md-4 place-card" data-category="temple" data-region="nashik" data-travel-time="5-6 hours from Mumbai" data-title="Trimbakeshwar Jyotirlinga" data-image="images/trimbakeshwar.jpg"
+  data-how-to-reach="Located near Nashik. Accessible by road from Nashik. One of the 12 Jyotirlingas."
+  data-activities="Temple darshan, Pilgrimage, Spiritual rituals, Exploring the source of Godavari River"
+  data-cost="500" data-duration="1-2 days"
+  data-map-link="https://www.google.com/maps/search/Trimbakeshwar+Jyotirlinga">
+  <div class="card mb-4 shadow-sm">
+    <img src="images/trimbakeshwar.jpg" class="card-img-top" alt="Trimbakeshwar Temple">
+    <div class="card-body">
+      <h5 class="card-title">Trimbakeshwar Jyotirlinga</h5>
+      <p class="card-text">One of the 12 Jyotirlingas in India, located at the origin of the Godavari River in Nashik district.</p>
+      <button class="btn btn-sm btn-primary view-btn">View Info</button>
+    </div>
+  </div>
+</article>
+
+<!-- Kalaram Temple -->
+<article class="col-md-4 place-card" data-category="temple" data-region="nashik" data-travel-time="5-6 hours from Mumbai" data-title="Kalaram Temple" data-image="images/kalaram.png"
+  data-how-to-reach="Located in Panchavati, Nashik. Easily accessible by local transport within Nashik."
+  data-activities="Temple darshan, Historical exploration, Photography, Spiritual pilgrimage, Cultural experience"
+  data-cost="200" data-duration="1-2 hours"
+  data-map-link="https://www.google.com/maps/search/Kalaram+Temple+Nashik">
+  <div class="card mb-4 shadow-sm">
+    <img src="images/kalaram.png" class="card-img-top" alt="Kalaram Temple">
+    <div class="card-body">
+      <h5 class="card-title">Kalaram Temple</h5>
+      <p class="card-text">Historic black-stone temple of Lord Rama in Panchavati, Nashik. Important part of Ramayana trail.</p>
+      <button class="btn btn-sm btn-primary view-btn">View Info</button>
+    </div>
+  </div>
+</article>
+
+<!-- Saptashrungi Devi Temple -->
+<article class="col-md-4 place-card" data-category="temple" data-region="nashik" data-travel-time="5-6 hours from Mumbai" data-title="Saptashrungi Temple" data-image="images/saptashrungi.jpg"
+  data-how-to-reach="Located on a hill near Nashik. Accessible by road. Pilgrimage site with scenic views."
+  data-activities="Temple darshan, Pilgrimage, Hill views, Trekking (optional), Spiritual retreat"
+  data-cost="400" data-duration="1-2 days"
+  data-map-link="https://www.google.com/maps/search/Saptashrungi+Temple+Nashik">
+  <div class="card mb-4 shadow-sm">
+    <img src="images/saptashrungi.jpg" class="card-img-top" alt="Saptashrungi Temple">
+    <div class="card-body">
+      <h5 class="card-title">Saptashrungi Temple</h5>
+      <p class="card-text">One of the 51 Shaktipeeths, this temple is located in the hills and is a highly revered place in Nashik district.</p>
+      <button class="btn btn-sm btn-primary view-btn">View Info</button>
+    </div>
+  </div>
+</article>
+
+<!-- Siddhivinayak Temple -->
+<article class="col-md-4 place-card" data-category="temple" data-region="mumbai" data-travel-time="1-2 hours from Mumbai" data-title="Siddhivinayak Temple" data-image="images/sidhhivinayak.jpg" data-how-to-reach="Located in Gangapur, 120 km from Solapur. Accessible by scenic route via car. Spiritual destination near river." data-activities="Temple darshan, Spiritual meditation, Photography, Peaceful walks, Pilgrimage" data-cost="700" data-duration="1-2 days" data-map-link="https://www.google.com/maps/search/Dattatreya+Temple,+Gangapur">
+  <div class="card mb-4 shadow-sm">
+    <img src="images/sidhhivinayak.jpg" class="card-img-top" alt="Siddhivinayak Temple">
+    <div class="card-body">
+      <h5 class="card-title">Siddhivinayak Temple</h5>
+      <p class="card-text">Most famous Ganesh temple in Mumbai, located in Prabhadevi. Visited by millions including celebrities.</p>
+      <button class="btn btn-sm btn-primary view-btn">View Info</button>
+    </div>
+  </div>
+</article>
+
+<!-- Mahalaxmi Temple -->
+<article class="col-md-4 place-card" data-category="temple" data-region="mumbai" data-travel-time="1-2 hours from Mumbai" data-title="Mahalaxmi Temple" data-image="images/mahalaxmi-mumbai.jpg" data-how-to-reach="Located in Dehu, 40 km from Pune. Accessible by car or local transport. Temple at river confluence." data-activities="Temple darshan, River views, Photography, Spiritual meditation, Local culture exploration" data-cost="600" data-duration="1-2 days" data-map-link="https://www.google.com/maps/search/Sangam+Mauli+Temple,+Dehu">
+  <div class="card mb-4 shadow-sm">
+    <img src="images/mahalaxmi-mumbai.jpg" class="card-img-top" alt="Mahalaxmi Temple">
+    <div class="card-body">
+      <h5 class="card-title">Mahalaxmi Temple</h5>
+      <p class="card-text">Iconic seaside temple dedicated to Goddess Mahalaxmi, offering divine energy and a beautiful view.</p>
+      <button class="btn btn-sm btn-primary view-btn">View Info</button>
+    </div>
+  </div>
+</article>
+
+<!-- ISKCON Temple, Juhu -->
+<article class="col-md-4 place-card" data-category="temple" data-region="mumbai" data-travel-time="1-2 hours from Mumbai" data-title="ISKCON Temple, Juhu" data-image="images/iskcon-juhu.jpg" data-how-to-reach="Located in Pune city, managed by Tamil community. Easily accessible by auto or taxi. Urban setting." data-activities="Temple prayers, South Indian culture experience, Photography, Community interaction, Spiritual visit" data-cost="300" data-duration="2-3 hours" data-map-link="https://www.google.com/maps/search/Lord+Karthikeya+Temple">
+  <div class="card mb-4 shadow-sm">
+    <img src="images/iskcon-juhu.jpg" class="card-img-top" alt="ISKCON Temple Juhu">
+    <div class="card-body">
+      <h5 class="card-title">ISKCON Temple, Juhu</h5>
+      <p class="card-text">Beautifully maintained Krishna temple known for peaceful atmosphere and spiritual programs in Juhu.</p>
+      <button class="btn btn-sm btn-primary view-btn">View Info</button>
+    </div>
+  </div>
+</article>
+
+<!-- Walkeshwar Temple (Banganga) -->
+<article class="col-md-4 place-card" data-category="temple" data-region="mumbai" data-travel-time="1-2 hours from Mumbai" data-title="Walkeshwar Temple" data-image="images/walkeshwar.jpg" data-how-to-reach="Located in Gondavale, 250 km from Mumbai. Accessible via Pune route. Peaceful spiritual retreat setting." data-activities="Spiritual meditation, Temple darshan, Community service, Photography, Peaceful atmosphere" data-cost="700" data-duration="1-2 days" data-map-link="https://www.google.com/maps/search/Gondavalekar+Maharaj+Temple">
+  <div class="card mb-4 shadow-sm">
+    <img src="images/walkeshwar.jpg" class="card-img-top" alt="Walkeshwar Temple">
+    <div class="card-body">
+      <h5 class="card-title">Walkeshwar Temple</h5>
+      <p class="card-text">Ancient temple dedicated to Lord Shiva, located near the sacred Banganga Tank in South Mumbai.</p>
+      <button class="btn btn-sm btn-primary view-btn">View Info</button>
+    </div>
+  </div>
+</article>
+
+<!-- Mumbadevi Temple -->
+<article class="col-md-4 place-card" data-category="temple" data-region="mumbai" data-travel-time="1-2 hours from Mumbai" data-title="Mumbadevi Temple" data-image="images/mumbadevi.jpg" data-how-to-reach="Located on hilltop in Shinganapur near Satara, 280 km from Mumbai. Requires some trekking. Scenic location." data-activities="Temple darshan, Hill trekking, Photography, Meditation, Panoramic views" data-cost="800" data-duration="2-3 days" data-map-link="https://www.google.com/maps/search/Shikhar+Shinganapur+Mahadev+Temple">
+  <div class="card mb-4 shadow-sm">
+    <img src="images/mumbadevi.jpg" class="card-img-top" alt="Mumbadevi Temple">
+    <div class="card-body">
+      <h5 class="card-title">Mumbadevi Temple</h5>
+      <p class="card-text">The temple after whom Mumbai is named. Dedicated to Goddess Mumbadevi, located in Bhuleshwar.</p>
+      <button class="btn btn-sm btn-primary view-btn">View Info</button>
+    </div>
+  </div>
+</article>
+
+<!-- Babulnath Temple -->
+<article class="col-md-4 place-card" data-category="temple" data-region="mumbai" data-travel-time="1-2 hours from Mumbai" data-title="Babulnath Temple" data-image="images/babulnath.jpg" data-how-to-reach="Located 100 km from Mumbai via NH-48 towards Belgaum, then local roads. Popular trekking destination with car access." data-activities="Trekking, Photography, Cave exploration, Sunrise/sunset viewing, Adventure" data-cost="1000" data-duration="2-3 days" data-map-link="https://www.google.com/maps/search/Harishchandragad+Fort">
+  <div class="card mb-4 shadow-sm">
+    <img src="images/babulnath.jpg" class="card-img-top" alt="Babulnath Temple">
+    <div class="card-body">
+      <h5 class="card-title">Babulnath Temple</h5>
+      <p class="card-text">Ancient temple near Girgaon Chowpatty, dedicated to Lord Shiva, known for its calmness amidst city life.</p>
+      <button class="btn btn-sm btn-primary view-btn">View Info</button>
+    </div>
+  </div>
+</article>
+
+<!-- Global Vipassana Pagoda (Spiritual Buddhist Site) -->
+<article class="col-md-4 place-card" data-category="temple" data-region="mumbai" data-travel-time="1-2 hours from Mumbai" data-title="Global Vipassana Pagoda" data-image="images/vipassana.jpg" data-how-to-reach="Located 20 km from Kolhapur, 390 km from Mumbai. Take NH-48 towards Belgaum. Regular taxi and bus services." data-activities="Fort trekking, Photography, Historical exploration, Scenic views, Adventure" data-cost="900" data-duration="1-2 days" data-map-link="https://www.google.com/maps/search/Panhala+Fort">
+  <div class="card mb-4 shadow-sm">
+    <img src="images/vipassana.jpg" class="card-img-top" alt="Global Vipassana Pagoda">
+    <div class="card-body">
+      <h5 class="card-title">Global Vipassana Pagoda</h5>
+      <p class="card-text">A stunning monument of peace and meditation near Gorai, blending spiritual learning with unique architecture.</p>
+      <button class="btn btn-sm btn-primary view-btn">View Info</button>
+    </div>
+  </div>
+</article>
+
+<!-- Dagdusheth Halwai Ganpati Temple -->
+<article class="col-md-4 place-card" data-category="temple" data-region="pune" data-travel-time="3-4 hours from Mumbai" data-title="Dagdusheth Halwai Ganpati" data-image="images/dagdushet.jpg" data-how-to-reach="Located on coast in Ratnagiri, 360 km from Mumbai. Take NH-48 towards Belgaum, then coastal route. Sea fort." data-activities="Fort exploration, Sea views, Photography, Boating, Coastal beauty" data-cost="1100" data-duration="2-3 days" data-map-link="https://www.google.com/maps/search/Jaigad+Fort">
+  <div class="card mb-4 shadow-sm">
+    <img src="images/dagdushet.jpg" class="card-img-top" alt="Dagdusheth Halwai Temple">
+    <div class="card-body">
+      <h5 class="card-title">Dagdusheth Halwai Ganpati</h5>
+      <p class="card-text">One of the most iconic Ganpati temples in Maharashtra, known for its grandeur and massive idol in the heart of Pune.</p>
+      <button class="btn btn-sm btn-primary view-btn">View Info</button>
+    </div>
+  </div>
+</article>
+
+<!-- Mini Balaji Temple, Pashan -->
+<article class="col-md-4 place-card" data-category="temple" data-region="pune" data-travel-time="3-4 hours from Mumbai" data-title="Mini Balaji Temple, Pashan" data-image="images/mini-balaji.JPG" data-how-to-reach="Located near Junnar, 120 km from Pune, 250 km from Mumbai. Take NH-48 towards Belgaum. Well-marked fort." data-activities="Trekking, Photography, Historical exploration, Scenic views, Birth place history" data-cost="1000" data-duration="2-3 days" data-map-link="https://www.google.com/maps/search/Shivneri+Fort">
+  <div class="card mb-4 shadow-sm">
+    <img src="images/mini-balaji.JPG" class="card-img-top" alt="Mini Balaji Temple Pune">
+    <div class="card-body">
+      <h5 class="card-title">Mini Balaji Temple, Pashan</h5>
+      <p class="card-text">A peaceful temple inspired by Tirupati Balaji, located in the suburbs of Pune and famous among South Indian devotees.</p>
+      <button class="btn btn-sm btn-primary view-btn">View Info</button>
+    </div>
+  </div>
+</article>
+
+<!-- Jejuri Khandoba Temple -->
+<article class="col-md-4 place-card" data-category="temple" data-region="pune" data-travel-time="3-4 hours from Mumbai" data-title="Jejuri Khandoba Temple" data-image="images/jejuri.jpg" data-how-to-reach="Located 40 km from Mahabaleshwar, 340 km from Mumbai. Take NH-48 via Pune towards Belgaum. Historic fort." data-activities="Trekking, Photography, Historical battles site, Scenic views, Adventure" data-cost="1100" data-duration="2-3 days" data-map-link="https://www.google.com/maps/search/Pratapgad+Fort">
+  <div class="card mb-4 shadow-sm">
+    <img src="images/jejuri.jpg" class="card-img-top" alt="Jejuri Khandoba Temple">
+    <div class="card-body">
+      <h5 class="card-title">Jejuri Khandoba Temple</h5>
+      <p class="card-text">Famous for its turmeric-covered rituals, the Jejuri temple is dedicated to Lord Khandoba and attracts thousands of devotees.</p>
+      <button class="btn btn-sm btn-primary view-btn">View Info</button>
+    </div>
+  </div>
+</article>
+
+<!-- Morgaon Ganpati (Mayureshwar Temple) -->
+<article class="col-md-4 place-card" data-category="temple" data-region="pune" data-travel-time="3-4 hours from Mumbai" data-title="Morgaon Ganpati (Mayureshwar)" data-image="images/morgaon.jpeg" data-how-to-reach="Located 50 km from Pune, 300 km from Mumbai. Take NH-48 towards Belgaum. Well-known fort with trekking routes." data-activities="Trekking, Photography, Historical exploration, Scenic views, Adventure" data-cost="1000" data-duration="1-2 days" data-map-link="https://www.google.com/maps/search/Torna+Fort">
+  <div class="card mb-4 shadow-sm">
+
+    
+    <img src="images/morgaon.jpeg" class="card-img-top" alt="Morgaon Ganpati Temple">
+    <div class="card-body">
+      <h5 class="card-title">Morgaon Ganpati (Mayureshwar)</h5>
+      <p class="card-text">The first temple in the Ashtavinayak pilgrimage, dedicated to Lord Ganesha in the form of Mayureshwar, located in Morgaon, Pune.</p>
+      <button class="btn btn-sm btn-primary view-btn">View Info</button>
+    </div>
+  </div>
+</article>
+
+
+
+<!-- Siddheshwar Temple, Solapur -->
+<article class="col-md-4 place-card" data-category="temple" data-region="solapur" data-travel-time="7-8 hours from Mumbai" data-title="Siddheshwar Temple, Solapur" data-image="images/siddheswar.jpg" data-how-to-reach="Located 50 km from Pune, 300 km from Mumbai. Take NH-48 towards Belgaum. Hill fort with road and trekking access." data-activities="Trekking, Photography, Historical exploration, Scenic views, Adventure" data-cost="1000" data-duration="1-2 days" data-map-link="https://www.google.com/maps/search/Purandar+Fort">
+  <div class="card mb-4 shadow-sm">
+    <img src="images/siddheswar.jpg" class="card-img-top" alt="Siddheshwar Temple Solapur">
+    <div class="card-body">
+      <h5 class="card-title">Siddheshwar Temple, Solapur</h5>
+      <p class="card-text">Iconic temple situated on the lake in Solapur city, dedicated to Lord Siddheshwar (Shiva). Hosts the grand annual Gadda Yatra.</p>
+      <button class="btn btn-sm btn-primary view-btn">View Info</button>
+    </div>
+  </div>
+</article>
+
+<!-- Vitthal-Rukmini Temple, Pandharpur -->
+<article class="col-md-4 place-card" data-category="temple" data-region="solapur" data-travel-time="7-8 hours from Mumbai" data-title="Vitthal-Rukmini Temple, Pandharpur" data-image="images/pandharpur.jpeg" data-how-to-reach="Located near Lonavala, 80 km from Mumbai via NH-48. Short trek with parking available. Pyramid-shaped." data-activities="Quick trekking, Photography, Scenic views, Pawna Lake views, Beginner-friendly" data-cost="800" data-duration="1-2 days" data-map-link="https://www.google.com/maps/search/Tikona+Fort">
+  <div class="card mb-4 shadow-sm">
+    <img src="images/pandharpur.jpeg" class="card-img-top" alt="Vitthal-Rukmini Temple">
+    <div class="card-body">
+      <h5 class="card-title">Vitthal-Rukmini Temple, Pandharpur</h5>
+      <p class="card-text">The most revered temple of Lord Vitthal and Rukmini, central to the Warkari tradition. Lakhs of devotees gather for Ashadhi Ekadashi.</p>
+      <button class="btn btn-sm btn-primary view-btn">View Info</button>
+    </div>
+  </div>
+</article>
+
+<!-- Akkalkot Swami Samarth Temple -->
+<article class="col-md-4 place-card" data-category="temple" data-region="solapur" data-travel-time="7-8 hours from Mumbai" data-title="Swami Samarth Temple, Akkalkot" data-image="images/akkalkot.jpg" data-how-to-reach="Located 120 km from Pune, 260 km from Mumbai via Panvel route. Historic capital requires climbing cable car." data-activities="Historical exploration, Cable car ride, Photography, Scenic views, Educational visit" data-cost="1200" data-duration="1-2 days" data-map-link="https://www.google.com/maps/search/Raigad+Fort">
+  <div class="card mb-4 shadow-sm">
+    <img src="images/akkalkot.jpg" class="card-img-top" alt="Akkalkot Swami Samarth Temple">
+    <div class="card-body">
+      <h5 class="card-title">Swami Samarth Temple, Akkalkot</h5>
+      <p class="card-text">Dedicated to Swami Samarth Maharaj, a spiritual guru believed to be an avatar of Dattatreya. Temple is filled with spiritual calmness.</p>
+      <button class="btn btn-sm btn-primary view-btn">View Info</button>
+    </div>
+  </div>
+</article>
+
+<!-- Gangapur Dattatreya Temple -->
+<article class="col-md-4 place-card" data-category="temple" data-region="solapur" data-travel-time="7-8 hours from Mumbai" data-title="Dattatreya Temple, Gangapur" data-image="images/gangapur.jpg" data-how-to-reach="Located off-coast of Murud, 80 km from Mumbai. Accessible by boat from Murud beach. Unique sea fort." data-activities="Boat tours, Fort exploration, Photography, Water adventure, Historical sites" data-cost="1100" data-duration="1-2 days" data-map-link="https://www.google.com/maps/search/Murud-Janjira+Fort">
+  <div class="card mb-4 shadow-sm">
+    <img src="images/gangapur.jpg" class="card-img-top" alt="Gangapur Dattatreya Temple">
+    <div class="card-body">
+      <h5 class="card-title">Dattatreya Temple, Gangapur</h5>
+      <p class="card-text">A sacred temple dedicated to Lord Dattatreya. Pilgrims believe that Swami Samarth’s presence is still felt here spiritually.</p>
+      <button class="btn btn-sm btn-primary view-btn">View Info</button>
+    </div>
+  </div>
+</article>
+
+<!-- Shri Uttar Chidambaram Nataraja Mandir, Satara -->
+<article class="col-md-4 place-card" data-category="temple" data-region="satara" data-travel-time="6-7 hours from Mumbai" data-title="Shri Uttar Chidambaram Nataraja Mandir" data-image="images/nataraja.jpg" data-how-to-reach="Located off-coast in Sindhudurg district, 410 km from Mumbai. Accessible by boat from coastal town. Remote sea fort." data-activities="Boat tours, Fort exploration, Photography, Historical learning, Water adventure" data-cost="1300" data-duration="2-3 days" data-map-link="https://www.google.com/maps/search/Sindhudurg+Fort">
+  <div class="card mb-4 shadow-sm">
+    <img src="images/nataraja.jpg" class="card-img-top" alt="Shri Uttar Chidambaram Nataraja Mandir">
+    <div class="card-body">
+      <h5 class="card-title">Shri Uttar Chidambaram Nataraja Mandir</h5>
+      <p class="card-text">A grand temple in Satara dedicated to Lord Nataraja, built in South Indian architectural style, known as "Mini Chidambaram."</p>
+      <button class="btn btn-sm btn-primary view-btn">View Info</button>
+    </div>
+  </div>
+</article>
+
+<!-- Sangam Mauli Temple, Dehu -->
+<article class="col-md-4 place-card" data-category="temple" data-region="pune" data-travel-time="3-4 hours from Mumbai" data-title="Sangam Mauli Temple, Dehu" data-image="images/sangam-mauli.jpeg" data-how-to-reach="Located near Harnai port in Ratnagiri, 360 km from Mumbai. Accessible via NH-48 and coastal route. Historic naval port." data-activities="Fort exploration, Photography, Historical naval sites, Coastal views, Learning" data-cost="1100" data-duration="1-2 days" data-map-link="https://www.google.com/maps/search/Suvarnadurg+Fort">
+  <div class="card mb-4 shadow-sm">
+    <img src="images/sangam-mauli.jpeg" class="card-img-top" alt="Sangam Mauli Temple">
+    <div class="card-body">
+      <h5 class="card-title">Sangam Mauli Temple, Dehu</h5>
+      <p class="card-text">A peaceful temple dedicated to Lord Vitthal at the confluence of Indrayani and Bhima rivers, near Sant Tukaram Maharaj Samadhi.</p>
+      <button class="btn btn-sm btn-primary view-btn">View Info</button>
+    </div>
+  </div>
+</article>
+
+<!-- Lord Kartikeya Temple, Pune -->
+<article class="col-md-4 place-card" data-category="temple" data-region="pune" data-travel-time="3-4 hours from Mumbai" data-title="Lord Karthikeya Temple" data-image="images/kartikeya.jpeg" data-how-to-reach="Located inside Sanjay Gandhi National Park, 40 km from central Mumbai. Accessible by car. Nature reserve setting." data-activities="Lake viewing, Nature walks, Photography, Bird watching, Picnicking" data-cost="600" data-duration="Half day" data-map-link="https://www.google.com/maps/search/Vihar+Lake">
+  <div class="card mb-4 shadow-sm">
+    <img src="images/kartikeya.jpeg" class="card-img-top" alt="Lord Karthikeya Temple">
+    <div class="card-body">
+      <h5 class="card-title">Lord Karthikeya Temple</h5>
+      <p class="card-text">A rare South Indian style temple dedicated to Lord Murugan/Karthikeya, located in Pune and managed by the Tamil community.</p>
+      <button class="btn btn-sm btn-primary view-btn">View Info</button>
+    </div>
+  </div>
+</article>
+
+<!-- Dholya Ganpati Mandir, Wai -->
+<article class="col-md-4 place-card" data-category="temple" data-region="satara" data-travel-time="6-7 hours from Mumbai" data-title="Dholya Ganpati Mandir, Wai" data-image="images/dholya-ganpati.jpg" data-how-to-reach="Located in forest zone within Mumbai, 35 km from city center. Accessible by car or taxi. Freshwater lake." data-activities="Nature walks, Photography, Bird watching, Peaceful atmosphere, Jogging" data-cost="300" data-duration="Few hours" data-map-link="https://www.google.com/maps/search/Tulsi+Lake">
+  <div class="card mb-4 shadow-sm">
+    <img src="images/dholya-ganpati.jpg" class="card-img-top" alt="Dholya Ganpati Temple">
+    <div class="card-body">
+      <h5 class="card-title">Dholya Ganpati Mandir, Wai</h5>
+      <p class="card-text">One of the oldest and largest Ganpati idols in Maharashtra, located on the bank of Krishna river in Wai town, Satara.</p>
+      <button class="btn btn-sm btn-primary view-btn">View Info</button>
+    </div>
+  </div>
+</article>
+
+<!-- Gondavalekar Maharaj Temple -->
+<article class="col-md-4 place-card" data-category="temple" data-region="satara" data-travel-time="6-7 hours from Mumbai" data-title="Gondavalekar Maharaj Temple" data-image="images/gondavale.webp" data-how-to-reach="Located in Mahabaleshwar, 330 km from Mumbai via Pune. Take NH-48 towards Belgaum. Main tourist attraction." data-activities="Boating, Horse riding, Photography, Scenic walks, Sunset viewing" data-cost="1200" data-duration="2-3 days" data-map-link="https://www.google.com/maps/search/Venna+Lake">
+  <div class="card mb-4 shadow-sm">
+    <img src="images/gondavale.webp" class="card-img-top" alt="Gondavalekar Maharaj Temple">
+    <div class="card-body">
+      <h5 class="card-title">Gondavalekar Maharaj Temple</h5>
+      <p class="card-text">Temple and samadhi of Brahmachaitanya Gondavalekar Maharaj, a spiritual saint. Place is known for peace and community service.</p>
+      <button class="btn btn-sm btn-primary view-btn">View Info</button>
+    </div>
+  </div>
+</article>
+
+<!-- Shikhar Shinganapur Mahadev Temple -->
+<article class="col-md-4 place-card" data-category="temple" data-region="satara" data-travel-time="6-7 hours from Mumbai" data-title="Shikhar Shinganapur Mahadev Temple" data-image="images/shikar-shinganapur.jpeg" data-how-to-reach="Located in Nagpur, 860 km from Mumbai. Largest lake in city. Accessible by auto or taxi. Well-developed." data-activities="Boating, Photography, Bird watching, Picnicking, Lakeside gardens" data-cost="600" data-duration="2-3 hours" data-map-link="https://www.google.com/maps/search/Ambazari+Lake">
+  <div class="card mb-4 shadow-sm">
+    <img src="images/shikar-shinganapur.jpeg" class="card-img-top" alt="Shikhar Shinganapur Temple">
+    <div class="card-body">
+      <h5 class="card-title">Shikhar Shinganapur Mahadev Temple</h5>
+      <p class="card-text">Hilltop Shiva temple located in Shinganapur near Satara. Offers a divine view and is an important pilgrimage destination.</p>
+      <button class="btn btn-sm btn-primary view-btn">View Info</button>
+    </div>
+  </div>
+</article>
+
+<!--end of temple cards-->
+      
+<!--fort cards-->
+<!-- Card 1 -->
+<!-- Daulatabad Fort -->
+<article class="col-md-4 place-card" data-category="fort" data-region="aurangabad" data-title="Daulatabad Fort" data-image="images/daulatabad.webp" data-how-to-reach="Located near Ramtek, 80 km from Aurangabad. Well-maintained road access. Popular fortress with strategic defense." data-travel-time="3-4 hours from Aurangabad" data-activities="Fort exploration, Cable car ride, Photography, Scenic views, Educational visit" data-cost="1200" data-duration="1-2 days" data-map-link="https://www.google.com/maps/search/Daulatabad+Fort">
+  <div class="card mb-4 shadow-sm">
+    <img src="images/daulatabad.webp" class="card-img-top" alt="Daulatabad Fort">
+    <div class="card-body">
+      <h5 class="card-title">Daulatabad Fort</h5>
+      <p class="card-text">One of the most powerful forts in Maharashtra, known for its strategic defense and secret tunnels.</p>
+      <button class="btn btn-sm btn-primary view-btn">View Info</button>
+    </div>
+  </div>
+</article>
+<!-- Harishchandragad Fort -->
+<article class="col-md-4 place-card" data-category="fort" data-region="ahmednagar" data-title="Harishchandragad Fort" data-image="images/harishchandragad.jpeg" data-how-to-reach="Located 100 km from Mumbai via NH-48 towards Belgaum, then local roads. Popular trekking destination with car access." data-travel-time="2-3 hours from Mumbai" data-activities="Trekking, Photography, Cave exploration, Sunrise/sunset viewing, Adventure" data-cost="1000" data-duration="2-3 days" data-map-link="https://www.google.com/maps/search/Harishchandragad+Fort">
+  <div class="card mb-4 shadow-sm">
+    <img src="images/harishchandragad.jpeg" class="card-img-top" alt="Harishchandragad Fort">
+    <div class="card-body">
+      <h5 class="card-title">Harishchandragad Fort</h5>
+      <p class="card-text">Popular trekking destination with stunning views from Konkankada and ancient caves like Kedareshwar.</p>
+      <button class="btn btn-sm btn-primary view-btn">View Info</button>
+    </div>
+  </div>
+</article>
+
+<!-- Panhala Fort -->
+<article class="col-md-4 place-card" data-category="fort" data-region="kolhapur" data-title="Panhala Fort" data-image="images/panhala.jpeg" data-how-to-reach="Located 20 km from Kolhapur, 390 km from Mumbai. Take NH-48 towards Belgaum. Regular taxi and bus services." data-travel-time="7-8 hours from Mumbai" data-activities="Fort trekking, Photography, Historical exploration, Scenic views, Adventure" data-cost="900" data-duration="1-2 days" data-map-link="https://www.google.com/maps/search/Panhala+Fort">
+  <div class="card mb-4 shadow-sm">
+    <img src="images/panhala.jpeg" class="card-img-top" alt="Panhala Fort">
+    <div class="card-body">
+      <h5 class="card-title">Panhala Fort</h5>
+      <p class="card-text">Historic hill fort near Kolhapur, known for its connection with Chhatrapati Shivaji Maharaj and scenic beauty.</p>
+      <button class="btn btn-sm btn-primary view-btn">View Info</button>
+    </div>
+  </div>
+</article>
+
+<!-- Vishalgad Fort (Khelna Fort) -->
+<article class="col-md-4 place-card" data-category="fort" data-region="kolhapur" data-travel-time="8-9 hours from Mumbai" data-how-to-reach="Located in Thane, 25 km from central Mumbai. Easily accessible by auto or local transport. Well-maintained." data-activities="Boating, Evening strolls, Family picnicking, Photography, Relaxation" data-cost="300" data-duration="2-3 hours" data-map-link="https://www.google.com/maps/search/Talao+Pali data-title="Vishalgad (Khelna Fort)" data-image="images/vishalgad.jpg">
+  <div class="card mb-4 shadow-sm">
+    <img src="images/vishalgad.jpg" class="card-img-top" alt="Vishalgad Fort">
+    <div class="card-body">
+      <h5 class="card-title">Vishalgad (Khelna Fort)</h5>
+      <p class="card-text">Famous for Shivaji Maharaj’s daring escape from Panhala to Vishalgad; a fort with great views and history.</p>
+      <button class="btn btn-sm btn-primary view-btn">View Info</button>
+    </div>
+  </div>
+</article>
+
+<!-- Jaigad Fort -->
+<article class="col-md-4 place-card" data-category="fort" data-region="ratnagiri" data-travel-time="8-9 hours from Mumbai" data-how-to-reach="Located near Khopoli, 85 km from Mumbai via NH-48 towards Belgaum. Direct highway access with parking." data-activities="Roller coaster rides, Live shows, Water rides, Family fun, Adventure activities" data-cost="1800" data-duration="Full day" data-map-link="https://www.google.com/maps/search/Imagicaa+Theme+Park data-title="Jaigad Fort" data-image="images/jaigad.jpeg">
+  <div class="card mb-4 shadow-sm">
+    <img src="images/jaigad.jpeg" class="card-img-top" alt="Jaigad Fort">
+    <div class="card-body">
+      <h5 class="card-title">Jaigad Fort</h5>
+      <p class="card-text">A coastal fort offering beautiful sea views and historical significance as a Maratha naval outpost.</p>
+      <button class="btn btn-sm btn-primary view-btn">View Info</button>
+    </div>
+  </div>
+</article>
+
+<!-- Ratnadurg Fort -->
+<article class="col-md-4 place-card" data-category="fort" data-region="ratnagiri" data-travel-time="8-9 hours from Mumbai" data-how-to-reach="Located next to Essel World in Gorai, 25 km from central Mumbai. Easy access via same route." data-activities="Water slides, Wave pools, Water rides, Family entertainment, Swimming" data-cost="1400" data-duration="Full day" data-map-link="https://www.google.com/maps/search/Water+Kingdom data-title="Ratnadurg Fort" data-image="images/ratnadurg.jpeg">
+  <div class="card mb-4 shadow-sm">
+    <img src="images/ratnadurg.jpeg" class="card-img-top" alt="Ratnadurg Fort">
+    <div class="card-body">
+      <h5 class="card-title">Ratnadurg Fort</h5>
+      <p class="card-text">Sea fort surrounded by water on three sides, offering panoramic views and a temple of Bhagwati Devi inside.</p>
+      <button class="btn btn-sm btn-primary view-btn">View Info</button>
+    </div>
+  </div>
+</article>
+
+<!-- Shivneri Fort (Junnar, Pune) -->
+<article class="col-md-4 place-card" data-category="fort" data-region="pune" data-travel-time="3-4 hours from Mumbai" data-how-to-reach="Located in Lonavala, 80 km from Mumbai via NH-48. Easily accessible by car. Largest extreme adventure park." data-activities="Bungee jumping, Dirt biking, Adventure sports, Zip lining, Extreme activities" data-cost="1500" data-duration="Full day" data-map-link="https://www.google.com/maps/search/Della+Adventure+Park data-title="Shivneri Fort" data-image="images/shivneri.jpeg">
+  <div class="card mb-4 shadow-sm">
+    <img src="images/shivneri.jpeg" class="card-img-top" alt="Shivneri Fort">
+    <div class="card-body">
+      <h5 class="card-title">Shivneri Fort</h5>
+      <p class="card-text">Birthplace of Chhatrapati Shivaji Maharaj, located near Junnar. A must-visit for history lovers.</p>
+      <button class="btn btn-sm btn-primary view-btn">View Info</button>
+    </div>
+  </div>
+</article>
+
+<!-- Rajgad Fort -->
+<article class="col-md-4 place-card" data-category="fort" data-region="pune" data-travel-time="3-4 hours from Mumbai" data-how-to-reach="Located in Thane, 40 km from central Mumbai. Accessible by car via highway. Award-winning park." data-activities="Water slides, Wave pools, Man-made cave, Swimming, Family entertainment" data-cost="1200" data-duration="Full day" data-map-link="https://www.google.com/maps/search/Suraj+Water+Park data-title="Rajgad Fort" data-image="images/rajgad.webp">
+  <div class="card mb-4 shadow-sm">
+    <img src="images/rajgad.webp" class="card-img-top" alt="Rajgad Fort">
+    <div class="card-body">
+      <h5 class="card-title">Rajgad Fort</h5>
+      <p class="card-text">The first capital of Chhatrapati Shivaji Maharaj's empire. Stunning architecture and trekking destination.</p>
+      <button class="btn btn-sm btn-primary view-btn">View Info</button>
+    </div>
+  </div>
+</article>
+
+<!-- Pratapgad Fort -->
+<article class="col-md-4 place-card" data-category="fort" data-region="satara" data-travel-time="6-7 hours from Mumbai" data-how-to-reach="Located near Virar, 80 km from central Mumbai via NH-48 towards Gujarat. Accessible by car." data-activities="Water slides, Lazy rivers, Rain dance setup, Group activities, Water sports" data-cost="1100" data-duration="Full day" data-map-link="https://www.google.com/maps/search/The+Great+Escape data-title="Pratapgad Fort" data-image="images/pratapgad.jpeg">
+  <div class="card mb-4 shadow-sm">
+    <img src="images/pratapgad.jpeg" class="card-img-top" alt="Pratapgad Fort">
+    <div class="card-body">
+      <h5 class="card-title">Pratapgad Fort</h5>
+      <p class="card-text">Site of the famous battle between Shivaji Maharaj and Afzal Khan. A major tourist spot near Mahabaleshwar.</p>
+      <button class="btn btn-sm btn-primary view-btn">View Info</button>
+    </div>
+  </div>
+</article>
+
+<!-- Torna Fort -->
+<article class="col-md-4 place-card" data-category="fort" data-region="pune" data-travel-time="3-4 hours from Mumbai" data-how-to-reach="Located next to Wet N Joy in Lonavala, 80 km from Mumbai via NH-48. Adjacent to water park." data-activities="High-speed rides, Zip lines, Thrill rides, Extreme sports, Adventure" data-cost="1400" data-duration="Full day" data-map-link="https://www.google.com/maps/search/Magic+Mountain data-title="Torna Fort" data-image="images/torna.jpeg">
+  <div class="card mb-4 shadow-sm">
+    <img src="images/torna.jpeg" class="card-img-top" alt="Torna Fort">
+    <div class="card-body">
+      <h5 class="card-title">Torna Fort</h5>
+      <p class="card-text">First fort captured by Shivaji Maharaj at age 16. Known as Prachandgad for its vastness.</p>
+      <button class="btn btn-sm btn-primary view-btn">View Info</button>
+    </div>
+  </div>
+</article>
+
+<!-- Lohagad Fort -->
+<article class="col-md-4 place-card" data-category="fort" data-region="pune" data-travel-time="3-4 hours from Mumbai" data-how-to-reach="Located in Shirdi, 210 km from Mumbai. Take NH-48 towards Belgaum, then SH-42 to Shirdi. Devotional park." data-activities="5D shows, Animated temples, Dhams replicas, Spiritual learning, Family entertainment" data-cost="1000" data-duration="Full day" data-map-link="https://www.google.com/maps/search/Sai+Teerth+Theme+Park data-title="Lohagad Fort" data-image="images/lohagad.jpeg">
+  <div class="card mb-4 shadow-sm">
+    <img src="images/lohagad.jpeg" class="card-img-top" alt="Lohagad Fort">
+    <div class="card-body">
+      <h5 class="card-title">Lohagad Fort</h5>
+      <p class="card-text">Popular monsoon destination near Lonavala, known for its long Vinchu Kata fortification tail.</p>
+      <button class="btn btn-sm btn-primary view-btn">View Info</button>
+    </div>
+  </div>
+</article>
+
+<!-- Purandar Fort -->
+<article class="col-md-4 place-card" data-category="fort" data-region="pune" data-travel-time="3-4 hours from Mumbai" data-how-to-reach="Located in South Mumbai near Gateway of India. Easily accessible by taxi, auto, or local train. City landmark." data-activities="Street shopping, Bargaining, Jewelry browsing, Book shopping, Photography" data-cost="500" data-duration="2-3 hours" data-map-link="https://www.google.com/maps/search/Colaba+Causeway data-title="Purandar Fort" data-image="images/purandar.jpeg">
+  <div class="card mb-4 shadow-sm">
+    <img src="images/purandar.jpeg" class="card-img-top" alt="Purandar Fort">
+    <div class="card-body">
+      <h5 class="card-title">Purandar Fort</h5>
+      <p class="card-text">Birthplace of Sambhaji Maharaj and a strategic military base in the Maratha Empire.</p>
+      <button class="btn btn-sm btn-primary view-btn">View Info</button>
+    </div>
+  </div>
+</article>
+
+<!-- Korigad Fort -->
+<article class="col-md-4 place-card" data-category="fort" data-region="pune" data-travel-time="3-4 hours from Mumbai" data-how-to-reach="Located in Dadar East, Mumbai. Accessible by local train or auto. Mumbai's most vibrant flower market." data-activities="Flower shopping, Photography, Sensory experience, Festive preparations, Shopping" data-cost="200" data-duration="1-2 hours" data-map-link="https://www.google.com/maps/search/Phool+Market,+Dadar data-title="Korigad Fort" data-image="images/korigad.jpg">
+  <div class="card mb-4 shadow-sm">
+    <img src="images/korigad.jpg" class="card-img-top" alt="Korigad Fort">
+    <div class="card-body">
+      <h5 class="card-title">Korigad Fort</h5>
+      <p class="card-text">Easy trek near Lonavala with scenic views and a temple at the top, suitable for beginners.</p>
+      <button class="btn btn-sm btn-primary view-btn">View Info</button>
+    </div>
+  </div>
+</article>
+
+<!-- Tikona Fort -->
+<article class="col-md-4 place-card" data-category="fort" data-region="pune" data-travel-time="3-4 hours from Mumbai" data-how-to-reach="Located in Bandra, Mumbai. Accessible by local train, auto, or car. Trendy fashion street." data-activities="Fashion shopping, Brand browsing, Shoe shopping, Street food, Hangouts" data-cost="1000" data-duration="2-3 hours" data-map-link="https://www.google.com/maps/search/Linking+Road,+Bandra data-title="Tikona Fort" data-image="images/tikona.jpeg">
+  <div class="card mb-4 shadow-sm">
+    <img src="images/tikona.jpeg" class="card-img-top" alt="Tikona Fort">
+    <div class="card-body">
+      <h5 class="card-title">Tikona Fort</h5>
+      <p class="card-text">Pyramid-shaped hill fort with a short trek and breathtaking views of the Pawna region.</p>
+      <button class="btn btn-sm btn-primary view-btn">View Info</button>
+    </div>
+  </div>
+</article>
+
+<!-- Tung Fort -->
+<article class="col-md-4 place-card" data-category="fort" data-region="pune" data-travel-time="3-4 hours from Mumbai" data-how-to-reach="Located near Mumbadevi temple in downtown Mumbai. Accessible by local train or metro. Iconic jewelry market." data-activities="Jewelry shopping, Gold buying, Diamond browsing, Traditional designs, Trading" data-cost="1000" data-duration="2-3 hours" data-map-link="https://www.google.com/maps/search/Zaveri+Bazaar data-title="Tung Fort" data-image="images/tung.webp">
+  <div class="card mb-4 shadow-sm">
+    <img src="images/tung.webp" class="card-img-top" alt="Tung Fort">
+    <div class="card-body">
+      <h5 class="card-title">Tung Fort</h5>
+      <p class="card-text">Narrow and tall fort that offers dramatic views over Pawna Lake and nearby forts like Tikona and Lohagad.</p>
+      <button class="btn btn-sm btn-primary view-btn">View Info</button>
+    </div>
+  </div>
+</article>
+
+<!-- Raigad Fort -->
+<article class="col-md-4 place-card" data-category="fort" data-region="konkan" data-travel-time="7-8 hours from Mumbai" data-how-to-reach="Located in downtown Mumbai. Accessible by local train, metro, or taxi. Unique antique market." data-activities="Antique browsing, Vintage item shopping, Furniture hunting, Decor buying, Exploration" data-cost="500" data-duration="2-3 hours" data-map-link="https://www.google.com/maps/search/Chor+Bazaar data-title="Raigad Fort" data-image="images/raigad.jpg">
+  <div class="card mb-4 shadow-sm">
+    <img src="images/raigad.jpg" class="card-img-top" alt="Raigad Fort">
+    <div class="card-body">
+      <h5 class="card-title">Raigad Fort</h5>
+      <p class="card-text">The capital of the Maratha Empire, where Shivaji Maharaj was crowned. A fort of immense pride and historical value.</p>
+      <button class="btn btn-sm btn-primary view-btn">View Info</button>
+    </div>
+  </div>
+</article>
+
+<!-- Karnala Fort -->
+<article class="col-md-4 place-card" data-category="fort" data-region="konkan" data-travel-time="7-8 hours from Mumbai" data-how-to-reach="Located in Pune city. Accessible by auto or local transport. Bustling market street." data-activities="Accessory shopping, Jewelry browsing, Cosmetics buying, Home utensils, Food" data-cost="500" data-duration="2-3 hours" data-map-link="https://www.google.com/maps/search/Tulsi+Baug data-title="Karnala Fort" data-image="images/karnala.jpg">
+  <div class="card mb-4 shadow-sm">
+    <img src="images/karnala.jpg" class="card-img-top" alt="Karnala Fort">
+    <div class="card-body">
+      <h5 class="card-title">Karnala Fort</h5>
+      <p class="card-text">Fort inside Karnala Bird Sanctuary near Panvel. Known for its thumb-shaped pinnacle and lush surroundings.</p>
+      <button class="btn btn-sm btn-primary view-btn">View Info</button>
+    </div>
+  </div>
+</article>
+
+<!-- Murud-Janjira Fort -->
+<article class="col-md-4 place-card" data-category="fort" data-region="konkan" data-travel-time="7-8 hours from Mumbai" data-how-to-reach="Located in Pune. Accessible by auto or taxi. Stylish small market area." data-activities="Trendy fashion, Phone cases, Watch shopping, College wear, Budget shopping" data-cost="800" data-duration="1-2 hours" data-map-link="https://www.google.com/maps/search/Hong+Kong+Lane data-title="Murud-Janjira Fort" data-image="images/murud-janjira.jpeg">
+  <div class="card mb-4 shadow-sm">
+    <img src="images/murud-janjira.jpeg" class="card-img-top" alt="Murud-Janjira Fort">
+    <div class="card-body">
+      <h5 class="card-title">Murud-Janjira Fort</h5>
+      <p class="card-text">Unconquered sea fort built by Siddis, located off the coast of Murud. Famous for its strong sea defenses and bastions.</p>
+      <button class="btn btn-sm btn-primary view-btn">View Info</button>
+    </div>
+  </div>
+</article>
+
+<!-- Sindhudurg Fort -->
+<article class="col-md-4 place-card" data-category="fort" data-region="konkan" data-travel-time="7-8 hours from Mumbai" data-how-to-reach="Located in Pune city. Easily accessible by auto or taxi. Historic flower and vegetable market." data-activities="Flower browsing, Vegetable shopping, Local culture exploration, Photography, Exploration" data-cost="200" data-duration="1-2 hours" data-map-link="https://www.google.com/maps/search/Phule+Market data-title="Sindhudurg Fort" data-image="images/sindhudurg.jpeg">
+  <div class="card mb-4 shadow-sm">
+    <img src="images/sindhudurg.jpeg" class="card-img-top" alt="Sindhudurg Fort">
+    <div class="card-body">
+      <h5 class="card-title">Sindhudurg Fort</h5>
+      <p class="card-text">Built by Shivaji Maharaj on a rocky island, Sindhudurg is one of the strongest sea forts in the Konkan region.</p>
+      <button class="btn btn-sm btn-primary view-btn">View Info</button>
+    </div>
+  </div>
+</article>
+
+<!-- Vijaydurg Fort -->
+<article class="col-md-4 place-card" data-category="fort" data-region="konkan" data-travel-time="7-8 hours from Mumbai" data-how-to-reach="Located in central Nashik. Accessible by auto or local transport. Mix of old and new." data-activities="Clothes shopping, Home essentials, Utensils buying, Budget shopping, Local atmosphere" data-cost="500" data-duration="2-3 hours" data-map-link="https://www.google.com/maps/search/Main+Road+Market data-title="Vijaydurg Fort" data-image="images/vijaydurg.jpeg">
+  <div class="card mb-4 shadow-sm">
+    <img src="images/vijaydurg.jpeg" class="card-img-top" alt="Vijaydurg Fort">
+    <div class="card-body">
+      <h5 class="card-title">Vijaydurg Fort</h5>
+      <p class="card-text">Massive coastal fort once known as the "Eastern Gibraltar", used as a naval base by the Marathas.</p>
+      <button class="btn btn-sm btn-primary view-btn">View Info</button>
+    </div>
+  </div>
+</article>
+
+<!-- Suvarnadurg Fort -->
+<article class="col-md-4 place-card" data-category="fort" data-region="konkan" data-travel-time="7-8 hours from Mumbai" data-how-to-reach="Located in Nashik. Accessible by auto. Seasonal winter market." data-activities="Woollen shopping, Jacket browsing, Shawl buying, Winter wear, Seasonal shopping" data-cost="800" data-duration="2-3 hours" data-map-link="https://www.google.com/maps/search/Tibetan+Market+(Seasonal) data-title="Suvarnadurg Fort" data-image="images/suvarnadurg.jpeg">
+  <div class="card mb-4 shadow-sm">
+    <img src="images/suvarnadurg.jpeg" class="card-img-top" alt="Suvarnadurg Fort">
+    <div class="card-body">
+      <h5 class="card-title">Suvarnadurg Fort</h5>
+      <p class="card-text">Sea fort located near Harnai port in Ratnagiri. Part of the naval defense line created by Shivaji Maharaj.</p>
+      <button class="btn btn-sm btn-primary view-btn">View Info</button>
+    </div>
+  </div>
+</article>
+
+<!--end of fort cards-->
+
+<!--lakes cards-->
+<!-- Powai Lake, Mumbai -->
+<article class="col-md-4 place-card" data-category="lake" data-region="mumbai" data-title="Powai Lake" data-image="images/powai-lake.jpeg" data-how-to-reach="Located in Mumbai near IIT Bombay. Accessible by car, taxi, or bus. Well-maintained walking trails around the lake." data-travel-time="30-45 minutes from South Mumbai" data-activities="Evening walks, Photography, Sunset viewing, Jogging, Boating" data-cost="400" data-duration="2-3 hours" data-map-link="https://www.google.com/maps/search/Powai+Lake+Mumbai">
+  <div class="card mb-4 shadow-sm">
+    <img src="images/powai-lake.jpeg" class="card-img-top" alt="Powai Lake">
+    <div class="card-body">
+      <h5 class="card-title">Powai Lake</h5>
+      <p class="card-text">An artificial lake in Mumbai, popular for its scenic sunset views and nearby IIT Bombay campus.</p>
+      <button class="btn btn-sm btn-primary view-btn">View Info</button>
+    </div>
+  </div>
+</article>
+
+<!-- Vihar Lake, Mumbai -->
+<article class="col-md-4 place-card" data-category="lake" data-region="mumbai" data-travel-time="1-2 hours from Mumbai" data-title="Vihar Lake" data-image="images/vihar-lake.jpg" data-how-to-reach="Located inside Sanjay Gandhi National Park, 40 km from central Mumbai. Accessible by car. Nature reserve setting within city." data-activities="Lake viewing, Nature walks, Photography, Bird watching, Picnicking" data-cost="600" data-duration="Half day" data-map-link="https://www.google.com/maps/search/Vihar+Lake+Mumbai">
+  <div class="card mb-4 shadow-sm">
+    <img src="images/vihar-lake.jpg" class="card-img-top" alt="Vihar Lake">
+    <div class="card-body">
+      <h5 class="card-title">Vihar Lake</h5>
+      <p class="card-text">Located inside Sanjay Gandhi National Park, it's one of the main sources of water supply to Mumbai.</p>
+      <button class="btn btn-sm btn-primary view-btn">View Info</button>
+    </div>
+  </div>
+</article>
+
+<!-- Tulsi Lake, Mumbai -->
+<article class="col-md-4 place-card" data-category="lake" data-region="mumbai" data-travel-time="1-2 hours from Mumbai" data-title="Tulsi Lake" data-image="images/tulsi-lake.jpeg" data-how-to-reach="Located in forest zone within Mumbai, 35 km from city center. Accessible by car or taxi. Freshwater lake within city boundaries." data-activities="Nature walks, Photography, Bird watching, Peaceful atmosphere, Jogging" data-cost="300" data-duration="Few hours" data-map-link="https://www.google.com/maps/search/Tulsi+Lake+Mumbai">
+  <div class="card mb-4 shadow-sm">
+    <img src="images/tulsi-lake.jpeg" class="card-img-top" alt="Tulsi Lake">
+    <div class="card-body">
+      <h5 class="card-title">Tulsi Lake</h5>
+      <p class="card-text">Situated within a forest zone of Mumbai, this freshwater lake contributes to the city's water needs.</p>
+      <button class="btn btn-sm btn-primary view-btn">View Info</button>
+    </div>
+  </div>
+</article>
+
+<!-- Lonar Lake, Buldhana -->
+<article class="col-md-4 place-card" data-category="lake" data-region="vidarbha" data-travel-time="12-13 hours from Mumbai" data-title="Lonar Lake" data-image="images/lonar-lake.jpeg" data-how-to-reach="Located in Aurangabad city. Accessible by auto or taxi. Local shopping area." data-activities="Clothes shopping, Footwear browsing, Accessories buying, Festival shopping, Local deals" data-cost="600" data-duration="2-3 hours" data-map-link="https://www.google.com/maps/search/Aurangpura+Market">
+  <div class="card mb-4 shadow-sm">
+    <img src="images/lonar-lake.jpeg" class="card-img-top" alt="Lonar Lake">
+    <div class="card-body">
+      <h5 class="card-title">Lonar Lake</h5>
+      <p class="card-text">Formed by a meteor impact, this unique saltwater lake is both scientifically and mythologically significant.</p>
+      <button class="btn btn-sm btn-primary view-btn">View Info</button>
+    </div>
+  </div>
+</article>
+
+<!-- Venna Lake, Satara -->
+<article class="col-md-4 place-card" data-category="lake" data-region="satara" data-travel-time="6-7 hours from Mumbai" data-title="Venna Lake" data-image="images/venna-lake.jpeg" data-how-to-reach="Located in Mahabaleshwar, 330 km from Mumbai via Pune. Take NH-48 towards Belgaum. Main tourist attraction in hill station." data-activities="Boating, Horse riding, Photography, Scenic walks, Sunset viewing" data-cost="1200" data-duration="2-3 days" data-map-link="https://www.google.com/maps/search/Venna+Lake+Mahabaleshwar">
+  <div class="card mb-4 shadow-sm">
+    <img src="images/venna-lake.jpeg" class="card-img-top" alt="Venna Lake">
+    <div class="card-body">
+      <h5 class="card-title">Venna Lake</h5>
+      <p class="card-text">One of the main tourist attractions in Mahabaleshwar, known for boating and horse rides around the lake.</p>
+      <button class="btn btn-sm btn-primary view-btn">View Info</button>
+    </div>
+  </div>
+</article>
+
+<!-- Rankala Lake, Kolhapur -->
+<article class="col-md-4 place-card" data-category="lake" data-region="kolhapur" data-travel-time="8-9 hours from Mumbai" data-title="Rankala Lake" data-image="images/rankala-lake.jpeg" data-how-to-reach="Located in Kolhapur city center. Accessible by auto or taxi. Near city landmarks. Well-maintained lake." data-activities="Boating, Photography, Evening walks, Peaceful atmosphere, Lakeside gardens" data-cost="600" data-duration="2-3 hours" data-map-link="https://www.google.com/maps/search/Rankala+Lake+Kolhapur">
+  <div class="card mb-4 shadow-sm">
+    <img src="images/rankala-lake.jpeg" class="card-img-top" alt="Rankala Lake">
+    <div class="card-body">
+      <h5 class="card-title">Rankala Lake</h5>
+      <p class="card-text">A historical lake in Kolhapur, surrounded by gardens and temples, perfect for evening strolls.</p>
+      <button class="btn btn-sm btn-primary view-btn">View Info</button>
+    </div>
+  </div>
+</article>
+
+<!-- Ambazari Lake, Nagpur -->
+<article class="col-md-4 place-card" data-category="lake" data-region="nagpur" data-title="Ambazari Lake" data-image="images/ambazari-lake.jpeg" data-how-to-reach="Located in Nagpur city center, 860 km from Mumbai. Easily accessible by auto or taxi. Well-developed lake area." data-travel-time="15-16 hours from Mumbai" data-activities="Boating, Photography, Bird watching, Picnicking, Lakeside gardens" data-cost="600" data-duration="2-3 hours" data-map-link="https://www.google.com/maps/search/Ambazari+Lake+Nagpur">
+  <div class="card mb-4 shadow-sm">
+    <img src="images/ambazari-lake.jpeg" class="card-img-top" alt="Ambazari Lake">
+    <div class="card-body">
+      <h5 class="card-title">Ambazari Lake</h5>
+      <p class="card-text">Largest lake in Nagpur, known for its lush garden, boating facilities, and migratory birds.</p>
+      <button class="btn btn-sm btn-primary view-btn">View Info</button>
+    </div>
+  </div>
+</article>
+
+<!-- Futala Lake, Nagpur -->
+<article class="col-md-4 place-card" data-category="lake" data-region="nagpur" data-title="Futala Lake" data-image="images/futala-lake.jpg" data-how-to-reach="Located in Nagpur city center, 860 km from Mumbai. Easily accessible by auto or taxi. Well-developed lake area." data-travel-time="15-16 hours from Mumbai" data-activities="Boating, Photography, Bird watching, Picnicking, Lakeside gardens" data-cost="600" data-duration="2-3 hours" data-map-link="https://www.google.com/maps/search/Futala+Lake+Nagpur">
+  <div class="card mb-4 shadow-sm">
+    <img src="images/futala-lake.jpg" class="card-img-top" alt="Futala Lake">
+    <div class="card-body">
+      <h5 class="card-title">Futala Lake</h5>
+      <p class="card-text">A scenic spot in Nagpur, famous for its colorful fountains, food stalls, and evening crowds.</p>
+      <button class="btn btn-sm btn-primary view-btn">View Info</button>
+    </div>
+  </div>
+</article>
+
+<!-- Khindsi Lake, Ramtek -->
+<article class="col-md-4 place-card" data-category="lake" data-region="nagpur" data-travel-time="14-15 hours from Mumbai" data-title="Khindsi Lake" data-image="images/khindsi-lake.jpg" data-how-to-reach="Located near Ramtek, 50 km from Nagpur, 850 km from Mumbai. Accessible by car from Nagpur area. Adventure-focused." data-activities="Boating, Jet skiing, Photography, Water sports, Serene nature" data-cost="1000" data-duration="Full day" data-map-link="https://www.google.com/maps/search/Khindsi+Lake+Ramtek">
+  <div class="card mb-4 shadow-sm">
+    <img src="images/khindsi-lake.jpg" class="card-img-top" alt="Khindsi Lake">
+    <div class="card-body">
+      <h5 class="card-title">Khindsi Lake</h5>
+      <p class="card-text">Adventure-packed lake near Ramtek, offering boating, jet skiing, and a serene natural backdrop.</p>
+      <button class="btn btn-sm btn-primary view-btn">View Info</button>
+    </div>
+  </div>
+</article>
+
+<!-- Upvan Lake, Thane -->
+<article class="col-md-4 place-card" data-category="lake" data-region="mumbai" data-title="Upvan Lake" data-image="images/upvan-lake.jpg" data-how-to-reach="Located in Thane, 25 km from central Mumbai. Easily accessible by auto or local transport. Surrounded by Yeoor Hills." data-travel-time="45 minutes from Mumbai" data-activities="Boating, Evening strolls, Family picnicking, Photography, Relaxation" data-cost="300" data-duration="2-3 hours" data-map-link="https://www.google.com/maps/search/Upvan+Lake+Thane">
+  <div class="card mb-4 shadow-sm">
+    <img src="images/upvan-lake.jpg" class="card-img-top" alt="Upvan Lake">
+    <div class="card-body">
+      <h5 class="card-title">Upvan Lake</h5>
+      <p class="card-text">A peaceful lake in Thane surrounded by Yeoor Hills, known for the Sanskruti Arts Festival and jogging track.</p>
+      <button class="btn btn-sm btn-primary view-btn">View Info</button>
+    </div>
+  </div>
+</article>
+
+<!-- Pawna Lake, Pune -->
+<article class="col-md-4 place-card" data-category="lake" data-region="pune" data-travel-time="3-4 hours from Mumbai" data-how-to-reach="Located 80 km from Mumbai, 60 km from Pune, near Lonavala and Khandala. Accessible via NH-48. Camping hotspot." data-activities="Camping, Boating, Photography, Fort views, Water sports" data-cost="1000" data-duration="1-2 days" data-map-link="https://www.google.com/maps/search/Pawna+Lake+Lonavala data-title="Pawna Lake" data-image="images/pawna.jpg">
+  <div class="card mb-4 shadow-sm">
+    <img src="images/pawna.jpg" class="card-img-top" alt="Pawna Lake">
+    <div class="card-body">
+      <h5 class="card-title">Pawna Lake</h5>
+      <p class="card-text">A popular weekend camping spot near Lonavala, with amazing views of Tikona and Tung forts.</p>
+      <button class="btn btn-sm btn-primary view-btn">View Info</button>
+    </div>
+  </div>
+</article>
+
+<!-- Shivsagar Lake, Satara (Koyna Dam) -->
+<article class="col-md-4 place-card" data-category="lake" data-region="satara" data-travel-time="6-7 hours from Mumbai" data-how-to-reach="Located in Satara city center. Accessible by auto or taxi. Cultural market corner." data-activities="Saree shopping, Local snack tasting, Traditional items, Cultural shopping, Local atmosphere" data-cost="700" data-duration="2-3 hours" data-map-link="https://www.google.com/maps/search/Moti+Chowk data-title="Shivsagar Lake" data-image="images/shivsagar.jpg">
+  <div class="card mb-4 shadow-sm">
+    <img src="images/shivsagar.jpg" class="card-img-top" alt="Shivsagar Lake">
+    <div class="card-body">
+      <h5 class="card-title">Shivsagar Lake</h5>
+      <p class="card-text">Formed by the Koyna Dam, this lake is surrounded by lush forest and hills, great for nature escapes.</p>
+      <button class="btn btn-sm btn-primary view-btn">View Info</button>
+    </div>
+  </div>
+</article>
+
+<!-- Pashan Lake, Pune -->
+<article class="col-md-4 place-card" data-category="lake" data-region="pune" data-travel-time="3-4 hours from Mumbai" data-how-to-reach="Located in Ahmednagar city. Accessible by auto or taxi. Traditional cloth market." data-activities="Cloth shopping, Ethnic dress material, Festive wear, Wedding shopping, Traditional browsing" data-cost="800" data-duration="2-3 hours" data-map-link="https://www.google.com/maps/search/Kapad+Bazar data-title="Pashan Lake" data-image="images/pashan.jpg">
+  <div class="card mb-4 shadow-sm">
+    <img src="images/pashan.jpg" class="card-img-top" alt="Pashan Lake">
+    <div class="card-body">
+      <h5 class="card-title">Pashan Lake</h5>
+      <p class="card-text">A quiet lake in Pune popular among birdwatchers, located close to the Pashan hills and university area.</p>
+      <button class="btn btn-sm btn-primary view-btn">View Info</button>
+    </div>
+  </div>
+</article>
+
+<!-- Talao Pali Lake, Thane -->
+<article class="col-md-4 place-card" data-category="lake" data-region="mumbai" data-travel-time="1-2 hours from Mumbai" data-title="Talao Pali" data-image="images/talao pali.jpg" data-how-to-reach="Located in Thane, 30 km from central Mumbai. Easily accessible by local train, auto or car. Surrounded by Yeoor Hills." data-activities="Jogging, Boating, Photography, Sanskruti Arts Festival, Hill views" data-cost="300" data-duration="2-3 hours" data-map-link="https://www.google.com/maps/search/Talao+Pali+Thane">
+  <div class="card mb-4 shadow-sm">
+    <img src="images/talao pali.jpg" class="card-img-top" alt="Talao Pali">
+    <div class="card-body">
+      <h5 class="card-title">Talao Pali</h5>
+      <p class="card-text">A well-maintained lake in Thane, popular among locals for boating and evening strolls with families.</p>
+      <button class="btn btn-sm btn-primary view-btn">View Info</button>
+    </div>
+  </div>
+</article>
+<!--end of lakes cards-->
+
+<!--theme park cards-->
+
+<!-- Imagicaa Theme Park -->
+<article class="col-md-4 place-card" data-category="themepark" data-region="mumbai" data-travel-time="1-2 hours from Mumbai" data-how-to-reach="Located inside SGNP in Borivali, 35 km from central Mumbai. Accessible by car. National park setting." data-activities="Zoo exploration, Forest trekking, Lion watching, Leopard viewing, Nature experience" data-cost="700" data-duration="Half day" data-map-link="https://www.google.com/maps/search/Sanjay+Gandhi+National+Park+Mini+Zoo data-title="Imagicaa Theme Park" data-image="images/imagicaa.jpg">
+  <div class="card mb-4 shadow-sm">
+    <img src="images/imagicaa.jpg" class="card-img-top" alt="Imagicaa Theme Park">
+    <div class="card-body">
+      <h5 class="card-title">Imagicaa Theme Park</h5>
+      <p class="card-text">Located near Khopoli, Imagicaa offers international-standard rides, live shows, and thrilling roller coasters for all age groups.</p>
+      <button class="btn btn-sm btn-primary view-btn">View Info</button>
+    </div>
+  </div>
+</article>
+
+<!-- Essel World -->
+<article class="col-md-4 place-card" data-category="themepark" data-region="mumbai" data-travel-time="1-2 hours from Mumbai" data-how-to-reach="Located in Nagpur city center, 860 km from Mumbai. Easily accessible by auto or taxi." data-activities="Tiger watching, Peacock viewing, Bird watching, Reptile viewing, Family visit" data-cost="500" data-duration="2-3 hours" data-map-link="https://www.google.com/maps/search/Maharajbagh+Zoo data-title="Essel World" data-image="images/essel-world.jpg">
+  <div class="card mb-4 shadow-sm">
+    <img src="images/essel-world.jpg" class="card-img-top" alt="Essel World">
+    <div class="card-body">
+      <h5 class="card-title">Essel World</h5>
+      <p class="card-text">India's iconic amusement park located in Gorai, Mumbai with fun rides, dashing cars, and a carnival vibe since decades!</p>
+      <button class="btn btn-sm btn-primary view-btn">View Info</button>
+    </div>
+  </div>
+</article>
+
+<!-- Water Kingdom -->
+<article class="col-md-4 place-card" data-category="themepark" data-region="mumbai" data-travel-time="1-2 hours from Mumbai" data-how-to-reach="Located in Aurangabad near Bibi Ka Maqbara, 350 km from Mumbai. Accessible by car or taxi." data-activities="Zoo exploration, Tiger watching, Crocodile viewing, Garden walks, Family entertainment" data-cost="700" data-duration="2-3 hours" data-map-link="https://www.google.com/maps/search/Siddharth+Garden+&+Zoo data-title="Water Kingdom" data-image="images/water-kingdom.png">
+  <div class="card mb-4 shadow-sm">
+    <img src="images/water-kingdom.png" class="card-img-top" alt="Water Kingdom">
+    <div class="card-body">
+      <h5 class="card-title">Water Kingdom</h5>
+      <p class="card-text">Asia's largest water park located next to Essel World, famous for wave pools and crazy water slides.</p>
+      <button class="btn btn-sm btn-primary view-btn">View Info</button>
+    </div>
+  </div>
+</article>
+
+<!-- Della Adventure Park -->
+<article class="col-md-4 place-card" data-category="themepark" data-region="pune" data-travel-time="3-4 hours from Mumbai" data-how-to-reach="Located 110 km from Aurangabad, 400 km from Mumbai. Take NH-48 to Aurangabad. Well-maintained road." data-activities="Cave exploration, Ancient fresco viewing, Buddhist architecture, Photography, Educational tour" data-cost="1100" data-duration="2-3 days" data-map-link="https://www.google.com/maps/search/Ajanta+Caves data-title="Della Adventure Park" data-image="images/della-adventure.webp">
+  <div class="card mb-4 shadow-sm">
+    <img src="images/della-adventure.webp" class="card-img-top" alt="Della Adventure Park">
+    <div class="card-body">
+      <h5 class="card-title">Della Adventure Park</h5>
+      <p class="card-text">India’s largest extreme adventure park in Lonavala, offering over 50 adventure activities including bungee jumping and dirt biking.</p>
+      <button class="btn btn-sm btn-primary view-btn">View Info</button>
+    </div>
+  </div>
+</article>
+
+<!-- Tikuji-Ni-Wadi -->
+<article class="col-md-4 place-card" data-category="themepark" data-region="mumbai" data-travel-time="1-2 hours from Mumbai" data-how-to-reach="Located 5 km from Aurangabad city, 350 km from Mumbai. Take NH-48 to Aurangabad. Easy city access." data-activities="Monument exploration, Photography, Mughal architecture viewing, Historical learning, Touring" data-cost="800" data-duration="2-3 hours" data-map-link="https://www.google.com/maps/search/Bibi+Ka+Maqbara data-title="Tikuji-Ni-Wadi" data-image="images/tikuji-ni-wadi.webp">
+  <div class="card mb-4 shadow-sm">
+    <img src="images/tikuji-ni-wadi.webp" class="card-img-top" alt="Tikuji-ni-Wadi">
+    <div class="card-body">
+      <h5 class="card-title">Tikuji-Ni-Wadi</h5>
+      <p class="card-text">Located in Thane, this park offers water rides, amusement area, a mini zoo, and even religious attractions like a replica of Kailash Parvat.</p>
+      <button class="btn btn-sm btn-primary view-btn">View Info</button>
+    </div>
+  </div>
+</article>
+
+<!-- Suraj Water Park -->
+<article class="col-md-4 place-card" data-category="themepark" data-region="mumbai" data-travel-time="1-2 hours from Mumbai" data-how-to-reach="Located in South Pune, 280 km from Mumbai. Accessible by auto or taxi. City center heritage site." data-activities="Palace exploration, Historical tours, Photography, Cultural learning, Monument visit" data-cost="700" data-duration="2-3 hours" data-map-link="https://www.google.com/maps/search/Shaniwar+Wada data-title="Suraj Water Park" data-image="images/suraj-waterpark.jpg">
+  <div class="card mb-4 shadow-sm">
+    <img src="images/suraj-waterpark.jpg" class="card-img-top" alt="Suraj Water Park">
+    <div class="card-body">
+      <h5 class="card-title">Suraj Water Park</h5>
+      <p class="card-text">Award-winning water park in Thane known for long slides, wave pool, and India's largest man-made cave.</p>
+      <button class="btn btn-sm btn-primary view-btn">View Info</button>
+    </div>
+  </div>
+</article>
+
+<!-- The Great Escape Water Park -->
+<article class="col-md-4 place-card" data-category="themepark" data-region="mumbai" data-travel-time="1-2 hours from Mumbai" data-how-to-reach="Located in South Mumbai near Apollo Bunder. Accessible by taxi, auto, or local train. City landmark." data-activities="Monument touring, Photography, Sea views, Tourist experience, Iconic location visit" data-cost="300" data-duration="1-2 hours" data-map-link="https://www.google.com/maps/search/Gateway+of+India data-title="The Great Escape" data-image="images/great-escape.jpg">
+  <div class="card mb-4 shadow-sm">
+    <img src="images/great-escape.jpg" class="card-img-top" alt="The Great Escape Water Park">
+    <div class="card-body">
+      <h5 class="card-title">The Great Escape</h5>
+      <p class="card-text">Located near Virar, this water park is perfect for group outings with thrilling slides, lazy rivers and rain dance setups.</p>
+      <button class="btn btn-sm btn-primary view-btn">View Info</button>
+    </div>
+  </div>
+</article>
+
+<!-- Wet N Joy Water Park -->
+<article class="col-md-4 place-card" data-category="themepark" data-region="pune" data-travel-time="3-4 hours from Mumbai" data-how-to-reach="Located in South Mumbai near Gateway. Accessible by taxi, auto, or local train. City museum." data-activities="Museum touring, Artifact viewing, Art appreciation, Photography, Cultural learning" data-cost="600" data-duration="3-4 hours" data-map-link="https://www.google.com/maps/search/Chhatrapati+Shivaji+Maharaj+Vastu+Sangrahalaya data-title="Wet N Joy" data-image="images/wet-n-joy.jpg">
+  <div class="card mb-4 shadow-sm">
+    <img src="images/wet-n-joy.jpg" class="card-img-top" alt="Wet N Joy">
+    <div class="card-body">
+      <h5 class="card-title">Wet N Joy</h5>
+      <p class="card-text">Located in Lonavala, this park offers one of the biggest wave pools in India with adventure-packed slides and kids' play areas.</p>
+      <button class="btn btn-sm btn-primary view-btn">View Info</button>
+    </div>
+  </div>
+</article>
+
+<!-- Magic Mountain -->
+<article class="col-md-4 place-card" data-category="themepark" data-region="pune" data-travel-time="3-4 hours from Mumbai" data-how-to-reach="Located in South Pune, 280 km from Mumbai. Accessible by auto or taxi. Historic residence." data-activities="Heritage touring, Historical learning, Architecture appreciation, Photography, Cultural visit" data-cost="500" data-duration="1-2 hours" data-map-link="https://www.google.com/maps/search/Lal+Mahal data-title="Magic Mountain" data-image="images/magic-mountain.avif">
+  <div class="card mb-4 shadow-sm">
+    <img src="images/magic-mountain.avif" class="card-img-top" alt="Magic Mountain">
+    <div class="card-body">
+      <h5 class="card-title">Magic Mountain</h5>
+      <p class="card-text">An amusement park next to Wet N Joy in Lonavala featuring high-speed rides, zip lines, and thrill machines for adrenaline junkies.</p>
+      <button class="btn btn-sm btn-primary view-btn">View Info</button>
+    </div>
+  </div>
+</article>
+
+<!-- Sai Teerth Theme Park -->
+<article class="col-md-4 place-card" data-category="themepark" data-region="ahmednagar" data-travel-time="4-5 hours from Mumbai" data-how-to-reach="Located in Ratnagiri, 350 km from Mumbai via NH-48 and coastal route. Colonial heritage palace." data-activities="Palace exploration, Historical learning, Architecture appreciation, Photography, Heritage visit" data-cost="700" data-duration="2-3 hours" data-map-link="https://www.google.com/maps/search/Thibaw+Palace data-title="Sai Teerth Theme Park" data-image="images/sai-teerth.jpg">
+  <div class="card mb-4 shadow-sm">
+    <img src="images/sai-teerth.jpg" class="card-img-top" alt="Sai Teerth Theme Park">
+    <div class="card-body">
+      <h5 class="card-title">Sai Teerth Theme Park</h5>
+      <p class="card-text">India's first devotional theme park in Shirdi featuring 5D shows, animated temples, and a replica of all 4 Dhams under one roof.</p>
+      <button class="btn btn-sm btn-primary view-btn">View Info</button>
+    </div>
+  </div>
+</article>
+<!--end of theme park cards-->
+
+<!--shopping cards-->
+<!-- Colaba Causeway -->
+<article class="col-md-4 place-card" data-category="shopping" data-region="mumbai" data-travel-time="1-2 hours from Mumbai" data-how-to-reach="Located in downtown Mumbai near CST. Accessible by local train, metro, or taxi. Historic market." data-activities="Fruit shopping, Spice buying, Pet supplies, Decorative items, Local shopping" data-cost="300" data-duration="2-3 hours" data-map-link="https://www.google.com/maps/search/Crawford+Market data-title="Colaba Causeway" data-image="images/colaba.jpg">
+  <div class="card mb-4 shadow-sm">
+    <img src="images/colaba.jpg" class="card-img-top" alt="Colaba Causeway">
+    <div class="card-body">
+      <h5 class="card-title">Colaba Causeway</h5>
+      <p class="card-text">A vibrant street market in South Mumbai offering clothes, jewelry, books, and more at bargain prices with a touch of Indo-western vibes.</p>
+      <button class="btn btn-sm btn-primary view-btn">View Info</button>
+    </div>
+  </div>
+</article>
+
+<!-- Crawford Market -->
+<article class="col-md-4 place-card" data-category="shopping" data-region="mumbai" data-travel-time="1-2 hours from Mumbai" data-how-to-reach="Located in Dadar East, Mumbai. Accessible by local train or auto. Mumbai's most vibrant flower market." data-activities="Flower shopping, Photography, Sensory experience, Festive preparations, Shopping" data-cost="200" data-duration="1-2 hours" data-map-link="https://www.google.com/maps/search/Phool+Market,+Dadar data-title="Crawford Market" data-image="images/crawford.jpeg">
+  <div class="card mb-4 shadow-sm">
+    <img src="images/crawford.jpeg" class="card-img-top" alt="Crawford Market">
+    <div class="card-body">
+      <h5 class="card-title">Crawford Market</h5>
+      <p class="card-text">Historic market known for fruits, dry fruits, exotic spices, pet supplies, and decorative items. A Mumbai shopping landmark!</p>
+      <button class="btn btn-sm btn-primary view-btn">View Info</button>
+    </div>
+  </div>
+</article>
+
+<!-- Phool Market, Dadar -->
+<article class="col-md-4 place-card" data-category="shopping" data-region="mumbai" data-travel-time="1-2 hours from Mumbai" data-how-to-reach="Located near CST, South Mumbai. Accessible by local train, metro, or taxi. Budget fashion market." data-activities="Fashion shopping, Budget buying, Stall browsing, College shopping, Bargaining" data-cost="500" data-duration="2-3 hours" data-map-link="https://www.google.com/maps/search/Fashion+Street data-title="Phool Market, Dadar" data-image="images/phool-market.webp">
+  <div class="card mb-4 shadow-sm">
+    <img src="images/phool-market.webp" class="card-img-top" alt="Phool Market, Dadar">
+    <div class="card-body">
+      <h5 class="card-title">Phool Market, Dadar</h5>
+      <p class="card-text">Mumbai’s most vibrant flower market, buzzing with colors and fragrances. A paradise for photographers, nature lovers, and festive shoppers.</p>
+      <button class="btn btn-sm btn-primary view-btn">View Info</button>
+    </div>
+  </div>
+</article>
+
+
+<!-- Linking Road, Bandra -->
+<article class="col-md-4 place-card" data-category="shopping" data-region="mumbai" data-travel-time="1-2 hours from Mumbai" data-how-to-reach="Located near Mumbadevi temple in downtown Mumbai. Accessible by local train or metro. Iconic jewelry market." data-activities="Jewelry shopping, Gold buying, Diamond browsing, Traditional designs, Trading" data-cost="1000" data-duration="2-3 hours" data-map-link="https://www.google.com/maps/search/Zaveri+Bazaar data-title="Linking Road, Bandra" data-image="images/linking-road.jpg">
+  <div class="card mb-4 shadow-sm">
+    <img src="images/linking-road.jpg" class="card-img-top" alt="Linking Road">
+    <div class="card-body">
+      <h5 class="card-title">Linking Road, Bandra</h5>
+      <p class="card-text">Trendy fashion street filled with branded stores and affordable street stalls. Great place for shoes, bags, and denim!</p>
+      <button class="btn btn-sm btn-primary view-btn">View Info</button>
+    </div>
+  </div>
+</article>
+
+<!-- Fashion Street -->
+<article class="col-md-4 place-card" data-category="shopping" data-region="mumbai" data-travel-time="1-2 hours from Mumbai" data-how-to-reach="Located in Pune city center. Easily accessible by auto or taxi. Main ethnic shopping avenue." data-activities="Saree shopping, Dress material buying, Festive wear, Traditional shopping, Browsing" data-cost="800" data-duration="2-3 hours" data-map-link="https://www.google.com/maps/search/Laxmi+Road data-title="Fashion Street" data-image="images/fs.jpg">
+  <div class="card mb-4 shadow-sm">
+    <img src="images/fs.jpg" class="card-img-top" alt="Fashion Street">
+    <div class="card-body">
+      <h5 class="card-title">Fashion Street</h5>
+      <p class="card-text">Located near CST, this market offers more than 150 stalls filled with trendy, budget-friendly fashion for college-goers and tourists.</p>
+      <button class="btn btn-sm btn-primary view-btn">View Info</button>
+    </div>
+  </div>
+</article>
+
+<!-- Zaveri Bazaar -->
+<article class="col-md-4 place-card" data-category="shopping" data-region="mumbai" data-travel-time="1-2 hours from Mumbai" data-how-to-reach="Located in Pune near Ferguson College. Accessible by auto or local transport. Youth-friendly street." data-activities="Fashion shopping, Accessory browsing, Book buying, Cafe hopping, Youth hangout" data-cost="1000" data-duration="2-3 hours" data-map-link="https://www.google.com/maps/search/Fergusson+College+Road+(FC+Road) data-title="Zaveri Bazaar" data-image="images/zaveri-bazaar.jpeg">
+  <div class="card mb-4 shadow-sm">
+    <img src="images/zaveri-bazaar.jpeg" class="card-img-top" alt="Zaveri Bazaar">
+    <div class="card-body">
+      <h5 class="card-title">Zaveri Bazaar</h5>
+      <p class="card-text">India’s biggest jewelry market located near Mumbadevi. Famous for gold, diamonds, and exquisite traditional designs.</p>
+      <button class="btn btn-sm btn-primary view-btn">View Info</button>
+    </div>
+  </div>
+</article>
+
+<!-- Chor Bazaar -->
+<article class="col-md-4 place-card" data-category="shopping" data-region="mumbai" data-travel-time="1-2 hours from Mumbai" data-how-to-reach="Located in Pune. Accessible by auto or taxi. Stylish small market area." data-activities="Trendy fashion, Phone cases, Watch shopping, College wear, Budget shopping" data-cost="800" data-duration="1-2 hours" data-map-link="https://www.google.com/maps/search/Hong+Kong+Lane data-title="Chor Bazaar" data-image="images/chor-bazaar.jpg">
+  <div class="card mb-4 shadow-sm">
+    <img src="images/chor-bazaar.jpg" class="card-img-top" alt="Chor Bazaar">
+    <div class="card-body">
+      <h5 class="card-title">Chor Bazaar</h5>
+      <p class="card-text">One of the oldest markets in Mumbai, famous for antique furniture, vintage Bollywood posters, gramophones, and quirky décor pieces.</p>
+      <button class="btn btn-sm btn-primary view-btn">View Info</button>
+    </div>
+  </div>
+</article>
+
+<!-- Laxmi Road -->
+<article class="col-md-4 place-card" data-category="shopping" data-region="pune" data-travel-time="3-4 hours from Mumbai" data-how-to-reach="Located in Nashik city center. Accessible by auto or taxi. Popular jewelry market." data-activities="Jewelry shopping, Gold buying, Traditional ornament browsing, Wedding shopping" data-cost="1000" data-duration="2-3 hours" data-map-link="https://www.google.com/maps/search/Saraf+Bazaar data-title="Laxmi Road" data-image="images/laxmi-road.jpeg">
+  <div class="card mb-4 shadow-sm">
+    <img src="images/laxmi-road.jpeg" class="card-img-top" alt="Laxmi Road">
+    <div class="card-body">
+      <h5 class="card-title">Laxmi Road</h5>
+      <p class="card-text">The heart of Pune's ethnic shopping. Famous for sarees, dress materials, and festive wear at reasonable rates.</p>
+      <button class="btn btn-sm btn-primary view-btn">View Info</button>
+    </div>
+  </div>
+</article>
+
+<!-- Tulsi Baug -->
+<article class="col-md-4 place-card" data-category="shopping" data-region="pune" data-travel-time="3-4 hours from Mumbai" data-how-to-reach="Located in central Nashik. Accessible by auto or local transport. Mix of old and new." data-activities="Clothes shopping, Home essentials, Utensils buying, Budget shopping, Local atmosphere" data-cost="500" data-duration="2-3 hours" data-map-link="https://www.google.com/maps/search/Main+Road+Market data-title="Tulsi Baug" data-image="images/tulsi-baug.jpeg">
+  <div class="card mb-4 shadow-sm">
+    <img src="images/tulsi-baug.jpeg" class="card-img-top" alt="Tulsi Baug">
+    <div class="card-body">
+      <h5 class="card-title">Tulsi Baug</h5>
+      <p class="card-text">Bustling market for accessories, artificial jewellery, cosmetics, home utensils, and street food – all in one street!</p>
+      <button class="btn btn-sm btn-primary view-btn">View Info</button>
+    </div>
+  </div>
+</article>
+
+<!-- FC Road (Fergusson College Road) -->
+<article class="col-md-4 place-card" data-category="shopping" data-region="pune" data-travel-time="3-4 hours from Mumbai" data-how-to-reach="Located in Nagpur city. Accessible by auto or taxi. Busy shopping district." data-activities="Electronics shopping, Clothes browsing, Shoes buying, Daily needs, Market exploration" data-cost="800" data-duration="2-3 hours" data-map-link="https://www.google.com/maps/search/Sitabuldi+Main+Road data-title="Fergusson College Road (FC Road)" data-image="images/fc-road.jpg">
+  <div class="card mb-4 shadow-sm">
+    <img src="images/fc-road.jpg" class="card-img-top" alt="FC Road">
+    <div class="card-body">
+      <h5 class="card-title">Fergusson College Road (FC Road)</h5>
+      <p class="card-text">Youth favorite spot filled with shops for funky fashion, accessories, books, and delicious quick bites.</p>
+      <button class="btn btn-sm btn-primary view-btn">View Info</button>
+    </div>
+  </div>
+</article>
+
+
+<!-- Hong Kong Lane -->
+<article class="col-md-4 place-card" data-category="shopping" data-region="pune" data-travel-time="3-4 hours from Mumbai" data-how-to-reach="Located in Nagpur city. Accessible by auto or taxi. Modern shopping area." data-activities="Fashion shopping, Branded stores, Cafe visits, Friend hangouts, Dining" data-cost="1000" data-duration="2-3 hours" data-map-link="https://www.google.com/maps/search/Sadar+Bazaar data-title="Hong Kong Lane" data-image="images/hong-kong-lane.jpg">
+  <div class="card mb-4 shadow-sm">
+    <img src="images/hong-kong-lane.jpg" class="card-img-top" alt="Hong Kong Lane">
+    <div class="card-body">
+      <h5 class="card-title">Hong Kong Lane</h5>
+      <p class="card-text">Small but stylish! Known for trendy clothes, phone cases, watches, and college-crowd fashion at budget prices.</p>
+      <button class="btn btn-sm btn-primary view-btn">View Info</button>
+    </div>
+  </div>
+</article>
+
+<!-- Phule Market -->
+<article class="col-md-4 place-card" data-category="shopping" data-region="pune" data-travel-time="3-4 hours from Mumbai" data-how-to-reach="Located in Nagpur. Accessible by auto or taxi. Local grocery and spice market." data-activities="Spice shopping, Dry fruit buying, Kitchenware, Groceries, Local food items" data-cost="300" data-duration="1-2 hours" data-map-link="https://www.google.com/maps/search/Gandhibagh+Market data-title="Phule Market" data-image="images/phule-market.jpeg">
+  <div class="card mb-4 shadow-sm">
+    <img src="images/phule-market.jpeg" class="card-img-top" alt="Phule Market">
+    <div class="card-body">
+      <h5 class="card-title">Phule Market</h5>
+      <p class="card-text">Historic flower and vegetable market in Pune. Great to explore local culture and street-side color!</p>
+      <button class="btn btn-sm btn-primary view-btn">View Info</button>
+    </div>
+  </div>
+</article>
+
+<!-- Saraf Bazaar -->
+<article class="col-md-4 place-card" data-category="shopping" data-region="nashik" data-travel-time="5-6 hours from Mumbai" data-how-to-reach="Located in Aurangabad city. Accessible by auto or taxi. Historic textile market." data-activities="Himroo shawl shopping, Paithani saree browsing, Textile heritage, Traditional buying" data-cost="1200" data-duration="2-3 hours" data-map-link="https://www.google.com/maps/search/Gulmandi+Bazaar data-title="Saraf Bazaar" data-image="images/saraf-bazaar.jpeg">
+  <div class="card mb-4 shadow-sm">
+    <img src="images/saraf-bazaar.jpeg" class="card-img-top" alt="Saraf Bazaar">
+    <div class="card-body">
+      <h5 class="card-title">Saraf Bazaar</h5>
+      <p class="card-text">Popular jewellery market in Nashik for gold, silver, and traditional Maharashtrian ornaments. Always buzzing during weddings & festivals.</p>
+      <button class="btn btn-sm btn-primary view-btn">View Info</button>
+    </div>
+  </div>
+</article>
+
+<!-- Main Road Market -->
+<article class="col-md-4 place-card" data-category="shopping" data-region="nashik" data-travel-time="5-6 hours from Mumbai" data-how-to-reach="Located in Kolhapur. Accessible by auto or taxi. Traditional market area." data-activities="Kolhapuri chappal shopping, Jewelry browsing, Household goods, Craft items, Local market" data-cost="800" data-duration="2-3 hours" data-map-link="https://www.google.com/maps/search/Shahu+Market data-title="Main Road Market" data-image="images/main-road.jpeg">
+  <div class="card mb-4 shadow-sm">
+    <img src="images/main-road.jpeg" cdlass="card-img-top" alt="Main Road Market Nashik">
+    <div class="card-body">
+      <h5 class="card-title">Main Road Market</h5>
+      <p class="card-text">A mix of old and new – clothes, home essentials, utensils, and budget buys in the center of Nashik city.</p>
+      <button class="btn btn-sm btn-primary view-btn">View Info</button>
+    </div>
+  </div>
+</article>
+
+<!-- Tibetan Market -->
+<article class="col-md-4 place-card" data-category="shopping" data-region="nashik" data-travel-time="5-6 hours from Mumbai" data-how-to-reach="Located in Nashik. Accessible by auto. Seasonal winter market." data-activities="Woollen shopping, Jacket browsing, Shawl buying, Winter wear, Seasonal shopping" data-cost="800" data-duration="2-3 hours" data-map-link="https://www.google.com/maps/search/Tibetan+Market+(Seasonal)" data-title="Tibetan Market (Seasonal)" data-image="images/tibetan-market.jpg">
+  <div class="card mb-4 shadow-sm">
+    <img src="images/tibetan-market.jpg" class="card-img-top" alt="Tibetan Market">
+    <div class="card-body">
+      <h5 class="card-title">Tibetan Market (Seasonal)</h5>
+      <p class="card-text">Winter-special market with cozy woollens, jackets, shawls, and accessories. Open mostly between November to January.</p>
+      <button class="btn btn-sm btn-primary view-btn">View Info</button>
+    </div>
+  </div>
+</article>
+
+<!-- Sitabuldi Main Road -->
+<article class="col-md-4 place-card" data-category="shopping" data-region="nagpur" data-travel-time="14-15 hours from Mumbai" data-how-to-reach="Located in Solapur. Accessible by auto or taxi. Handmade chappal market." data-activities="Chappal shopping, Leather browsing, Traditional footwear, Handicraft, Local shopping" data-cost="500" data-duration="1-2 hours" data-map-link="https://www.google.com/maps/search/Chappal+Market data-title="Sitabuldi Main Road" data-image="images/sitabuldi.jpg">
+  <div class="card mb-4 shadow-sm">
+    <img src="images/sitabuldi.jpg" class="card-img-top" alt="Sitabuldi Market">
+    <div class="card-body">
+      <h5 class="card-title">Sitabuldi Main Road</h5>
+      <p class="card-text">One of Nagpur’s oldest and busiest markets with shops for electronics, clothes, shoes, and everyday needs. Shopper’s go-to spot!</p>
+      <button class="btn btn-sm btn-primary view-btn">View Info</button>
+    </div>
+  </div>
+</article>
+
+<!-- Sadar Bazaar -->
+<article class="col-md-4 place-card" data-category="shopping" data-region="nagpur" data-travel-time="14-15 hours from Mumbai" data-how-to-reach="Located in Ratnagiri town, 350 km from Mumbai via NH-48. Accessible by car. Local marketplace." data-activities="Alphonso mango shopping, Kokum product buying, Sweet tasting, Konkan artefacts, Local items" data-cost="600" data-duration="2-3 hours" data-map-link="https://www.google.com/maps/search/Ratnagiri+Bazaar+Peth data-title="Sadar Bazaar" data-image="images/sadar-nagpur.jpg">
+  <div class="card mb-4 shadow-sm">
+    <img src="images/sadar-nagpur.jpg" class="card-img-top" alt="Sadar Bazaar">
+    <div class="card-body">
+      <h5 class="card-title">Sadar Bazaar</h5>
+      <p class="card-text">Trendy fashion stores and local boutiques all in one place. Great for branded shopping, cafés, and hangouts with friends.</p>
+      <button class="btn btn-sm btn-primary view-btn">View Info</button>
+    </div>
+  </div>
+</article>
+
+<!-- Itwari Market -->
+<article class="col-md-4 place-card" data-category="shopping" data-region="nagpur" data-travel-time="14-15 hours from Mumbai" data-how-to-reach="Located in Malvan, 400 km from Mumbai via coastal route. Accessible by car. Coastal spice market." data-activities="Dried seafood shopping, Malvani masala buying, Kokum juice, Coastal snacks, Souvenirs" data-cost="800" data-duration="1-2 hours" data-map-link="https://www.google.com/maps/search/Malvan+Fish+&+Spice+Market data-title="Itwari Market" data-image="images/sitabuldi.jpg">
+  <div class="card mb-4 shadow-sm">
+    <img src="images/sitabuldi.jpg" class="card-img-top" alt="Itwari Market">
+    <div class="card-body">
+      <h5 class="card-title">Itwari Market</h5>
+      <p class="card-text">Wholesale fashion hub of Nagpur – perfect for buying sarees, dress materials, and household items in bulk at cheap rates.</p>
+      <button class="btn btn-sm btn-primary view-btn">View Info</button>
+    </div>
+  </div>
+</article>
+
+<!-- Gandhibagh Market -->
+<article class="col-md-4 place-card" data-category="shopping" data-region="nagpur" data-travel-time="14-15 hours from Mumbai" data-how-to-reach="Located in Satara city, 280 km from Mumbai via Pune. Accessible by auto or taxi. Local hotspot." data-activities="Daily shopping, Traditional wear, Regional sweets, Local goods, Community atmosphere" data-cost="400" data-duration="1-2 hours" data-map-link="https://www.google.com/maps/search/Powai+Naka+Market data-title="Gandhibagh Market" data-image="images/gandhibagh.jpeg">
+  <div class="card mb-4 shadow-sm">
+    <img src="images/gandhibagh.jpeg" class="card-img-top" alt="Gandhibagh Market">
+    <div class="card-body">
+      <h5 class="card-title">Gandhibagh Market</h5>
+      <p class="card-text">Famous for local groceries, masalas, kitchenware, and dry fruits. A must-visit for Nagpur’s spice lovers!</p>
+      <button class="btn btn-sm btn-primary view-btn">View Info</button>
+    </div>
+  </div>
+</article>
+
+<!-- Gulmandi Bazaar -->
+<article class="col-md-4 place-card" data-category="shopping" data-region="aurangabad" data-travel-time="6-7 hours from Mumbai" data-how-to-reach="Located in Satara. Accessible by auto or taxi. Historic market area." data-activities="Footwear shopping, Utensil buying, Clothes browsing, Festival shopping, Local market" data-cost="500" data-duration="2-3 hours" data-map-link="https://www.google.com/maps/search/shaniwar+Peth data-title="Gulmandi Bazaar" data-image="images/gulmandi.jpg">
+  <div class="card mb-4 shadow-sm">
+    <img src="images/gulmandi.jpg" class="card-img-top" alt="Gulmandi Bazaar">
+    <div class="card-body">
+      <h5 class="card-title">Gulmandi Bazaar</h5>
+      <p class="card-text">Known for its beautiful Himroo shawls and Paithani sarees, this market reflects Aurangabad’s rich textile heritage.</p>
+      <button class="btn btn-sm btn-primary view-btn">View Info</button>
+    </div>
+  </div>
+</article>
+
+<!-- Aurangpura Market -->
+<article class="col-md-4 place-card" data-category="shopping" data-region="aurangabad" data-travel-time="6-7 hours from Mumbai" data-how-to-reach="Located in Ahmednagar. Accessible by auto or taxi. Local market area." data-activities="Produce shopping, Grocery buying, Garment browsing, Daily items, Community shopping" data-cost="400" data-duration="1-2 hours" data-map-link="https://www.google.com/maps/search/Savedi+Market data-title="Aurangpura Market" data-image="images/aurangpura.jpeg">
+  <div class="card mb-4 shadow-sm">
+    <img src="images/aurangpura.jpeg" class="card-img-top" alt="Aurangpura Market">
+    <div class="card-body">
+      <h5 class="card-title">Aurangpura Market</h5>
+      <p class="card-text">A local favorite for clothes, footwear, and accessories. Often crowded during festivals and wedding season shopping.</p>
+      <button class="btn btn-sm btn-primary view-btn">View Info</button>
+    </div>
+  </div>
+</article>
+
+<!-- Shahu Market -->
+<article class="col-md-4 place-card" data-category="shopping" data-region="kolhapur" data-travel-time="8-9 hours from Mumbai" data-how-to-reach="Located in Ahmednagar city. Accessible by auto or taxi. Traditional cloth market." data-activities="Cloth shopping, Ethnic dress material, Festive wear, Wedding shopping, Traditional browsing" data-cost="800" data-duration="2-3 hours" data-map-link="https://www.google.com/maps/search/Kapad+Bazar data-title="Shahu Market" data-image="images/shahu-market.jpeg">
+  <div class="card mb-4 shadow-sm">
+    <img src="images/shahu-market.jpeg" class="card-img-top" alt="Shahu Market">
+    <div class="card-body">
+      <h5 class="card-title">Shahu Market</h5>
+      <p class="card-text">Traditional market popular for authentic Kolhapuri chappals, jewellery, and household goods. Must-visit for local crafts!</p>
+      <button class="btn btn-sm btn-primary view-btn">View Info</button>
+    </div>
+  </div>
+</article>
+
+<!-- DYP City Mall -->
+<article class="col-md-4 place-card" data-category="shopping" data-region="kolhapur" data-travel-time="8-9 hours from Mumbai" data-how-to-reach="Located in Kolhapur, 390 km from Mumbai. Accessible by auto or taxi." data-activities="Shopping, Branded stores, Food court, Multiplex entertainment" data-cost="1000" data-duration="2-3 hours" data-map-link="https://www.google.com/maps/search/DYP+City+Mall+Kolhapur" data-title="DYP City Mall" data-image="images/dyp-mall.jpg">
+  <div class="card mb-4 shadow-sm">
+    <img src="images/dyp-mall.jpg" class="card-img-top" alt="DYP City Mall">
+    <div class="card-body">
+      <h5 class="card-title">DYP City Mall</h5>
+      <p class="card-text">Kolhapur’s biggest shopping mall featuring branded outlets, food court, and a multiplex – perfect for a chill shopping day!</p>
+      <button class="btn btn-sm btn-primary view-btn">View Info</button>
+    </div>
+  </div>
+</article>
+
+<!-- Mangalwar Peth -->
+<article class="col-md-4 place-card" data-category="shopping" data-region="kolhapur" data-travel-time="8-9 hours from Mumbai" data-how-to-reach="Located in Kolhapur. Accessible by auto or taxi. Local hotspot." data-activities="Garment shopping, Footwear browsing, Local sweets, Traditional items, Shopping" data-cost="600" data-duration="2-3 hours" data-map-link="https://www.google.com/maps/search/Mangalwar+Peth+Kolhapur" data-title="Mangalwar Peth" data-image="images/mangalwar-peth.jpg">
+  <div class="card mb-4 shadow-sm">
+    <img src="images/mangalwar-peth.jpg" class="card-img-top" alt="Mangalwar Peth Kolhapur">
+    <div class="card-body">
+      <h5 class="card-title">Mangalwar Peth</h5>
+      <p class="card-text">A buzzing local market known for ready-made garments, traditional items, footwear, and local sweets like Kolhapuri jaggery.</p>
+      <button class="btn btn-sm btn-primary view-btn">View Info</button>
+    </div>
+  </div>
+</article>
+
+<!-- Chappal Market -->
+<article class="col-md-4 place-card" data-category="shopping" data-region="solapur" data-travel-time="7-8 hours from Mumbai" data-how-to-reach="Located in Aurangabad near Bibi Ka Maqbara, 350 km from Mumbai. Accessible by car or taxi." data-activities="Zoo exploration, Tiger watching, Crocodile viewing, Garden walks, Family entertainment" data-cost="700" data-duration="2-3 hours" data-map-link="https://www.google.com/maps/search/Siddharth+Garden+&+Zoo data-title="Chappal Market" data-image="images/chappal-market.jpeg">
+  <div class="card mb-4 shadow-sm">
+    <img src="images/chappal-market.jpeg" class="card-img-top" alt="Chappal Market Solapur">
+    <div class="card-body">
+      <h5 class="card-title">Chappal Market</h5>
+      <p class="card-text">Famous for handmade leather chappals unique to Solapur. Durable, traditional, and perfect for daily wear at affordable prices.</p>
+      <button class="btn btn-sm btn-primary view-btn">View Info</button>
+    </div>
+  </div>
+</article>
+
+<!-- chadar Market -->
+<article class="col-md-4 place-card" data-category="shopping" data-region="solapur" data-travel-time="7-8 hours from Mumbai" data-how-to-reach="Located in Jalna district, 550 km from Mumbai. Accessible by car from main cities. Smaller facility." data-activities="Zoo viewing, Deer watching, Peacock viewing, Kids play zone, Nature walk" data-cost="400" data-duration="2-3 hours" data-map-link="https://www.google.com/maps/search/Nandankanan+Mini+Zoo data-title="Main Market Road" data-image="images/chadar-market.jpeg">
+  <div class="card mb-4 shadow-sm">
+    <img src="images/chadar-market.jpeg" class="card-img-top" alt="Main Market Road Solapur">
+    <div class="card-body">
+      <h5 class="card-title">Main Market Road</h5>
+      <p class="card-text">Bustling market known for Solapuri bedsheets, towels, sarees, and garments. A popular choice for both locals and tourists.</p>
+      <button class="btn btn-sm btn-primary view-btn">View Info</button>
+    </div>
+  </div>
+</article>
+
+<!-- Ratnagiri Bazaar Peth -->
+<article class="col-md-4 place-card" data-category="shopping" data-region="konkan" data-travel-time="7-8 hours from Mumbai" data-how-to-reach="Located 60 km from Aurangabad, 350 km from Mumbai. Take NH-48 to Aurangabad. Well-connected heritage site." data-activities="Cave exploration, Temple viewing, Rock-cut art, Photography, Historical learning" data-cost="1000" data-duration="2-3 days" data-map-link="https://www.google.com/maps/search/Ellora+Caves data-title="Ratnagiri Bazaar Peth" data-image="images/ratnagiri-bazarpeth.jpeg">
+  <div class="card mb-4 shadow-sm">
+    <img src="images/ratnagiri-bazarpeth.jpeg" class="card-img-top" alt="Ratnagiri Bazaar Peth">
+    <div class="card-body">
+      <h5 class="card-title">Ratnagiri Bazaar Peth</h5>
+      <p class="card-text">Local marketplace known for Alphonso mangoes, kokum products, traditional sweets, and Konkani artefacts. Pure Konkan vibes!</p>
+      <button class="btn btn-sm btn-primary view-btn">View Info</button>
+    </div>
+  </div>
+</article>
+
+<!-- Malvan Fish & Spice Market -->
+<article class="col-md-4 place-card" data-category="shopping" data-region="konkan" data-travel-time="7-8 hours from Mumbai" data-how-to-reach="Located in South Pune, 280 km from Mumbai. Accessible by auto or taxi. City center heritage site." data-activities="Palace exploration, Historical tours, Photography, Cultural learning, Monument visit" data-cost="700" data-duration="2-3 hours" data-map-link="https://www.google.com/maps/search/Shaniwar+Wada data-title="Malvan Fish & Spice Market" data-image="images/malvan-market.jpeg">
+  <div class="card mb-4 shadow-sm">
+    <img src="images/malvan-market.jpeg" class="card-img-top" alt="Malvan Market">
+    <div class="card-body">
+      <h5 class="card-title">Malvan Fish & Spice Market</h5>
+      <p class="card-text">Must-visit for dried seafood, Malvani masalas, kokum juice, and authentic coastal snacks. Perfect souvenir stop!</p>
+      <button class="btn btn-sm btn-primary view-btn">View Info</button>
+    </div>
+  </div>
+</article>
+
+<!-- Kankavli Market -->
+<article class="col-md-4 place-card" data-category="shopping" data-region="konkan" data-travel-time="7-8 hours from Mumbai" data-how-to-reach="Located in Pune, 280 km from Mumbai. Accessible by auto or taxi from city center. Heritage monument." data-activities="Palace exploration, Historical learning, Gandhi memorial, Photography, Cultural visit" data-cost="800" data-duration="2-3 hours" data-map-link="https://www.google.com/maps/search/Aga+Khan+Palace data-title="Kankavli Market" data-image="images/kankavli-market.jpeg">
+  <div class="card mb-4 shadow-sm">
+    <img src="images/kankavli-market.jpeg" class="card-img-top" alt="Kankavli Market">
+    <div class="card-body">
+      <h5 class="card-title">Kankavli Market</h5>
+      <p class="card-text">Weekly market known for handmade items, local produce, sweets, and Konkan-style accessories and clothes.</p>
+      <button class="btn btn-sm btn-primary view-btn">View Info</button>
+    </div>
+  </div>
+</article>
+
+<!-- Powai Naka Market -->
+<article class="col-md-4 place-card" data-category="shopping" data-region="satara" data-travel-time="6-7 hours from Mumbai" data-how-to-reach="Located in Satara. Accessible by auto or taxi. Local shopping area." data-activities="Daily shopping, Traditional wear, Regional sweets, Local goods, Community atmosphere" data-cost="400" data-duration="1-2 hours" data-map-link="https://www.google.com/maps/search/Powai+Naka+Market" data-title="Powai Naka Market" data-image="images/powai-naka.jpg">
+  <div class="card mb-4 shadow-sm">
+    <img src="images/powai-naka.jpg" class="card-img-top" alt="Powai Naka Market">
+    <div class="card-body">
+      <h5 class="card-title">Powai Naka Market</h5>
+      <p class="card-text">Satara’s local hotspot for daily shopping, traditional wear, and regional sweets like Kandi Pedha. Always full of buzz!</p>
+      <button class="btn btn-sm btn-primary view-btn">View Info</button>
+    </div>
+  </div>
+</article>
+
+<!-- shaniwar Peth -->
+<article class="col-md-4 place-card" data-category="shopping" data-region="satara" data-travel-time="6-7 hours from Mumbai" data-how-to-reach="Located in South Pune, 280 km from Mumbai. Accessible by auto or taxi. Historic residence." data-activities="Heritage touring, Historical learning, Architecture appreciation, Photography, Cultural visit" data-cost="500" data-duration="1-2 hours" data-map-link="https://www.google.com/maps/search/Lal+Mahal data-title="shaniwar Peth" data-image="images/shaniwar-peth.jpeg">
+  <div class="card mb-4 shadow-sm">
+    <img src="images/shaniwar-peth.jpeg" class="card-img-top" alt="shaniwar Peth Satara">
+    <div class="card-body">
+      <h5 class="card-title">shaniwar Peth</h5>
+      <p class="card-text">One of the oldest markets in Satara – known for footwear, utensils, clothes, and festive shopping especially during Ganeshotsav.</p>
+      <button class="btn btn-sm btn-primary view-btn">View Info</button>
+    </div>
+  </div>
+</article>
+
+<!-- Moti Chowk -->
+<article class="col-md-4 place-card" data-category="shopping" data-region="satara" data-travel-time="6-7 hours from Mumbai" data-how-to-reach="Located in Kolhapur city, 390 km from Mumbai. Take NH-48 towards Belgaum. Heritage museum." data-activities="Palace exploration, Royal artifact viewing, Photography, Cultural learning, Heritage touring" data-cost="800" data-duration="2-3 hours" data-map-link="https://www.google.com/maps/search/New+Palace+Museum data-title="Moti Chowk" data-image="images/moti-chowk.jpg">
+  <div class="card mb-4 shadow-sm">
+    <img src="images/moti-chowk.jpg" class="card-img-top" alt="Moti Chowk Satara">
+    <div class="card-body">
+      <h5 class="card-title">Moti Chowk</h5>
+      <p class="card-text">A cultural corner of Satara – from traditional sarees to local snacks, this place brings out the true essence of Maharashtrian shopping.</p>
+      <button class="btn btn-sm btn-primary view-btn">View Info</button>
+    </div>
+  </div>
+</article>
+
+
+<!-- Savedi Market -->
+<article class="col-md-4 place-card" data-category="shopping" data-region="ahmednagar" data-travel-time="4-5 hours from Mumbai" data-how-to-reach="Located near Nashik, 200 km from Mumbai. Take NH-48 to Nashik. Well-connected heritage site." data-activities="Cave exploration, Buddhist art viewing, Photography, Hiking, Historical learning, Pilgrimage" data-cost="800" data-duration="1-2 days" data-map-link="https://www.google.com/maps/search/Pandav+Leni+(Nashik+Caves) data-title="Savedi Market" data-image="images/savedi-market.jpeg">
+  <div class="card mb-4 shadow-sm">
+    <img src="images/savedi-market.jpeg" class="card-img-top" alt="Savedi Market">
+    <div class="card-body">
+      <h5 class="card-title">Savedi Market</h5>
+      <p class="card-text">A local favorite for fresh produce, groceries, garments, and utility goods. Popular among daily shoppers and weekend visitors.</p>
+      <button class="btn btn-sm btn-primary view-btn">View Info</button>
+    </div>
+  </div>
+</article>
+
+<!-- Kapad Bazar -->
+<article class="col-md-4 place-card" data-category="shopping" data-region="ahmednagar" data-travel-time="4-5 hours from Mumbai" data-how-to-reach="Located in Byculla, central Mumbai. Accessible by local train, metro, or taxi. Urban zoo." data-activities="Wildlife viewing, Tiger watching, Penguin viewing, Botanical garden strolls, Family visit" data-cost="500" data-duration="2-3 hours" data-map-link="https://www.google.com/maps/search/Byculla+Zoo+(Veermata+Jijabai+Bhosale+Udyan) data-title="Kapad Bazar" data-image="images/kapad-bazar.jpeg">
+  <div class="card mb-4 shadow-sm">
+    <img src="images/kapad-bazar.jpeg" class="card-img-top" alt="Kapad Bazar Ahmednagar">
+    <div class="card-body">
+      <h5 class="card-title">Kapad Bazar</h5>
+      <p class="card-text">Traditional market specializing in cloth and ethnic dress materials. Great place for festive and wedding shopping.</p>
+      <button class="btn btn-sm btn-primary view-btn">View Info</button>
+    </div>
+  </div>
+</article>
+
+<!--end of shopping cards-->
+
+<!-- zoo cards-->
+<!-- Byculla Zoo (Veermata Jijabai Bhosale Udyan and Zoo) -->
+<article class="col-md-4 place-card" data-category="zoo" data-region="mumbai" data-travel-time="1-2 hours from Mumbai" data-how-to-reach="Located inside SGNP in Borivali, 35 km from central Mumbai. Accessible by car. National park setting." data-activities="Zoo exploration, Forest trekking, Lion watching, Leopard viewing, Nature experience" data-cost="700" data-duration="Half day" data-map-link="https://www.google.com/maps/search/Sanjay+Gandhi+National+Park+Mini+Zoo data-title="Byculla Zoo (Veermata Jijabai Bhosale Udyan)" data-image="images/byculla-zoo.jpg">
+  <div class="card mb-4 shadow-sm">
+    <img src="images/byculla-zoo.jpg" class="card-img-top" alt="Byculla Zoo">
+    <div class="card-body">
+      <h5 class="card-title">Byculla Zoo (Veermata Jijabai Bhosale Udyan)</h5>
+      <p class="card-text">Mumbai's oldest zoo, home to tigers, penguins, and a botanical garden. A family favorite near Byculla.</p>
+      <button class="btn btn-sm btn-primary view-btn">View Info</button>
+    </div>
+  </div>
+</article>
+
+<!-- Sanjay Gandhi National Park Mini Zoo -->
+<article class="col-md-4 place-card" data-category="zoo" data-region="mumbai" data-travel-time="1-2 hours from Mumbai" data-how-to-reach="Located in Nagpur city center, 860 km from Mumbai. Easily accessible by auto or taxi." data-activities="Tiger watching, Peacock viewing, Bird watching, Reptile viewing, Family visit" data-cost="500" data-duration="2-3 hours" data-map-link="https://www.google.com/maps/search/Maharajbagh+Zoo data-title="Sanjay Gandhi National Park Mini Zoo" data-image="images/sg-zoo.jpg">
+  <div class="card mb-4 shadow-sm">
+    <img src="images/sg-zoo.jpg" class="card-img-top" alt="Sanjay Gandhi National Park Mini Zoo">
+    <div class="card-body">
+      <h5 class="card-title">Sanjay Gandhi National Park Mini Zoo</h5>
+      <p class="card-text">Located inside the Borivali park, this mini zoo houses lions, leopards, and deer amidst lush forest trails.</p>
+      <button class="btn btn-sm btn-primary view-btn">View Info</button>
+    </div>
+  </div>
+</article>
+
+<!-- Rajiv Gandhi Zoological Park (Katraj Zoo) -->
+<article class="col-md-4 place-card" data-category="zoo" data-region="pune" data-travel-time="3-4 hours from Mumbai" data-how-to-reach="Located in Jalna district, 550 km from Mumbai. Accessible by car from main cities. Smaller facility." data-activities="Zoo viewing, Deer watching, Peacock viewing, Kids play zone, Nature walk" data-cost="400" data-duration="2-3 hours" data-map-link="https://www.google.com/maps/search/Nandankanan+Mini+Zoo data-title="Rajiv Gandhi Zoological Park (Katraj Zoo)" data-image="images/katraj-zoo.jpg">
+  <div class="card mb-4 shadow-sm">
+    <img src="images/katraj-zoo.jpg" class="card-img-top" alt="Katraj Zoo Pune">
+    <div class="card-body">
+      <h5 class="card-title">Rajiv Gandhi Zoological Park (Katraj Zoo)</h5>
+      <p class="card-text">Located in Katraj, this zoo features snakes, leopards, and a beautiful lake. Great for nature and wildlife lovers!</p>
+      <button class="btn btn-sm btn-primary view-btn">View Info</button>
+    </div>
+  </div>
+</article>
+
+<!-- Nagpur - Maharajbagh Zoo -->
+<article class="col-md-4 place-card" data-category="zoo" data-region="nagpur" data-travel-time="14-15 hours from Mumbai" data-how-to-reach="Located 110 km from Aurangabad, 400 km from Mumbai. Take NH-48 to Aurangabad. Well-maintained road." data-activities="Cave exploration, Ancient fresco viewing, Buddhist architecture, Photography, Educational tour" data-cost="1100" data-duration="2-3 days" data-map-link="https://www.google.com/maps/search/Ajanta+Caves data-title="Maharajbagh Zoo" data-image="images/maharajbagh.jpeg">
+  <div class="card mb-4 shadow-sm">
+    <img src="images/maharajbagh.jpeg" class="card-img-top" alt="Maharajbagh Zoo">
+    <div class="card-body">
+      <h5 class="card-title">Maharajbagh Zoo</h5>
+      <p class="card-text">Situated in the heart of Nagpur, it houses tigers, peacocks, and a variety of birds and reptiles.</p>
+      <button class="btn btn-sm btn-primary view-btn">View Info</button>
+    </div>
+  </div>
+</article>
+
+<!-- Aurangabad - Siddharth Garden & Zoo -->
+<article class="col-md-4 place-card" data-category="zoo" data-region="aurangabad" data-travel-time="6-7 hours from Mumbai" data-how-to-reach="Located 5 km from Aurangabad city, 350 km from Mumbai. Take NH-48 to Aurangabad. Easy city access." data-activities="Monument exploration, Photography, Mughal architecture viewing, Historical learning, Touring" data-cost="800" data-duration="2-3 hours" data-map-link="https://www.google.com/maps/search/Bibi+Ka+Maqbara data-title="Siddharth Garden & Zoo" data-image="images/sidhart-zoo.jpg">
+  <div class="card mb-4 shadow-sm">
+    <img src="images/sidhart-zoo.jpg" class="card-img-top" alt="Siddharth Garden Zoo">
+    <div class="card-body">
+      <h5 class="card-title">Siddharth Garden & Zoo</h5>
+      <p class="card-text">A peaceful garden and zoo combo featuring tigers, crocodiles, and more – close to Bibi Ka Maqbara.</p>
+      <button class="btn btn-sm btn-primary view-btn">View Info</button>
+    </div>
+  </div>
+</article>
+
+<!-- Jalna - Nandankanan Mini Zoo -->
+<article class="col-md-4 place-card" data-category="zoo" data-region="marathwada" data-travel-time="6-7 hours from Mumbai" data-how-to-reach="Located in South Pune, 280 km from Mumbai. Accessible by auto or taxi. City center heritage site." data-activities="Palace exploration, Historical tours, Photography, Cultural learning, Monument visit" data-cost="700" data-duration="2-3 hours" data-map-link="https://www.google.com/maps/search/Shaniwar+Wada data-title="Nandankanan Mini Zoo" data-image="images/nandankanan.jpeg">
+  <div class="card mb-4 shadow-sm">
+    <img src="images/nandankanan.jpeg" class="card-img-top" alt="Nandankanan Zoo Jalna">
+    <div class="card-body">
+      <h5 class="card-title">Nandankanan Mini Zoo</h5>
+      <p class="card-text">A small zoo located in Jalna district with deer, peacocks, and a kids’ play zone surrounded by greenery.</p>
+      <button class="btn btn-sm btn-primary view-btn">View Info</button>
+    </div>
+  </div>
+</article>
+<!--end of zoo cards-->
+
+<!--hertiage sites-->
+<!-- Ajanta Caves -->
+<article class="col-md-4 place-card" data-category="heritage" data-region="aurangabad" data-travel-time="6-7 hours from Mumbai" data-how-to-reach="Located in South Mumbai near Apollo Bunder. Accessible by taxi, auto, or local train. City landmark." data-activities="Monument touring, Photography, Sea views, Tourist experience, Iconic location visit" data-cost="300" data-duration="1-2 hours" data-map-link="https://www.google.com/maps/search/Gateway+of+India data-title="Ajanta Caves" data-image="images/ajanta-caves.jpeg">
+  <div class="card mb-4 shadow-sm">
+    <img src="images/ajanta-caves.jpeg" class="card-img-top" alt="Ajanta Caves">
+    <div class="card-body">
+      <h5 class="card-title">Ajanta Caves</h5>
+      <p class="card-text">UNESCO World Heritage Site with Buddhist rock-cut caves and ancient frescoes. A gem of Aurangabad.</p>
+      <button class="btn btn-sm btn-primary view-btn">View Info</button>
+    </div>
+  </div>
+</article>
+
+<!-- Ellora Caves -->
+<article class="col-md-4 place-card" data-category="heritage" data-region="aurangabad" data-travel-time="6-7 hours from Mumbai" data-how-to-reach="Located in South Mumbai near Gateway. Accessible by taxi, auto, or local train. City museum." data-activities="Museum touring, Artifact viewing, Art appreciation, Photography, Cultural learning" data-cost="600" data-duration="3-4 hours" data-map-link="https://www.google.com/maps/search/Chhatrapati+Shivaji+Maharaj+Vastu+Sangrahalaya data-title="Ellora Caves" data-image="images/ellora-caves.jpeg">
+  <div class="card mb-4 shadow-sm">
+    <img src="images/ellora-caves.jpeg" class="card-img-top" alt="Ellora Caves">
+    <div class="card-body">
+      <h5 class="card-title">Ellora Caves</h5>
+      <p class="card-text">Famous for its rock-cut temples representing Buddhism, Hinduism, and Jainism. Includes the Kailasa Temple.</p>
+      <button class="btn btn-sm btn-primary view-btn">View Info</button>
+    </div>
+  </div>
+</article>
+
+<!-- Bibi Ka Maqbara -->
+<article class="col-md-4 place-card" data-category="heritage" data-region="aurangabad" data-travel-time="6-7 hours from Mumbai" data-how-to-reach="Located in South Pune, 280 km from Mumbai. Accessible by auto or taxi. Historic residence." data-activities="Heritage touring, Historical learning, Architecture appreciation, Photography, Cultural visit" data-cost="500" data-duration="1-2 hours" data-map-link="https://www.google.com/maps/search/Lal+Mahal data-title="Bibi Ka Maqbara" data-image="images/bibi-ka-maqbara.jpeg">
+  <div class="card mb-4 shadow-sm">
+    <img src="images/bibi-ka-maqbara.jpeg" class="card-img-top" alt="Bibi Ka Maqbara">
+    <div class="card-body">
+      <h5 class="card-title">Bibi Ka Maqbara</h5>
+      <p class="card-text">A beautiful Mughal-era tomb built by Aurangzeb, resembling the Taj Mahal. Also called the 'Taj of the Deccan.'</p>
+      <button class="btn btn-sm btn-primary view-btn">View Info</button>
+    </div>
+  </div>
+</article>
+
+<!-- Shaniwar Wada -->
+<article class="col-md-4 place-card" data-category="heritage" data-region="pune" data-travel-time="3-4 hours from Mumbai" data-how-to-reach="Located in Ratnagiri, 350 km from Mumbai via NH-48 and coastal route. Colonial heritage palace." data-activities="Palace exploration, Historical learning, Architecture appreciation, Photography, Heritage visit" data-cost="700" data-duration="2-3 hours" data-map-link="https://www.google.com/maps/search/Thibaw+Palace data-title="Shaniwar Wada" data-image="images/shaniwar-wada.jpg">
+  <div class="card mb-4 shadow-sm">
+    <img src="images/shaniwar-wada.jpg" class="card-img-top" alt="Shaniwar Wada">
+    <div class="card-body">
+      <h5 class="card-title">Shaniwar Wada</h5>
+      <p class="card-text">Iconic palace fortification of the Peshwas in Pune. Famous for its grand gates and historical legacy.</p>
+      <button class="btn btn-sm btn-primary view-btn">View Info</button>
+    </div>
+  </div>
+</article>
+
+<!-- Aga Khan Palace -->
+<article class="col-md-4 place-card" data-category="heritage" data-region="pune" data-travel-time="3-4 hours from Mumbai" data-how-to-reach="Located near Nashik, 200 km from Mumbai. Take NH-48 to Nashik. Well-connected heritage site." data-activities="Cave exploration, Buddhist art viewing, Photography, Hiking, Historical learning, Pilgrimage" data-cost="800" data-duration="1-2 days" data-map-link="https://www.google.com/maps/search/Pandav+Leni+(Nashik+Caves) data-title="Aga Khan Palace" data-image="images/aga-khan-palace.jpg">
+  <div class="card mb-4 shadow-sm">
+    <img src="images/aga-khan-palace.jpg" class="card-img-top" alt="Aga Khan Palace">
+    <div class="card-body">
+      <h5 class="card-title">Aga Khan Palace</h5>
+      <p class="card-text">Built in 1892, this palace is linked to Indian freedom movement and is now a Gandhi memorial.</p>
+      <button class="btn btn-sm btn-primary view-btn">View Info</button>
+    </div>
+  </div>
+</article>
+
+<!-- Gateway of India -->
+<article class="col-md-4 place-card" data-category="heritage" data-region="mumbai" data-travel-time="1-2 hours from Mumbai" data-title="Gateway of India" data-image="images/gateway.jpg" data-how-to-reach="Located at Apollo Bunder in South Mumbai. Easily accessible by local train, taxi, or auto. City landmark near waterfront." data-activities="Monument touring, Photography, Sea views, Tourist experience, Iconic location visit" data-cost="300" data-duration="1-2 hours" data-map-link="https://www.google.com/maps/search/Gateway+of+India+Mumbai">
+  <div class="card mb-4 shadow-sm">
+    <img src="images/gateway.jpg" class="card-img-top" alt="Gateway of India">
+    <div class="card-body">
+      <h5 class="card-title">Gateway of India</h5>
+      <p class="card-text">Mumbai's most iconic monument built during the British era. Overlooks the Arabian Sea at Apollo Bunder.</p>
+      <button class="btn btn-sm btn-primary view-btn">View Info</button>
+    </div>
+  </div>
+</article>
+
+<!-- Chhatrapati Shivaji Maharaj Terminus (CST) -->
+<article class="col-md-4 place-card" data-category="heritage" data-region="mumbai" data-travel-time="1-2 hours from Mumbai" data-title="Chhatrapati Shivaji Maharaj Terminus" data-image="images/csmt.jpg" data-how-to-reach="Located in Fort area, South Mumbai. Easily accessible by local train, metro, or auto. Major railway hub." data-activities="Architecture appreciation, Photography, Historical learning, Heritage touring, Railway station visit" data-cost="250" data-duration="1-2 hours" data-map-link="https://www.google.com/maps/search/Chhatrapati+Shivaji+Terminus+Mumbai">
+  <div class="card mb-4 shadow-sm">
+    <img src="images/csmt.jpg" class="card-img-top" alt="CST Mumbai">
+    <div class="card-body">
+      <h5 class="card-title">Chhatrapati Shivaji Maharaj Terminus</h5>
+      <p class="card-text">A UNESCO World Heritage Site and historical railway station known for its Victorian Gothic architecture.</p>
+      <button class="btn btn-sm btn-primary view-btn">View Info</button>
+    </div>
+  </div>
+</article>
+
+<!-- Prince of Wales Museum (CSMVS) -->
+<article class="col-md-4 place-card" data-category="heritage" data-region="mumbai" data-travel-time="1-2 hours from Mumbai" data-title="Chhatrapati Shivaji Maharaj Vastu Sangrahalaya" data-image="images/csmvs-museum.jpg" data-how-to-reach="Located at 159-A Mahatma Gandhi Marg in South Mumbai. Easily accessible by local train, metro, or taxi. Walking distance from Fort area." data-activities="Museum touring, Art appreciation, Historical learning, Artifact viewing, Cultural experience" data-cost="500" data-duration="2-3 hours" data-map-link="https://www.google.com/maps/search/Chhatrapati+Shivaji+Maharaj+Vastu+Sangrahalaya+Mumbai">
+  <div class="card mb-4 shadow-sm">
+    <img src="images/csmvs-museum.jpg" class="card-img-top" alt="CSMVS Museum">
+    <div class="card-body">
+      <h5 class="card-title">Chhatrapati Shivaji Maharaj Vastu Sangrahalaya</h5>
+      <p class="card-text">Formerly Prince of Wales Museum, this museum holds rare artifacts, sculptures, and artworks from Indian history.</p>
+      <button class="btn btn-sm btn-primary view-btn">View Info</button>
+    </div>
+  </div>
+</article>
+
+<!-- Lal Mahal -->
+<article class="col-md-4 place-card" data-category="heritage" data-region="pune" data-travel-time="3-4 hours from Mumbai" data-title="Lal Mahal" data-image="images/lal-mahal.jpeg" data-how-to-reach="Located in South Pune, 280 km from Mumbai. Accessible by auto or taxi. Historic residence in city area." data-activities="Heritage touring, Historical learning, Architecture appreciation, Photography, Cultural visit" data-cost="500" data-duration="1-2 hours" data-map-link="https://www.google.com/maps/search/Lal+Mahal+Pune">
+  <div class="card mb-4 shadow-sm">
+    <img src="images/lal-mahal.jpeg" class="card-img-top" alt="Lal Mahal">
+    <div class="card-body">
+      <h5 class="card-title">Lal Mahal</h5>
+      <p class="card-text">A historic residence of Shivaji Maharaj in Pune, rebuilt to reflect its original Maratha-style grandeur.</p>
+      <button class="btn btn-sm btn-primary view-btn">View Info</button>
+    </div>
+  </div>
+</article>
+
+<!-- New Palace Museum Kolhapur -->
+<article class="col-md-4 place-card" data-category="heritage" data-region="kolhapur" data-travel-time="8-9 hours from Mumbai" data-title="New Palace Museum" data-image="images/new-palace-kolhapur.jpeg" data-how-to-reach="Located in Kolhapur city, 390 km from Mumbai. Take NH-48 towards Belgaum. Well-developed city infrastructure." data-activities="Palace exploration, Museum touring, Royal artifact viewing, Architecture appreciation, Cultural learning" data-cost="700" data-duration="2-3 hours" data-map-link="https://www.google.com/maps/search/New+Palace+Museum+Kolhapur">
+  <div class="card mb-4 shadow-sm">
+    <img src="images/new-palace-kolhapur.jpeg" class="card-img-top" alt="New Palace Kolhapur">
+    <div class="card-body">
+      <h5 class="card-title">New Palace Museum</h5>
+      <p class="card-text">Built in Indo-Saracenic style, it showcases royal artifacts and the lifestyle of Kolhapur's kings.</p>
+      <button class="btn btn-sm btn-primary view-btn">View Info</button>
+    </div>
+  </div>
+</article>
+
+<!-- Thibaw Palace Ratnagiri -->
+<article class="col-md-4 place-card" data-category="heritage" data-region="ratnagiri" data-travel-time="8-9 hours from Mumbai" data-title="Thibaw Palace" data-image="images/thibaw-palace.jpeg" data-how-to-reach="Located in Ratnagiri, 350 km from Mumbai via NH-48 and coastal route. Colonial heritage palace with scenic setting." data-activities="Palace exploration, Historical learning, Architecture appreciation, Photography, Heritage visit" data-cost="700" data-duration="2-3 hours" data-map-link="https://www.google.com/maps/search/Thibaw+Palace+Ratnagiri">
+  <div class="card mb-4 shadow-sm">
+    <img src="images/thibaw-palace.jpeg" class="card-img-top" alt="Thibaw Palace">
+    <div class="card-body">
+      <h5 class="card-title">Thibaw Palace</h5>
+      <p class="card-text">This palace housed the exiled king of Burma and features colonial-era architecture in Ratnagiri.</p>
+      <button class="btn btn-sm btn-primary view-btn">View Info</button>
+    </div>
+  </div>
+</article>
+
+
+<!-- Nashik Caves -->
+<article class="col-md-4 place-card" data-category="heritage" data-region="nashik" data-travel-time="5-6 hours from Mumbai" data-title="Pandav Leni (Nashik Caves)" data-image="images/nashik-caves.jpg" data-how-to-reach="Located near Nashik, 200 km from Mumbai. Take NH-48 to Nashik. Well-connected heritage site." data-activities="Cave exploration, Buddhist art viewing, Photography, Hiking, Historical learning, Pilgrimage" data-cost="800" data-duration="1-2 days" data-map-link="https://www.google.com/maps/search/Pandav+Leni+(Nashik+Caves)">
+  <div class="card mb-4 shadow-sm">
+    <img src="images/nashik-caves.jpg" class="card-img-top" alt="Nashik Caves">
+    <div class="card-body">
+      <h5 class="card-title">Pandav Leni (Nashik Caves)</h5>
+      <p class="card-text">A group of 24 ancient Buddhist caves carved into a hillside near Nashik. A complex of 24 ancient Buddhist caves carved between 1st BCE and 3rd CE, famous for inscriptions and Buddhist architecture.</p>
+      <button class="btn btn-sm btn-primary view-btn">View Info</button>
+    </div>
+  </div>
+</article>
+
+
+  <script src="js/explore.js"></script>
+
+  <!-- Universal Modal (One for all cards) -->
+<div class="modal fade" id="placeModal" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white;">
+        <h5 class="modal-title" id="placeModalLabel"></h5>
+        <button type="button" class="close" data-dismiss="modal" style="color: white;">&times;</button>
+      </div>
+      <div class="modal-body" style="max-height: 600px; overflow-y: auto;">
+        <!-- Place Image -->
+        <div style="margin-bottom: 20px;">
+          <img id="placeImage" src="" alt="" style="width: 100%; height: 300px; object-fit: cover; border-radius: 10px;">
+        </div>
+
+        <!-- Category & Region -->
+        <div style="margin-bottom: 15px;">
+          <span class="badge badge-primary" id="placeCategory" style="font-size: 12px; padding: 8px 12px; margin-right: 8px;"></span>
+          <span class="badge badge-info" id="placeRegion" style="font-size: 12px; padding: 8px 12px;"></span>
+        </div>
+
+        <!-- Description -->
+        <div style="margin-bottom: 20px;">
+          <h6 style="color: #667eea; font-weight: 700; margin-bottom: 8px;">📝 About</h6>
+          <p id="placeDescription" style="color: #666; line-height: 1.6;"></p>
+        </div>
+
+        <!-- How to Reach -->
+        <div style="margin-bottom: 20px; padding: 15px; background: #f8f9fa; border-radius: 8px; border-left: 4px solid #667eea;">
+          <h6 style="color: #667eea; font-weight: 700; margin-bottom: 8px;">🚗 How to Reach</h6>
+          <p id="placeHowToReach" style="color: #666; line-height: 1.6; margin-bottom: 8px;"></p>
+          <p style="color: #999; font-size: 14px;"><strong>Travel Time from Mumbai:</strong> <span id="placeTravelTime"></span></p>
+        </div>
+
+        <!-- Activities -->
+        <div style="margin-bottom: 20px;">
+          <h6 style="color: #667eea; font-weight: 700; margin-bottom: 8px;">🎯 Activities</h6>
+          <p id="placeActivities" style="color: #666; line-height: 1.6;"></p>
+        </div>
+
+        <!-- Budget Info -->
+        <div style="margin-bottom: 20px; padding: 15px; background: #f8f9fa; border-radius: 8px; border-left: 4px solid #764ba2;">
+          <h6 style="color: #764ba2; font-weight: 700; margin-bottom: 8px;">💰 Budget Estimate</h6>
+          <p style="color: #666; font-size: 16px; margin-bottom: 0;"><strong>₹<span id="placeDailyCost"></span></strong> per day</p>
+        </div>
+
+        <!-- Duration -->
+        <div style="margin-bottom: 20px;">
+          <h6 style="color: #667eea; font-weight: 700; margin-bottom: 8px;">⏱️ Suggested Duration</h6>
+          <p id="placeDuration" style="color: #666; font-size: 16px; margin-bottom: 0;"></p>
+        </div>
+
+        <!-- Google Maps Link -->
+        <div style="margin-bottom: 0;">
+          <a id="placeMapLink" href="#" target="_blank" class="btn btn-block" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 12px; border-radius: 6px; text-decoration: none; text-align: center; font-weight: 600;">
+            <i class="fas fa-map-marker-alt"></i> View on Google Maps
+          </a>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Bootstrap JS (needed for modal) -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+</html>

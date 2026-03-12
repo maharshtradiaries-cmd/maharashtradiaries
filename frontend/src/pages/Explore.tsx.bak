@@ -1,0 +1,292 @@
+import { useState, useMemo, useEffect } from 'react'
+import Navbar from '../components/Navbar'
+import { FaSearch, FaMapMarkerAlt, FaClock, FaRupeeSign, FaCompass, FaHeart, FaCloudSun, FaShareAlt, FaStar, FaArrowRight } from 'react-icons/fa'
+import { destinations as staticDestinations, type Destination } from '../data/destinations'
+import { useAuth } from '../context/AuthContext'
+import toast from 'react-hot-toast'
+import axios from 'axios'
+import './Explore.css'
+
+interface Review {
+    user: { username: string }
+    rating: number
+    comment: string
+    date: string
+}
+
+interface FullDestination extends Destination {
+    reviews: Review[]
+    rating: number
+}
+
+const DEFAULT_IMAGE = "https://images.unsplash.com/photo-1596402184320-417d7178b2cd?auto=format&fit=crop&q=80&w=1000"
+
+const CATEGORIES = ['All', 'Hill Stations', 'Beaches', 'Temples', 'Forts', 'Lakes', 'Heritage', 'Zoos', 'Theme Parks', 'Shopping']
+
+export default function Explore() {
+    const { user, toggleFavorite } = useAuth()
+    const [allDestinations, setAllDestinations] = useState<Destination[]>(staticDestinations)
+    const [searchTerm, setSearchTerm] = useState('')
+    const [selectedCategory, setSelectedCategory] = useState('All')
+    const [selectedDestination, setSelectedDestination] = useState<FullDestination | null>(null)
+    const [reviewText, setReviewText] = useState('')
+    const [selectedRating, setSelectedRating] = useState(5)
+
+    useEffect(() => {
+        fetchDestinations()
+    }, [])
+
+    const fetchDestinations = async () => {
+        try {
+            const res = await axios.get('http://localhost:5000/api/destinations')
+            setAllDestinations(res.data)
+        } catch {
+            console.error('Failed to fetch destinations, using static data')
+        }
+    }
+
+    const openDetails = async (dest: Destination) => {
+        try {
+            const res = await axios.get(`http://localhost:5000/api/destinations/${dest.id}`)
+            setSelectedDestination(res.data)
+        } catch {
+            setSelectedDestination({ ...dest, reviews: [], rating: 4.5 })
+        }
+    }
+
+    const handlePostReview = async () => {
+        if (!selectedDestination || !reviewText) {
+            toast.error('Please write a comment')
+            return
+        }
+        try {
+            const token = localStorage.getItem('md_token')
+            const res = await axios.post(`http://localhost:5000/api/destinations/${selectedDestination.id}/reviews`,
+                { rating: selectedRating, comment: reviewText },
+                { headers: { Authorization: `Bearer ${token}` } }
+            )
+            setSelectedDestination(res.data)
+            setReviewText('')
+            toast.success('Review posted!')
+        } catch {
+            toast.error('Failed to post review. Are you logged in?')
+        }
+    }
+
+    const handleToggleFavorite = async (e: React.MouseEvent, id: string) => {
+        e.stopPropagation()
+        try {
+            await toggleFavorite(id)
+            const isNowFav = user?.favorites?.includes(id)
+            toast.success(!isNowFav ? 'Added to favorites' : 'Removed from favorites')
+        } catch {
+            toast.error('Failed to update favorites')
+        }
+    }
+
+    const filteredDestinations = useMemo(() => {
+        return allDestinations.filter(dest => {
+            const matchesSearch = dest.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                dest.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                dest.region.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                dest.activities.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                dest.category.toLowerCase().includes(searchTerm.toLowerCase())
+            const matchesCategory = selectedCategory === 'All' || dest.category === selectedCategory
+            return matchesSearch && matchesCategory
+        })
+    }, [searchTerm, selectedCategory, allDestinations])
+
+    return (
+        <div className="explore-page">
+            <Navbar />
+
+            <main className="explore-main">
+                <header className="explore-header animate-slideInDown">
+                    <h1><FaCompass /> Explore Maharashtra</h1>
+                    <p>Discover hidden gems across the land of warriors</p>
+
+                    <div className="search-container glass-card">
+                        <FaSearch className="search-icon" />
+                        <input
+                            type="text"
+                            placeholder="Search by destination, region or experience..."
+                            value={searchTerm}
+                            onChange={(e) => setSearchTerm(e.target.value)}
+                        />
+                    </div>
+
+                    <div className="category-filter">
+                        {CATEGORIES.map(cat => (
+                            <button
+                                key={cat}
+                                className={`category-chip ${selectedCategory === cat ? 'active' : ''}`}
+                                onClick={() => setSelectedCategory(cat)}
+                            >
+                                {cat}
+                            </button>
+                        ))}
+                    </div>
+                </header>
+
+                <section className="destinations-grid">
+                    {filteredDestinations.map((dest, idx) => (
+                        <div
+                            key={dest.id}
+                            className="dest-card glass-card animate-scaleIn"
+                            style={{ animationDelay: `${idx * 0.05}s` }}
+                            onClick={() => openDetails(dest)}
+                        >
+                            <div className="dest-image">
+                                <img
+                                    src={dest.image}
+                                    alt={dest.title}
+                                    onError={(e) => (e.currentTarget.src = DEFAULT_IMAGE)}
+                                />
+                                <span className="dest-tag">{dest.category}</span>
+                                <button
+                                    className={`fav-btn ${user?.favorites?.includes(dest.id) ? 'active' : ''}`}
+                                    onClick={(e) => handleToggleFavorite(e, dest.id)}
+                                >
+                                    <FaHeart />
+                                </button>
+                            </div>
+                            <div className="dest-info">
+                                <div className="dest-title-row">
+                                    <h3>{dest.title}</h3>
+                                    <div className="dest-rating">
+                                        <FaStar /> {dest.rating?.toFixed(1) || '4.5'}
+                                    </div>
+                                </div>
+                                <p className="dest-location"><FaMapMarkerAlt /> {dest.region}</p>
+                                <p className="dest-desc">{dest.description}</p>
+                                <div className="dest-meta">
+                                    <span><FaClock /> {dest.travelTime.split(' ')[0]}h</span>
+                                    <span><FaRupeeSign /> {dest.cost}</span>
+                                    <button className="view-btn">Explore <FaArrowRight /></button>
+                                </div>
+                            </div>
+                        </div>
+                    ))}
+
+                    {filteredDestinations.length === 0 && (
+                        <div className="no-results">
+                            <h3>No destinations found matching your criteria.</h3>
+                            <p>Try searching for something else!</p>
+                        </div>
+                    )}
+                </section>
+            </main>
+
+            {selectedDestination && (
+                <div className="modal-overlay" onClick={() => setSelectedDestination(null)}>
+                    <div className="modal-content glass-card animate-scaleIn" onClick={e => e.stopPropagation()}>
+                        <button className="close-modal" onClick={() => setSelectedDestination(null)}>&times;</button>
+                        <div className="modal-grid">
+                            <div className="modal-image">
+                                <img
+                                    src={selectedDestination.image}
+                                    alt={selectedDestination.title}
+                                    onError={(e) => (e.currentTarget.src = DEFAULT_IMAGE)}
+                                />
+                            </div>
+                            <div className="modal-body">
+                                <span className="badge-primary">{selectedDestination.category}</span>
+                                <div className="modal-title-row">
+                                    <h2>{selectedDestination.title}</h2>
+                                    <div className="avg-rating">
+                                        <FaStar /> {selectedDestination.rating?.toFixed(1) || '4.5'}
+                                    </div>
+                                </div>
+                                <p className="region-name">{selectedDestination.region}</p>
+
+                                <div className="weather-summary glass-card">
+                                    <FaCloudSun />
+                                    <div className="weather-info">
+                                        <span className="temp">28°C</span>
+                                        <span className="condition">Great for trekking</span>
+                                    </div>
+                                </div>
+
+                                <section className="modal-section">
+                                    <h4>📝 About</h4>
+                                    <p>{selectedDestination.description}</p>
+                                </section>
+
+                                <section className="modal-section info-box">
+                                    <h4>🚗 How to Reach</h4>
+                                    <p>{selectedDestination.howToReach}</p>
+                                    <p className="meta-info"><strong>Travel Time:</strong> {selectedDestination.travelTime}</p>
+                                </section>
+
+                                <div className="modal-footer-stats">
+                                    <div className="stat-item">
+                                        <span className="label">Budget</span>
+                                        <span className="value">₹{selectedDestination.cost}</span>
+                                    </div>
+                                    <div className="stat-item">
+                                        <span className="label">Stay</span>
+                                        <span className="value">{selectedDestination.duration}</span>
+                                    </div>
+                                </div>
+
+                                <div className="modal-actions">
+                                    <a href={selectedDestination.mapLink} target="_blank" rel="noreferrer" className="map-btn pulse">
+                                        <FaMapMarkerAlt /> Open in Maps
+                                    </a>
+                                    <button className="share-btn glass-btn" onClick={() => {
+                                        navigator.clipboard.writeText(window.location.href);
+                                        toast.success('Link copied!');
+                                    }}>
+                                        <FaShareAlt /> Share
+                                    </button>
+                                </div>
+
+                                <section className="modal-section reviews-section">
+                                    <h4><FaStar /> Traveler Reviews</h4>
+                                    <div className="review-input glass-card">
+                                        <div className="rating-select">
+                                            {[1, 2, 3, 4, 5].map(num => (
+                                                <FaStar
+                                                    key={num}
+                                                    className={num <= selectedRating ? 'star-active' : 'star-inactive'}
+                                                    onClick={() => setSelectedRating(num)}
+                                                />
+                                            ))}
+                                        </div>
+                                        <div className="input-row">
+                                            <input
+                                                type="text"
+                                                placeholder="Write a review..."
+                                                value={reviewText}
+                                                onChange={(e) => setReviewText(e.target.value)}
+                                            />
+                                            <button onClick={handlePostReview}>Post</button>
+                                        </div>
+                                    </div>
+                                    <div className="reviews-list">
+                                        {selectedDestination.reviews.length > 0 ? (
+                                            selectedDestination.reviews.map((rev, i) => (
+                                                <div key={i} className="review-item">
+                                                    <div className="review-meta">
+                                                        <strong>{rev.user.username}</strong>
+                                                        <div className="stars">
+                                                            {Array(rev.rating).fill('⭐').join('')}
+                                                        </div>
+                                                    </div>
+                                                    <p>{rev.comment}</p>
+                                                    <small>{new Date(rev.date).toLocaleDateString()}</small>
+                                                </div>
+                                            ))
+                                        ) : (
+                                            <p className="no-reviews">No reviews yet. Be the first to review!</p>
+                                        )}
+                                    </div>
+                                </section>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            )}
+        </div>
+    )
+}

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MaharashtraDiaries - Login/Signup</title>
+  <meta name="description" content="Login or signup to explore the best destinations in Maharashtra." />
+
+  <!-- Fonts & Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <nav class="navbar navbar-expand-lg navbar-dark" style="position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(13,13,13,0.95);backdrop-filter:blur(20px);border-bottom:1px solid rgba(255,107,0,0.2);box-shadow:0 4px 20px rgba(0,0,0,0.3);">
+    <div style="max-width:1200px;margin:0 auto;padding:12px 20px;display:flex;align-items:center;">
+      <a href="index.html" style="font-weight:800;font-size:1.3rem;color:transparent;background:linear-gradient(135deg,#FF6B00,#FF8C00,#FFB347);-webkit-background-clip:text;background-clip:text;text-decoration:none;">
+        <i class="fas fa-map-marked-alt" style="margin-right:8px;color:#FF6B00;-webkit-text-fill-color:#FF6B00;"></i>MaharashtraDiaries
+      </a>
+    </div>
+  </nav>
+
+  <!-- Background Slideshow -->
+  <div class="slideshow">
+    <img src="images/beach.jpg" class="active" />
+    <img src="images/fort.jpg" />
+    <img src="images/heritage.jpg" />
+    <img src="images/temple.jpg" />
+  </div>
+
+  <!-- Wrapper -->
+  <div class="wrapper" id="form-wrapper">
+    <h2 id="form-title">Login</h2>
+
+   <!-- Login Form -->
+<form id="login-form">
+  <div class="input-box">
+    <i class="fas fa-user"></i>
+    <input type="text" id="login-username" placeholder="Username or Email" required />
+  </div>
+  <div class="input-box">
+    <i class="fas fa-lock"></i>
+    <input type="password" id="login-password" placeholder="Password" required />
+  </div>
+  <button class="btn" id="login-btn" type="submit">Login</button>
+  <p>Don't have an account? <a href="#" id="show-signup">Sign up</a></p>
+</form>
+
+<!-- Signup Form -->
+<form id="signup-form" style="display: none;">
+  <div class="input-box">
+    <i class="fas fa-user"></i>
+    <input type="text" id="signup-name" placeholder="Full Name" required />
+    <div class="validation-msg" id="name-validation"></div>
+  </div>
+  <div class="input-box">
+    <i class="fas fa-at"></i>
+    <input type="text" id="signup-username" placeholder="Username" required />
+    <div class="validation-msg" id="username-validation"></div>
+  </div>
+  <div class="input-box">
+    <i class="fas fa-envelope"></i>
+    <input type="email" id="signup-email" placeholder="Email" required />
+    <div class="validation-msg" id="email-validation"></div>
+  </div>
+  <div class="input-box">
+    <i class="fas fa-lock"></i>
+    <input type="password" id="signup-password" placeholder="Password" required />
+    <div class="validation-msg" id="password-validation"></div>
+    <div class="password-strength">
+      <div class="strength-bar" id="strength-bar"></div>
+    </div>
+  </div>
+  <button class="btn" type="submit" id="signup-btn">Sign Up</button>
+  <p>Already have an account? <a href="#" id="show-login">Login</a></p>
+</form>
+
+<!-- OTP Verification Section -->
+<div class="otp-section" id="otp-section">
+  <h3><i class="fas fa-shield-halved"></i> Verify Your Email</h3>
+  <p id="otp-email-display">We've sent a 6-digit OTP to your email</p>
+  <div class="otp-inputs">
+    <input type="text" maxlength="1" class="otp-digit" data-index="0" autocomplete="off" />
+    <input type="text" maxlength="1" class="otp-digit" data-index="1" autocomplete="off" />
+    <input type="text" maxlength="1" class="otp-digit" data-index="2" autocomplete="off" />
+    <input type="text" maxlength="1" class="otp-digit" data-index="3" autocomplete="off" />
+    <input type="text" maxlength="1" class="otp-digit" data-index="4" autocomplete="off" />
+    <input type="text" maxlength="1" class="otp-digit" data-index="5" autocomplete="off" />
+  </div>
+  <button class="btn" id="verify-otp-btn" type="button">Verify OTP</button>
+  <p class="resend-otp">Didn't receive? <a href="#" id="resend-otp">Resend OTP</a></p>
+</div>
+
+  </div>
+
+  <script src="js/script.js"></script>
+</body>
+</html>

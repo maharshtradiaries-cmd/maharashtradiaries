@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>MaharashtraDiaries - Dashboard</title>
+  <meta name="description" content="Your personalized Maharashtra travel dashboard. Explore destinations, plan trips, and split costs with friends." />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/dashboard.css" />
+  <script src="js/animations.js"></script>
+</head>
+
+<body>
+
+  <!-- Navigation Bar -->
+  <nav class="navbar navbar-expand-lg navbar-dark">
+    <div style="max-width:1200px;margin:0 auto;padding:8px 20px;display:flex;align-items:center;justify-content:space-between;width:100%;">
+      <a class="navbar-brand" href="dashboard.html" style="font-weight:800;font-size:1.3rem;">
+        <i class="fas fa-map-marked-alt" style="margin-right:8px;color:#FF6B00;"></i>MaharashtraDiaries
+      </a>
+      <button class="navbar-toggler" type="button" onclick="document.getElementById('navbarNav').classList.toggle('show')" style="background:none;border:1px solid rgba(255,107,0,0.3);padding:6px 10px;border-radius:5px;cursor:pointer;">
+        <span style="color:#FF8C00;font-size:1.2rem;">☰</span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav" style="display:flex;gap:25px;align-items:center;">
+        <a class="nav-link active" href="dashboard.html" style="color:#FF8C00;text-decoration:none;font-weight:600;">Dashboard</a>
+        <a class="nav-link" href="explore.html" style="color:rgba(255,255,255,0.7);text-decoration:none;font-weight:600;">Explore</a>
+        <a class="nav-link" href="plantrip.html" style="color:rgba(255,255,255,0.7);text-decoration:none;font-weight:600;">Plan Trip</a>
+        <a class="nav-link" href="#" id="nav-logout-btn" style="color:#ff4444;text-decoration:none;font-weight:600;">Logout</a>
+      </div>
+    </div>
+  </nav>
+
+  <div class="page dashboard-wrapper">
+  
+  <!-- HERO SECTION -->
+  <section class="hero-section">
+    <div class="hero-content">
+      <h1 class="hero-title">Discover Maharashtra</h1>
+      <p class="hero-subtitle">Explore Forts, Beaches, Hills & Rich Culture</p>
+      <div class="hero-buttons">
+        <a href="explore.html" class="hero-btn btn-primary">Start Exploring</a>
+        <a href="plantrip.html" class="hero-btn btn-secondary">Plan Your Trip</a>
+      </div>
+    </div>
+  </section>
+
+  <header>
+    <h1 id="welcome-text">Welcome! 👋</h1>
+    <button id="logout-btn">Logout</button>
+  </header>
+
+  <main>
+    <h2>Quick Actions</h2>
+    <div class="sections">
+      <a href="explore.html" class="card glass-card explore-card">
+        <div class="card-overlay"></div>
+        <div class="card-content">
+          <i class="fas fa-map-marked-alt"></i>
+          <span>Explore Maharashtra</span>
+        </div>
+      </a>
+      <a href="plantrip.html" class="card glass-card plan-card">
+        <div class="card-overlay"></div>
+        <div class="card-content">
+          <i class="fas fa-route"></i>
+          <span>Plan Trip</span>
+        </div>
+      </a>
+      <a href="#" class="card glass-card contact-card">
+        <div class="card-overlay"></div>
+        <div class="card-content">
+          <i class="fas fa-envelope"></i>
+          <span>Contact Us</span>
+        </div>
+      </a>
+    </div>
+  </main>
+
+  <!-- WISHLIST SECTION -->
+  <section class="wishlist-section">
+    <h2><i class="fas fa-heart" style="color:#FF6B00;margin-right:10px;"></i> My Wishlist</h2>
+    <div class="wishlist-container" id="wishlist-container">
+      <div class="empty-wishlist" id="empty-wishlist">
+        <i class="fas fa-heart-circle-plus" style="font-size:3rem;color:rgba(255,107,0,0.3);margin-bottom:15px;display:block;"></i>
+        <p>No destinations in your wishlist yet. Explore places and add them to your wishlist!</p>
+        <a href="explore.html" style="color:#FF8C00;text-decoration:none;font-weight:700;">Browse Destinations →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURED DESTINATIONS -->
+  <section class="plan-now-section">
+    <h2>Featured Destinations</h2>
+    <div class="plan-card-container" id="featured-cards-container">
+      <!-- Featured cards will be loaded dynamically here -->
+    </div>
+  </section>
+
+  <!-- MONEY SPLIT SECTION -->
+  <section class="money-split-section">
+    <h2><i class="fas fa-coins" style="color:#FF6B00;margin-right:10px;"></i> Split Trip Costs</h2>
+    <p class="section-subtitle">Easily split expenses with your friends or travel group</p>
+    
+    <div class="split-container">
+      <!-- Total amount and split type -->
+      <div class="split-total-row">
+        <input type="number" id="split-total" placeholder="Total Trip Cost (₹)" min="0" />
+        <select id="split-type">
+          <option value="equal">Split Equally</option>
+          <option value="custom">Custom Split</option>
+        </select>
+      </div>
+
+      <!-- Add member -->
+      <div class="split-input-row">
+        <input type="text" id="member-name" placeholder="Member name" />
+        <button class="split-add-btn" id="add-member-btn">
+          <i class="fas fa-plus"></i> Add
+        </button>
+      </div>
+
+      <!-- Members list -->
+      <div class="split-members-list" id="split-members-list">
+        <!-- Members will be added here -->
+      </div>
+
+      <!-- Summary -->
+      <div class="split-summary" id="split-summary" style="display:none;">
+        <h4>Per Person Share</h4>
+        <div class="per-person-amount" id="per-person-amount">₹0</div>
+        <div class="split-label" id="split-count-label">0 members</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer-section">
+    <div class="footer-content">
+      <div class="footer-column">
+        <h4><i class="fas fa-map-marked-alt"></i> MaharashtraDiaries</h4>
+        <p>Discover the beauty and culture of Maharashtra</p>
+      </div>
+      <div class="footer-column">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="dashboard.html">Dashboard</a></li>
+          <li><a href="explore.html">Explore</a></li>
+          <li><a href="plantrip.html">Plan Trip</a></li>
+        </ul>
+      </div>
+      <div class="footer-column">
+        <h4>Follow Us</h4>
+        <div class="social-icons">
+          <a href="#"><i class="fab fa-facebook"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-youtube"></i></a>
+        </div>
+      </div>
+      <div class="footer-column">
+        <h4>Contact</h4>
+        <p>Email: info@maharashtradiaries.com</p>
+        <p>Phone: +91 9876543210</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2025 MaharashtraDiaries. All rights reserved.</p>
+    </div>
+  </footer>
+
+  </div>
+
+  <script src="js/dashboard.js"></script>
+</body>
+</html>
