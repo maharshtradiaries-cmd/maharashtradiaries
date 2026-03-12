@@ -1,5 +1,5 @@
 import Navbar from '../components/Navbar'
-import { Link } from 'react-router-dom'
+
 import { FaShieldAlt, FaEnvelope } from 'react-icons/fa'
 
 export default function PrivacyPolicy() {

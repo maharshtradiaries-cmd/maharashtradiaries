@@ -1,7 +1,7 @@
 import { useState, useMemo } from 'react'
 import axios from 'axios'
 import Navbar from '../components/Navbar'
-import { FaMapMarkerAlt, FaPlus, FaTrash, FaInfoCircle, FaWallet, FaSearch, FaCalendarAlt, FaUsers, FaCompass, FaChevronRight, FaTimes, FaMapSigns, FaEdit } from 'react-icons/fa'
+import { FaPlus, FaInfoCircle, FaSearch, FaCalendarAlt, FaUsers, FaCompass, FaChevronRight, FaTimes, FaMapSigns, FaEdit } from 'react-icons/fa'
 import { destinations } from '../data/destinations'
 import toast from 'react-hot-toast'
 import { jsPDF } from 'jspdf'
